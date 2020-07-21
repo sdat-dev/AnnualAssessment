@@ -1,15 +1,15 @@
-let addsidemenu = function(page){
-    let sidemenuItems = [{"item": "HOME", "link": "home.html"},
-                         {"item":"CURRENT ASSESSMENTS", "link":"currentassessments.html"},
-                         {"item":"ADMINISTRATIVE UNITS", "link":"#", 
-                            "subItems":[{"item":"Sponsored Programs Administration", "link":"sponsoredprograms.html"},
-                                        {"item":"RF-SUNY Human Resources", "link":"#"},
-                                        {"item":"Office for Regulatory and Research Compliance", "link":"#"},
-                                        {"item":"Innovation Development and Commercialization", "link":"#"},
-                                        {"item":"Community & Economic Development", "link":"#"},
-                                        {"item":"Office of Strategic Initiatives, Data, Assessment and Technology", "link":"#"}]},
-                         {"item":"GOALS & BENEFITS", "link":"goalsandbenifits.html"}]
+let sidemenuItems = [{"item": "HOME", "link": "home.html"},
+{"item":"CURRENT ASSESSMENTS", "link":"currentassessments.html"},
+{"item":"ADMINISTRATIVE UNITS", "link":"#", 
+   "subItems":[{"item":"Sponsored Programs Administration", "link":"sponsoredprograms.html"},
+               {"item":"RF-SUNY Human Resources", "link":"#"},
+               {"item":"Office for Regulatory and Research Compliance", "link":"#"},
+               {"item":"Innovation Development and Commercialization", "link":"#"},
+               {"item":"Community & Economic Development", "link":"#"},
+               {"item":"Office of Strategic Initiatives, Data, Assessment and Technology", "link":"#"}]},
+{"item":"GOALS & BENEFITS", "link":"goalsandbenifits.html"}]
 
+let addsidemenu = function(page){
     let sidemenu = document.getElementById('navigation-bar');
 
     for(let i = 0; i < sidemenuItems.length; i++){
@@ -89,4 +89,14 @@ let addsidemenu = function(page){
             sidemenu.appendChild(menuItem);
         }
     }
+}
+
+let generateAccordionElem = function(level, collapseId, headerId, parentId, childId, header, accordionContent){
+    var headerno = level + 2;
+    let accordionElem =  '<div class = "card"><div class="card-header level'+ level +'" id="'+ headerId + '">' +
+                          '<button class="btn btn-link" data-toggle="collapse" data-target="#'+ collapseId + '" aria-expanded="false" aria-controls="' + collapseId + '">'+
+                            '<h'+ headerno +' class = "content-header-no-margin">' + header + '<i class="fas fa-chevron-down"></i></h'+ headerno +'></button></div>'
+                        + '<div id="'+ collapseId + '" class = "collapse" aria-labelledby= "'+ headerId + '" data-parent="#'+ parentId +'"> <div class = "card-body" id="'+ childId +'">'
+                        + accordionContent +'</div></div></div>';  
+    return accordionElem;
 }
