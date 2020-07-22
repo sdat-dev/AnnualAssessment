@@ -1,4 +1,3 @@
-let requestURL = "data/sponsoredprogramsadministration.json"
 let request = new XMLHttpRequest();
 //getting content Element to append grants information
 let maincontentContainer = document.getElementsByClassName('main-content')[0];

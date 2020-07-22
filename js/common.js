@@ -1,14 +1,6 @@
-let sidemenuItems = [{"item": "HOME", "link": "home.html"},
-{"item":"CURRENT ASSESSMENTS", "link":"currentassessments.html"},
-{"item":"ADMINISTRATIVE UNITS", "link":"#", 
-   "subItems":[{"item":"Sponsored Programs Administration", "link":"sponsoredprograms.html"},
-               {"item":"RF-SUNY Human Resources", "link":"#"},
-               {"item":"Office for Regulatory and Research Compliance", "link":"#"},
-               {"item":"Innovation Development and Commercialization", "link":"#"},
-               {"item":"Community & Economic Development", "link":"#"},
-               {"item":"Office of Strategic Initiatives, Data, Assessment and Technology", "link":"#"}]},
-{"item":"GOALS & BENEFITS", "link":"goalsandbenifits.html"}]
-
+let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"CURRENT ASSESSMENTS","link":"currentassessments.html"},{"item":"ADMINISTRATIVE UNITS","link":"#","subItems":[{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"},{"item":"Office for Innovation Development and Commercialization (OIDC)","link":"officeforinnovationdevelopmentandcommercialization(oidc).html"},{"item":"Office of Community and Economic Development","link":"officeofcommunityandeconomicdevelopment.html"},{"item":"Office of Regulatory and Research Compliance","link":"officeofregulatoryandresearchcompliance.html"}]},{"item":"GOALS & BENEFITS","link":"goalsandbenifits.html"}]
+//SideMenu Start
+//What evet written  before '//SideMenu Start' will be relace with sidemenuItems in automation scripts
 let addsidemenu = function(page){
     let sidemenu = document.getElementById('navigation-bar');
 
