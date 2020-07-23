@@ -142,8 +142,9 @@ Primary use:    Common.css file used for styling header and
     padding-left: 30px;
 }
 
-.num-list{
+#num-list{
     list-style:decimal;
+    list-style-position: inside;
 }
 
 .underline{
@@ -257,6 +258,11 @@ Primary use:    Common.css file used for styling header and
 .nav-item{
     margin-right: 10px;
     text-align: center;
+}
+
+.italic-underline{
+    font-style: italic;
+    text-decoration: underline;
 }
 
 @media only screen and (max-width: 340px)

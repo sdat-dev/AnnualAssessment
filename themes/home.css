@@ -30,3 +30,28 @@ Primary use:    home.css file used for styling home page
     color: #46166C;
     font-weight: bold;
 }
+
+.check-list{
+    list-style:none;
+    list-style-position: inside;
+}
+
+.check-list>dd:before {
+    content: "✓  ";
+    font-weight: bold;
+    color: #000000;
+}
+
+.list-header{
+    text-decoration: underline;
+}
+
+.highlight{
+    color:  #46166C;
+    font-weight: bold;
+}
+
+.italic{
+    font-style: italic;
+
+}
