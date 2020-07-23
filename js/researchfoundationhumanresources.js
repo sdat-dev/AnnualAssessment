@@ -74,12 +74,17 @@ let add1920report = function(reportdata){
         content += addMembershipBenifits(ids, data);
     }
 
-    for(var i = 1; i < 6; i++)
+    for(var i = 8; i < 13; i++)
     {
         ids = getIds('FY1920');
-        let goal = new Goal(1, reportdata["Goal"+i+"1819"], reportdata["Activities"+i+"1819"], 
-        reportdata["Metrics"+i+"1819"], reportdata["Timeframe"+i+"1819"], reportdata["Q"+(i+7)+"2"], reportdata["Q"+(i+7)+"3"], reportdata["Q"+(i+7)+"4"]);
+        let no = i-7;
+        let goal = new Goal(no, reportdata["Goal"+no+"1819"], reportdata["Activities"+no+"1819"], 
+        reportdata["Metrics"+no+"1819"], reportdata["Timeframe"+no+"1819"], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
         content += addSmartGoal(ids, goal);
+        if(i > 10 && reportdata.Q105 === 'No')
+        {
+            break;
+        }
     }
 
     ids = getIds('FY1920');
@@ -108,7 +113,7 @@ let add2021report = function(reportdata){
     let content = '';
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
+    '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021';
     content += '<div id = "FY2021">';
 
     let ids= getIds('FY2021');
@@ -129,10 +134,10 @@ let add2021report = function(reportdata){
     for(var i = 6; i < 11; i++)
     {
         ids = getIds('FY2021');
-        let goal = new GoalPlan(1, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
+        let goal = new GoalPlan(i-5, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
-        content += addSmartGoalPlan('FY 19-20', ids, goal);
+        content += addSmartGoalPlan(ids, goal);
     }
     content += '</div>'
     return content;
@@ -153,8 +158,8 @@ let addAnnualBudget = function(ids, data)
     '<p>'+ data.annualBudget + '</p>' +
     '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-    '<tbody><tr><th class="border_right">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
-    data.employeesRF + '</td>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
+    data.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
     data.fteRF + '</td></tr></tbody></table>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Annual Budget", budgetContent);
 }
@@ -204,13 +209,14 @@ class Goal{
 let addSmartGoal = function(ids, goal)
 {
     let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ goal.goal +'</p>';
-    smartgoal += "<p><b>Action(s): </b>"+ goal.action +'</p>';
-    smartgoal += "<p><b>Metric(s): </b>"+ goal.metric +'</p>';
-    smartgoal += "<p><b>TimeFrame: </b>"+ goal.timeFrame +'</p></div>';
-    smartgoal += '<h4> Actions implemented</h4><p>'+ goal.actionsImplemented+'</p>';
-    smartgoal += '<h4> Noteworthy Results of Assessment</h4><p>'+ goal.results+'</p>';
-    smartgoal += '<h4> Changes Made/Planned</h4><p>'+ goal.changes+'</p>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
+    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
+    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
+    let time = isNaN(goal.timeFrame) ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
+    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p></div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':goal.actionsImplemented) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':goal.results) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':goal.changes) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
@@ -227,11 +233,11 @@ let addTopAchievements = function(ids, data)
 
 let addOtherThoughts = function(ids, data)
 {
-    let otherthoughts = '<p><b>Big Opportunities: </b>'+ data.opportunities + '</p>'+
-    '<p><b>Big Challenges: </b>'+ data.challenges +'</p>'+
-    '<p><b>Resource Needs: </b>'+ data.needs +'</p>'+
-    '<p><b>Strategy Suggestions to Grow Research: </b>'+ data.strategies +'</p>'+
-    '<p><b>Other Thoughts and Suggestions: </b>'+ data.suggestions +'</p>';
+    let otherthoughts = '<p><b>Big Opportunities: </b>'+ (data.opportunities == ''?'N/A':data.opportunities) + '</p>'+
+    '<p><b>Big Challenges: </b>'+ (data.challenges == ''?'N/A':data.challenges) +'</p>'+
+    '<p><b>Resource Needs: </b>'+ (data.needs == ''?'N/A':data.needs) +'</p>'+
+    '<p><b>Strategy Suggestions to Grow Research: </b>'+ (data.strategies == ''?'N/A':data.strategies) +'</p>'+
+    '<p><b>Other Thoughts and Suggestions: </b>'+ (data.suggestions == ''?'N/A':data.suggestions) +'</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
 }
 
@@ -252,13 +258,14 @@ class GoalPlan{
 let addSmartGoalPlan = function(ids, goal)
 {
     let smartgoal = '<h4>FY 20-21 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goalplan"><p><b>Goal: </b>'+ goal.goal +'</p>';
-    smartgoal += "<p><b>Action(s): </b>"+ goal.action +'</p>';
-    smartgoal += "<p><b>Metric(s): </b>"+ goal.metric +'</p>';
-    smartgoal += "<p><b>TimeFrame: </b>"+ goal.timeFrame +'</p></div>';
-    smartgoal += '<h4>Primary Leader on this Project</h4><p>'+ goal.primaryLeader+'</p>';
-    smartgoal += '<h4>Circumstances That Could Impact Workplan</h4><p>'+ goal.circumstances+'</p>';
-    smartgoal += '<h4>Most Important Collaborating Units/Offices</h4><p>'+ goal.collaborations+'</p>';
-    smartgoal += '<h4>Impact on Research Excellence (Campus Strategic Priorities)</h4><p>'+ goal.impact+'</p>';
+    smartgoal += '<p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
+    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
+    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
+    let time = isNaN(goal.timeFrame) ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
+    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p>';
+    smartgoal += '<p><b>Primary Leader on this Project: </b>'+ (goal.primaryLeader == ''?'N/A':goal.primaryLeader) +'</p>';
+    smartgoal += '<p><b>Circumstances That Could Impact Workplan: </b>'+ (goal.circumstances == ''?'N/A':goal.circumstances) +'</p>';
+    smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>'+ (goal.collaborations == ''?'N/A':goal.collaborations) +'</p>';
+    smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>'+ (goal.impact == ''?'N/A':goal.impact) +'</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }

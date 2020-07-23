@@ -1,0 +1,31 @@
+
+.border_bottom{
+    border-bottom: 1px grey solid;
+    text-align: center;
+}
+
+.border_right{
+    border-right: 1px grey solid;
+}
+
+.goal{
+    background-color: rgb(231, 231, 231);
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.goalresult{
+    background-color: #eed546;
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.padding_bottom{
+    padding-bottom: 10px;
+}
+
+.padding_top{
+    padding-top: 10px;
+}

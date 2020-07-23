@@ -136,3 +136,10 @@ let buildTabContent = function(distincttabs, tabname, tabContent){
     content += '</div>';
     return content;
 }
+
+function getDate(serial){
+    let utc_days  = Math.floor(serial - 25569);
+    let utc_value = utc_days * 86400;                                        
+    let date_info = new Date(utc_value * 1000);
+    return (parseInt(date_info.getMonth(),10) + 1) + '/' + (parseInt(date_info.getDate(),10) + 1) + '/' + date_info.getFullYear();//, 0, minutes, seconds);
+}

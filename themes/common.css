@@ -238,20 +238,6 @@ Primary use:    Common.css file used for styling header and
     vertical-align: middle;
 }
 
-.border_bottom{
-    border-bottom: 1px grey solid;
-    text-align: center;
-}
-.border_right{
-    border-right: 1px grey solid;
-}
-
-.goal{
-    background-color: rgb(231, 231, 231);
-    border-radius: 2px;
-    padding: 10px;
-    margin-bottom: 10px;
-}
 @media only screen and (max-width: 340px)
 {
     .ualbany-logo{
