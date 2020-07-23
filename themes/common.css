@@ -238,6 +238,27 @@ Primary use:    Common.css file used for styling header and
     vertical-align: middle;
 }
 
+.nav-pills .nav-link.active{
+    background-color: #edba32;
+    color: #46166C;
+}
+
+.nav-pills .nav-link:hover{
+    background-color:#edba32;
+    color: #46166C;
+}
+
+.nav-link{
+    background-color: #46166C;
+    color: white;
+    border: 1px solid #46166C;
+}
+
+.nav-item{
+    margin-right: 10px;
+    text-align: center;
+}
+
 @media only screen and (max-width: 340px)
 {
     .ualbany-logo{
