@@ -1,4 +1,4 @@
-let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"CURRENT ASSESSMENTS","link":"currentassessments.html"},{"item":"ADMINISTRATIVE UNITS","link":"#","subItems":[{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"},{"item":"Office for Innovation Development and Commercialization (OIDC)","link":"officeforinnovationdevelopmentandcommercialization(oidc).html"},{"item":"Office of Community and Economic Development","link":"officeofcommunityandeconomicdevelopment.html"},{"item":"Office of Regulatory and Research Compliance","link":"officeofregulatoryandresearchcompliance.html"}]},{"item":"GOALS & BENEFITS","link":"goalsandbenifits.html"}]
+let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"CURRENT ASSESSMENTS","link":"currentassessments.html"},{"item":"ADMINISTRATIVE UNITS","link":"#","subItems":[{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Office for Innovation Development and Commercialization (OIDC)","link":"officeforinnovationdevelopmentandcommercialization(oidc).html"},{"item":"Office of Community and Economic Development","link":"officeofcommunityandeconomicdevelopment.html"},{"item":"Office of Regulatory and Research Compliance","link":"officeofregulatoryandresearchcompliance.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"}]},{"item":"GOALS & BENEFITS","link":"goalsandbenifits.html"}]
 //SideMenu Start
 //What evet written  before '//SideMenu Start' will be relace with sidemenuItems in automation scripts
 let addsidemenu = function(page){
@@ -91,4 +91,48 @@ let generateAccordionElem = function(level, collapseId, headerId, parentId, chil
                         + '<div id="'+ collapseId + '" class = "collapse" aria-labelledby= "'+ headerId + '" data-parent="#'+ parentId +'"> <div class = "card-body" id="'+ childId +'">'
                         + accordionContent +'</div></div></div>';  
     return accordionElem;
+}
+
+let createTabNavigation = function(distincttabs, tabname)
+{
+    let navigationContent = '<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">';
+    for(let i = 0; i< distincttabs.length; i++)
+    {
+        let buttonContent = '';
+        let tabId = tabname + i.toString();
+        if(i == 0)
+        {
+            buttonContent = '<a class="nav-link active" id="pills-'+ tabId +'-tab" data-toggle="pill" href="#pills-'+ tabId +'" role="tab" aria-controls="pills-'+ tabId +'" aria-selected="true">'+ distincttabs[i] +'</a>';
+        }
+        else
+        {
+            buttonContent = '<a class="nav-link" id="pills-'+ tabId +'-tab" data-toggle="pill" href="#pills-'+ tabId +'" role="tab" aria-controls="pills-'+ tabId +'" aria-selected="true">'+ distincttabs[i] +'</a>';
+        }
+       
+        let linkElement = '<li class="nav-item">' + buttonContent + '</li>';
+        navigationContent = navigationContent + linkElement;
+    }
+    navigationContent += '</ul>';
+    return navigationContent;
+}
+
+let buildTabContent = function(distincttabs, tabname, tabContent){
+    let content = '<div class="tab-content" id="pills-tabContent">';
+    
+    for(let i = 0; i< distincttabs.length; i++)
+    {
+        let tabId = tabname + i.toString();
+        if(i == 0)
+        {
+            content +='<div class="tab-pane fade show active" id="pills-'+ tabId +'" role="tabpanel" aria-labelledby="pills-'+ tabId +'-tab">';
+        }
+        else
+        {
+            content +='<div class="tab-pane fade" id="pills-'+ tabId +'" role="tabpanel" aria-labelledby="pills-'+ tabId +'-tab">';
+        }
+        content += tabContent[i];
+        content += '</div>';
+    }
+    content += '</div>';
+    return content;
 }

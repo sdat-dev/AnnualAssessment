@@ -11,134 +11,175 @@ request.onload = function(){
     let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
     let contentHeadr = document.getElementsByClassName('content-header')[0];
     contentHeadr.textContent = reportdata.ExternalReference;
-
-    content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
-                '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-                '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
-    content += '<div id = "annualreport">';
-    let counter = 1; 
-    let collapseId = "collapse" + counter;
-    let headerId = "heading" + counter;
-    let childId = "#";
-    counter++;
-    content += addMissionAndVision(collapseId, headerId, 'annualreport', childId, reportdata);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    content += addAnnualBudget(collapseId, headerId, 'annualreport', childId, reportdata);
-    if( reportdata.Q51 == 'Yes')
-    {
-        collapseId = "collapse" + counter;
-        headerId = "heading" + counter;
-        counter++;
-        content += addOrganizationalMemberships(collapseId, headerId, 'annualreport', childId, reportdata);
-        collapseId = "collapse" + counter;
-        headerId = "heading" + counter;
-        counter++;
-        content += addMembershipBenifits(collapseId, headerId, 'annualreport', childId, reportdata);
-    }
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    let goal = new Goal(1, reportdata.Goal11920, reportdata.Activities11920, 
-        reportdata.Metrics11920, reportdata.Timeframe11920, reportdata.Q82, reportdata.Q83, reportdata.Q84);
-    content += addSmartGoal(collapseId, headerId, 'annualreport', childId, goal);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    goal = new Goal(2, reportdata.Goal21920, reportdata.Activities21920, 
-        reportdata.Metrics21920, reportdata.Timeframe21920, reportdata.Q92, reportdata.Q93, reportdata.Q94);
-    content += addSmartGoal(collapseId, headerId, 'annualreport', childId, goal);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    goal = new Goal(3, reportdata.Goal31920, reportdata.Activities31920, 
-        reportdata.Metrics31920, reportdata.Timeframe31920, reportdata.Q102, reportdata.Q103, reportdata.Q104);
-    content += addSmartGoal(collapseId, headerId, 'annualreport', childId, goal);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    goal = new Goal(4, reportdata.Goal41920, reportdata.Activities41920, 
-        reportdata.Metrics41920, reportdata.Timeframe41920, reportdata.Q112, reportdata.Q113, reportdata.Q114);
-    content += addSmartGoal(collapseId, headerId, 'annualreport', childId, goal);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    goal = new Goal(5, reportdata.Goal51920, reportdata.Activities51920, 
-        reportdata.Metrics51920, reportdata.Timeframe51920, reportdata.Q122, reportdata.Q123, reportdata.Q124);
-    content += addSmartGoal(collapseId, headerId, 'annualreport', childId, goal);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    content += addTopAchievements(collapseId, headerId, 'annualreport', childId, reportdata);
-    collapseId = "collapse" + counter;
-    headerId = "heading" + counter;
-    counter++;
-    content += addOtherThoughts(collapseId, headerId, 'annualreport', childId, reportdata);
-    content += '</div>'
+    let years = ['FY 2019-20', 'FY 2020-21'];
+    content += createTabNavigation(years, "year");
+    let tabcontent = [];
+    tabcontent.push(add1920report(reportdata.FY1920));
+    tabcontent.push(add2021report(reportdata.FY2021));
+    content += buildTabContent(years, 'year', tabcontent);
     let contentElement = document.createElement('div');
     contentElement.classList.add('content');
     contentElement.innerHTML = content.trim();
     maincontentContainer.appendChild(contentElement);
 }
 
-let addMissionAndVision = function(collapseId, headerId, parentId, childId, data)
+let counter = 1;
+let getIds = function(year){
+    let ids = {};
+    ids["parentId"] = year;
+    ids["collapseId"] = "collapse" + counter;
+    ids["headerId"] = "heading" + counter;
+    ids["childId"] = "#";
+    counter++;
+    return ids;
+}
+
+let add1920report = function(reportdata){
+    let content = '';
+    content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
+    '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
+    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
+    content += '<div id = "FY1920">';
+
+    let ids= getIds('FY1920');
+    let data = {};
+    data["mission"] = reportdata.Mission1819; 
+    data["vision"] = reportdata.Vision1819;
+    content += addMissionAndVision(ids, data);
+
+    ids = getIds('FY1920');
+    data = {};
+    data["annualBudget"] = reportdata.Q41;
+    data["employeesState"] = reportdata.Q42_1_1; 
+    data["employeesRF"] = reportdata.Q42_1_2; 
+    data["fteState"] = reportdata.Q42_2_1; 
+    data["fteRF"] = reportdata.Q42_2_2; 
+    content += addAnnualBudget(ids, data);
+    if( reportdata.Q51 == 'Yes')
+    {
+        ids = getIds('FY1920');
+        data = {};
+        for(var i=1; i < 7; i++ )
+        {
+            data['membership' + i] =  reportdata["Q52_" + i];
+        }
+        content += addOrganizationalMemberships(ids, data);
+        ids = getIds('FY1920');
+        data = {};
+        for(var i=1; i < 7; i++ )
+        {
+            data['benifit' + i] =  reportdata["Q61_" + i];
+        }
+        content += addMembershipBenifits(ids, data);
+    }
+
+    for(var i = 1; i < 6; i++)
+    {
+        ids = getIds('FY1920');
+        let goal = new Goal(1, reportdata["Goal"+i+"1819"], reportdata["Activities"+i+"1819"], 
+        reportdata["Metrics"+i+"1819"], reportdata["Timeframe"+i+"1819"], reportdata["Q"+(i+7)+"2"], reportdata["Q"+(i+7)+"3"], reportdata["Q"+(i+7)+"4"]);
+        content += addSmartGoal(ids, goal);
+    }
+
+    ids = getIds('FY1920');
+    data = [];
+    data.push(reportdata.Q83);
+    data.push(reportdata.Q93);
+    data.push(reportdata.Q103);
+    data.push(reportdata.Q131_4);
+    data.push(reportdata.Q131_5);
+    data.push(reportdata.Q131_6);
+    content += addTopAchievements(ids, data);
+
+    ids = getIds('FY1920');
+    data = {};
+    data["opportunities"] = reportdata.Q142;
+    data["challenges"] = reportdata.Q143;
+    data["needs"] = reportdata.Q144;
+    data["strategies"] = reportdata.Q145;
+    data["suggestions"] = reportdata.Q146;
+    content += addOtherThoughts(ids, data);
+    content += '</div>'
+    return content;
+}
+
+let add2021report = function(reportdata){
+    let content = '';
+    content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
+    '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
+    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
+    content += '<div id = "FY2021">';
+
+    let ids= getIds('FY2021');
+    let data = {};
+    data["mission"] = reportdata.Q31; 
+    data["vision"] = reportdata.Q32;
+    content += addMissionAndVision(ids, data);
+
+    ids = getIds('FY2021');
+    data = {};
+    data["annualBudget"] = reportdata.Q41;
+    data["employeesState"] = reportdata.Q42_1_1; 
+    data["employeesRF"] = reportdata.Q42_1_2; 
+    data["fteState"] = reportdata.Q42_2_1; 
+    data["fteRF"] = reportdata.Q42_2_2; 
+    content += addAnnualBudget(ids, data);
+
+    for(var i = 6; i < 11; i++)
+    {
+        ids = getIds('FY2021');
+        let goal = new GoalPlan(1, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
+        reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
+        reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
+        content += addSmartGoalPlan('FY 19-20', ids, goal);
+    }
+    content += '</div>'
+    return content;
+}
+
+let addMissionAndVision = function(ids, data)
 {
     let misionandvision = '<h4>MISSION</h4>'+
-    '<p>'+ data.Mission1819 + '</p>' +
+    '<p>'+ data.mission + '</p>' +
     '<h4>VISION</h4>'+
-    '<p>'+ data.Vision1819 + '</p>' ;
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Mission and Vision", misionandvision);
+    '<p>'+ data.vision + '</p>' ;
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Mission and Vision", misionandvision);
 }
 
-let addAnnualBudget = function(collapseId, headerId, parentId, childId, data)
+let addAnnualBudget = function(ids, data)
 {
-    let annualBudget = '<h4> ANNUAL BUDGET </h4>'+
-    '<p>'+ data.Q41 + '</p>' +
+    let budgetContent = '<h4> ANNUAL BUDGET </h4>'+
+    '<p>'+ data.annualBudget + '</p>' +
     '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-    '<tbody><tr><th class="border_right">#Employees (Headcounts)</th><td>'+ data.Q42_1_1 + '</td><td>'+
-    data.Q42_1_2 + '</td>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.Q42_2_1 + '</td><td>'+
-    data.Q42_2_2 + '</td></tr></tbody></table>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Annual Budget", annualBudget);
+    '<tbody><tr><th class="border_right">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
+    data.employeesRF + '</td>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
+    data.fteRF + '</td></tr></tbody></table>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Annual Budget", budgetContent);
 }
 
-let addOrganizationalMemberships = function(collapseId, headerId, parentId, childId, data)
+let addOrganizationalMemberships = function(ids, data)
 {
     let organizations = '<ul class="num-list">';
-    if(data.Q52_1 != "")
-    organizations +='<li>'+ data.Q52_1 +'</li>';
-    if(data.Q52_2 != "")
-    organizations +='<li>'+ data.Q52_2+'</li>';
-    if(data.Q52_3 != "")
-    organizations +='<li>'+ data.Q52_3+'</li>';
-    if(data.Q52_4 != "")
-    organizations +='<li>'+ data.Q52_4+'</li>';
-    if(data.Q52_5 != "")
-    organizations +='<li>'+ data.Q52_5+'</li>';
-    if(data.Q52_6 != "")
-    organizations +='<li>'+ data.Q52_6+'</li>';
+    for(var i=1; i<7; i++)
+    {
+        if(data['membership'+i]!= "")
+            organizations +='<li>'+ data['membership'+i] +'</li>';
+    }
     organizations +='</ul>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Active Organizational Memberships", organizations);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Active Organizational Memberships", organizations);
 }
 
-let addMembershipBenifits = function(collapseId, headerId, parentId, childId, data)
+let addMembershipBenifits = function(ids, data)
 {
     let membershipBenefit = '<ul class="num-list">';
-    if(data.Q56_1 != "")
-    membershipBenefit +='<li>'+ data.Q56_1 +'</li>';
-    if(data.Q56_2 != "")
-    membershipBenefit +='<li>'+ data.Q56_2+'</li>';
-    if(data.Q56_3 != "")
-    membershipBenefit +='<li>'+ data.Q56_3+'</li>';
-    if(data.Q56_4 != "")
-    membershipBenefit +='<li>'+ data.Q56_4+'</li>';
-    if(data.Q56_5 != "")
-    membershipBenefit +='<li>'+ data.Q56_5+'</li>';
-    if(data.Q56_6 != "")
-    membershipBenefit +='<li>'+ data.Q56_6+'</li>';
+    for(var i=1; i<7; i++)
+    {
+        if(data['benefit'+i]!= "")
+            membershipBenefit +='<li>'+ data['benefit'+i] +'</li>';
+    }
     membershipBenefit +='</ul>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Membership Benefit to the Unit", membershipBenefit);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Membership Benefit to the Unit", membershipBenefit);
 }
 
 let addHonors = function(collapseId, headerId, parentId, childId, data)
@@ -159,7 +200,7 @@ class Goal{
     }
 }
 
-let addSmartGoal = function(collapseId, headerId, parentId, childId, goal)
+let addSmartGoal = function(ids, goal)
 {
     let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ goal.goal +'</p>';
@@ -169,24 +210,54 @@ let addSmartGoal = function(collapseId, headerId, parentId, childId, goal)
     smartgoal += '<h4> Actions implemented</h4><p>'+ goal.actionsImplemented+'</p>';
     smartgoal += '<h4> Noteworthy Results of Assessment</h4><p>'+ goal.results+'</p>';
     smartgoal += '<h4> Changes Made/Planned</h4><p>'+ goal.changes+'</p>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "SMART Goal "+ goal.no, smartgoal);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
-let addTopAchievements = function(collapseId, headerId, parentId, childId, data)
+let addTopAchievements = function(ids, data)
 {
-    let achievements = '<ul class="num-list sub-list">'+
-    '<li>'+ data.Q132_4 +'</li>'+
-    '<li>'+ data.Q132_5 +'</li>'+
-    '<li>'+ data.Q132_6 +'</li></ul>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Top 3 Achievements", achievements);
+    let achievements = '<ul class="num-list sub-list">';
+    for(var i=0; i<data.length; i++)
+    {
+        achievements +=  '<li>'+ data[i] +'</li>';
+    }
+    achievements +='</ul>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3 Achievements", achievements);
 }
 
-let addOtherThoughts = function(collapseId, headerId, parentId, childId, data)
+let addOtherThoughts = function(ids, data)
 {
-    let otherthoughts = '<p><b>Big Opportunities: </b>'+ data.Q141 + '</p>'+
-    '<p><b>Big Challenges: </b>'+ data.Q142 +'</p>'+
-    '<p><b>Resource Needs: </b>'+ data.Q143 +'</p>'+
-    '<p><b>Strategy Suggestions to Grow Research: </b>'+ data.Q144 +'</p>'+
-    '<p><b>Other Thoughts and Suggestions: </b>'+ data.Q145 +'</p>';
-    return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Other Thoughts and Suggestions", otherthoughts);
+    let otherthoughts = '<p><b>Big Opportunities: </b>'+ data.opportunities + '</p>'+
+    '<p><b>Big Challenges: </b>'+ data.challenges +'</p>'+
+    '<p><b>Resource Needs: </b>'+ data.needs +'</p>'+
+    '<p><b>Strategy Suggestions to Grow Research: </b>'+ data.strategies +'</p>'+
+    '<p><b>Other Thoughts and Suggestions: </b>'+ data.suggestions +'</p>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
+}
+
+class GoalPlan{
+    constructor(no, goal, action, metric, timeframe, primaryLeader, circumstances, collaborations, impact){
+        this.no = no;
+        this.goal = goal;
+        this.action = action;
+        this.metric = metric;
+        this.timeFrame = timeframe;
+        this.primaryLeader = primaryLeader;
+        this.circumstances = circumstances;
+        this.collaborations = collaborations;
+        this.impact = impact;
+    }
+}
+
+let addSmartGoalPlan = function(ids, goal)
+{
+    let smartgoal = '<h4>FY 20-21 SMART GOAL '+ goal.no +'</h4>';
+    smartgoal += '<div class="goalplan"><p><b>Goal: </b>'+ goal.goal +'</p>';
+    smartgoal += "<p><b>Action(s): </b>"+ goal.action +'</p>';
+    smartgoal += "<p><b>Metric(s): </b>"+ goal.metric +'</p>';
+    smartgoal += "<p><b>TimeFrame: </b>"+ goal.timeFrame +'</p></div>';
+    smartgoal += '<h4>Primary Leader on this Project</h4><p>'+ goal.primaryLeader+'</p>';
+    smartgoal += '<h4>Circumstances That Could Impact Workplan</h4><p>'+ goal.circumstances+'</p>';
+    smartgoal += '<h4>Most Important Collaborating Units/Offices</h4><p>'+ goal.collaborations+'</p>';
+    smartgoal += '<h4>Impact on Research Excellence (Campus Strategic Priorities)</h4><p>'+ goal.impact+'</p>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
