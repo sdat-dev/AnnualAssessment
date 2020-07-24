@@ -145,6 +145,7 @@ Primary use:    Common.css file used for styling header and
 #num-list{
     list-style:decimal;
     list-style-position: inside;
+    color: #46166b;
 }
 
 .underline{
@@ -263,6 +264,31 @@ Primary use:    Common.css file used for styling header and
 .italic-underline{
     font-style: italic;
     text-decoration: underline;
+}
+
+.check-list{
+    list-style:none;
+    list-style-position: inside;
+}
+
+.check-list>li:before {
+    content: "✓  ";
+    font-weight: bold;
+}
+
+.greenHighLight{
+    background-color: green;
+    color: white;
+}
+
+.redHighLight{
+    background-color: red;
+    color: white;
+}
+
+.highlight{
+    color:  #46166C;
+    font-weight: bold;
 }
 
 @media only screen and (max-width: 340px)
