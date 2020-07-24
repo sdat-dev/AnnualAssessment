@@ -291,6 +291,15 @@ Primary use:    Common.css file used for styling header and
     font-weight: bold;
 }
 
+.italic{
+    font-style: italic;
+}
+
+.square-list{
+    list-style: square;
+    list-style-position: inside;
+}
+
 @media only screen and (max-width: 340px)
 {
     .ualbany-logo{

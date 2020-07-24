@@ -34,13 +34,3 @@ Primary use:    home.css file used for styling home page
 .list-header{
     text-decoration: underline;
 }
-
-.italic{
-    font-style: italic;
-
-}
-
-.square-list{
-    list-style: square;
-    list-style-position: inside;
-}
