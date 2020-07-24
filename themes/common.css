@@ -276,12 +276,12 @@ Primary use:    Common.css file used for styling header and
     font-weight: bold;
 }
 
-.greenHighLight{
+.greenHighlight{
     background-color: green;
     color: white;
 }
 
-.redHighLight{
+.redHighlight{
     background-color: red;
     color: white;
 }
@@ -298,6 +298,11 @@ Primary use:    Common.css file used for styling header and
 .square-list{
     list-style: square;
     list-style-position: inside;
+}
+
+li{
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 @media only screen and (max-width: 340px)
