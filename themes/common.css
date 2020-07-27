@@ -142,10 +142,9 @@ Primary use:    Common.css file used for styling header and
     padding-left: 30px;
 }
 
-#num-list{
+.num-list{
     list-style:decimal;
     list-style-position: inside;
-    color: #46166b;
 }
 
 .underline{
@@ -395,7 +394,7 @@ li{
     }
     #landing-logo-wrapper{
         bottom: 10%;
-        width: 20%;
+        width: 173px;
     }
     .main-content>h1, .main-content>h2, .main-content>h3, .main-content>h4, .main-content>h5, .main-content>h6, .main-content>p, .main-content>div {
         margin-left: 50px;
@@ -437,7 +436,7 @@ li{
     }
     #landing-logo-wrapper{
         bottom: 10%;
-        width: 20%;
+        width: 173px;
     }
 }
 
@@ -458,6 +457,6 @@ li{
     }
     #landing-logo-wrapper{
         bottom: 10%;
-        width: 20%;
+        width: 173px;
     }
 }

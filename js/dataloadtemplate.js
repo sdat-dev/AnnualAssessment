@@ -218,17 +218,74 @@ class Goal{
 let addSmartGoal = function(ids, goal)
 {
     let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
-    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
-    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
+    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
     smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p></div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':goal.actionsImplemented) +'</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':goal.results) +'</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':goal.changes) +'</p></div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':formatText(goal.actionsImplemented)) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
+let formatText = function(text){
+    let result = '';
+    let paras = text.split("\n\n");
+    for(var i=0; i< paras.length; i++){
+        let para = paras[i];
+        if(para.includes("\n") == false && para.search(/d.\t/) == -1)
+        {
+            result += para;
+        }
+        else
+        {
+            let lines = para.split(/\d.\t/);
+            if(lines.length > 1)
+            {
+                lines[0] = lines[0].replace(/\d.\t/,"");
+                result += '<ul class="num-list">';
+                for(var j =0; j< lines.length; j++)
+                {
+                    if(lines[j] == '') continue;
+                    result += '<li>' + lines[j] + '</li>';
+                }
+            }
+            else
+            {
+                lines = para.split(/\n\d. /);
+                if(lines.length > 1)
+                {
+                    lines[0] = lines[0].replace(/\d. /,"");
+                    result += '<ul class="num-list">';
+                    for(var j =0; j< lines.length; j++)
+                    {
+                        if(lines[j] == '') continue;
+                        result += '<li>' + lines[j] + '</li>';
+                    }
+                }
+                else
+                {
+                    lines = para.split(/\n\d.\t/);
+                    if(lines.length > 1)
+                    {
+                        lines[0] = lines[0].replace(/\d.\t/,"");
+                        result += '<ul class="num-list">';
+                        for(var j =0; j< lines.length; j++)
+                        {
+                            if(lines[j] == '') continue;
+                            result += '<li>' + lines[j] + '</li>';
+                        }
+                    }
+                    else
+                        result += '<p>'+ lines[0] + '</p>';
+                }
+            }
+        }        
+    }
+
+    return result;
+}
 let addTopAchievements = function(ids, data)
 {
     let achievements = '<ul class="num-list sub-list">';
