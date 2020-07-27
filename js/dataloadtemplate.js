@@ -75,25 +75,35 @@ let add1920report = function(reportdata){
 
     for(var i = 8; i < 13; i++)
     {
+        if(i > 10 && reportdata.Q105 === 'No')
+        {
+            break;
+        }
         ids = getIds('FY1920');
         let no = i-7;
         let goal = new Goal(no, reportdata["Goal"+no+"1819"], reportdata["Activities"+no+"1819"], 
         reportdata["Metrics"+no+"1819"], reportdata["Timeframe"+no+"1819"], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
         content += addSmartGoal(ids, goal);
-        if(i > 10 && reportdata.Q105 === 'No')
-        {
-            break;
-        }
     }
 
     ids = getIds('FY1920');
     data = [];
-    data.push(reportdata.Q83);
-    data.push(reportdata.Q93);
-    data.push(reportdata.Q103);
-    data.push(reportdata.Q131_4);
-    data.push(reportdata.Q131_5);
-    data.push(reportdata.Q131_6);
+    if(reportdata.Q131_8 != '')
+        data.push(reportdata.Q83);
+    if(reportdata.Q131_9 != '')
+        data.push(reportdata.Q93);
+    if(reportdata.Q131_13 != '')
+        data.push(reportdata.Q103);
+    if(reportdata.Q131_11 != '')
+        data.push(reportdata.Q113);
+    if(reportdata.Q131_12 != '')
+        data.push(reportdata.Q123);
+    if(reportdata.Q132_4 != '')
+        data.push(reportdata.Q132_4);
+    if(reportdata.Q132_5 != '')
+        data.push(reportdata.Q132_5);
+    if(reportdata.Q132_6 != '')
+        data.push(reportdata.Q132_6);
     content += addTopAchievements(ids, data);
 
     ids = getIds('FY1920');
