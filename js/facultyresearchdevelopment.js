@@ -44,8 +44,8 @@ let add1920report = function(reportdata){
 
     let ids= getIds('FY1920');
     let data = {};
-    data["mission"] = reportdata.Mission1819; 
-    data["vision"] = reportdata.Vision1819;
+    data["mission"] = reportdata["1819Mission"]; 
+    data["vision"] = reportdata["1819Vision"];
     content += addMissionAndVision(ids, data);
 
     ids = getIds('FY1920');
@@ -82,8 +82,8 @@ let add1920report = function(reportdata){
         }
         ids = getIds('FY1920');
         let no = i-7;
-        let goal = new Goal(no, reportdata["Goal"+no+"1819"], reportdata["Activities"+no+"1819"], 
-        reportdata["Metrics"+no+"1819"], reportdata["Timeframe"+no+"1819"], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
+        let goal = new Goal(no, reportdata["1819Goal"+no], reportdata["1819Activities"+no], 
+        reportdata["1819Metrics"+no], reportdata["1819Timeframe"+no], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
         content += addSmartGoal(ids, goal);
     }
 
@@ -109,11 +109,11 @@ let add1920report = function(reportdata){
 
     ids = getIds('FY1920');
     data = {};
-    data["opportunities"] = reportdata.Q142;
-    data["challenges"] = reportdata.Q143;
-    data["needs"] = reportdata.Q144;
-    data["strategies"] = reportdata.Q145;
-    data["suggestions"] = reportdata.Q146;
+    data["opportunities"] = reportdata.Q141;
+    data["challenges"] = reportdata.Q142;
+    data["needs"] = reportdata.Q143;
+    data["strategies"] = reportdata.Q144;
+    data["suggestions"] = reportdata.Q145;
     content += addOtherThoughts(ids, data);
     content += '</div>'
     return content;
@@ -222,7 +222,7 @@ let addSmartGoal = function(ids, goal)
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
-    let time = isNaN(goal.timeFrame) ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
+    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
     smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p></div>';
     smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':goal.actionsImplemented) +'</p>';
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':goal.results) +'</p>';
@@ -271,7 +271,7 @@ let addSmartGoalPlan = function(ids, goal)
     smartgoal += '<p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
-    let time = isNaN(goal.timeFrame) ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
+    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
     smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p>';
     smartgoal += '<p><b>Primary Leader on this Project: </b>'+ (goal.primaryLeader == ''?'N/A':goal.primaryLeader) +'</p>';
     smartgoal += '<p><b>Circumstances That Could Impact Workplan: </b>'+ (goal.circumstances == ''?'N/A':goal.circumstances) +'</p>';
