@@ -241,10 +241,10 @@ let formatText = function(text){
         }
         else
         {
-            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i.|ii.|iii.|iv.|v.)/);
-            if(lines.length == 0)
+            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i\.|ii\.|iii\.|iv\.|v\.)/);
+            if(lines.length == 1)
             {
-                result += lines[j]; 
+                result += lines[0]; 
             }
             else
             {
@@ -262,12 +262,12 @@ let formatText = function(text){
 }
 let addTopAchievements = function(ids, data)
 {
-    let achievements = '<ul class="num-list">';
+    let achievements = '';
     for(var i=0; i<data.length; i++)
     {
-        achievements += '<li>' + formatText(data[i]) + '</li>';
+        achievements += '<p><b>Achievement'+ (i+1)+': </b><p>';
+        achievements += formatText(data[i]);
     }
-    achievements +='</ul>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3 Achievements", achievements);
 }
 
