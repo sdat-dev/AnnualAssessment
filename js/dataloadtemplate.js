@@ -240,58 +240,31 @@ let formatText = function(text){
         }
         else
         {
-            let lines = para.split(/\d.\t/);
-            if(lines.length > 1)
+            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i.|ii.|iii.|iv.|v.)/);
+            if(lines.length == 0)
             {
-                lines[0] = lines[0].replace(/\d.\t/,"");
-                result += '<ul class="num-list">';
-                for(var j =0; j< lines.length; j++)
-                {
-                    if(lines[j] == '') continue;
-                    result += '<li>' + lines[j] + '</li>';
-                }
+                result += lines[j]; 
             }
             else
             {
-                lines = para.split(/\n\d. /);
-                if(lines.length > 1)
+                for(var j =0; j< lines.length; j++)
                 {
-                    lines[0] = lines[0].replace(/\d. /,"");
-                    result += '<ul class="num-list">';
-                    for(var j =0; j< lines.length; j++)
-                    {
-                        if(lines[j] == '') continue;
-                        result += '<li>' + lines[j] + '</li>';
-                    }
-                }
-                else
-                {
-                    lines = para.split(/\n\d.\t/);
-                    if(lines.length > 1)
-                    {
-                        lines[0] = lines[0].replace(/\d.\t/,"");
-                        result += '<ul class="num-list">';
-                        for(var j =0; j< lines.length; j++)
-                        {
-                            if(lines[j] == '') continue;
-                            result += '<li>' + lines[j] + '</li>';
-                        }
-                    }
-                    else
-                        result += '<p>'+ lines[0] + '</p>';
+                    if(lines[j] == '') continue;
+                    result += '<p>'+lines[j]+'</p>'; 
                 }
             }
         }        
     }
 
+
     return result;
 }
 let addTopAchievements = function(ids, data)
 {
-    let achievements = '<ul class="num-list sub-list">';
+    let achievements = '<ul class="num-list">';
     for(var i=0; i<data.length; i++)
     {
-        achievements +=  '<li>'+ data[i] +'</li>';
+        achievements += '<li>' + formatText(data[i]) + '</li>';
     }
     achievements +='</ul>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3 Achievements", achievements);

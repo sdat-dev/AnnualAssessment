@@ -102,3 +102,7 @@ button.btn-link:hover, button.btn-link > .content-header-no-margin:hover{
     line-height: 30px;
     font-size: 15px;
 }
+
+td{
+    text-align: center;
+}
