@@ -265,7 +265,7 @@ let addTopAchievements = function(ids, data)
     let achievements = '';
     for(var i=0; i<data.length; i++)
     {
-        achievements += '<p><b>Achievement'+ (i+1)+': </b><p>';
+        achievements += '<p><b>Achievement '+ (i+1)+': </b><p>';
         achievements += formatText(data[i]);
     }
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3 Achievements", achievements);
