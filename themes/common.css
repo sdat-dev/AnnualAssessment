@@ -460,3 +460,9 @@ li{
         width: 173px;
     }
 }
+
+@media print
+{
+.no-print {display:none;}
+.collapse {display: block;}
+}

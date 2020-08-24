@@ -1,4 +1,4 @@
-let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"ANNUAL ASSESSMENTS","link":"annualassessments.html"},{"item":"UNIT REPORTS","link":"#","subItems":[{"item":"Community and Economic Development","link":"communityandeconomicdevelopment.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Innovation Development and Commercialization (OIDC)","link":"innovationdevelopmentandcommercialization(oidc).html"},{"item":"Regulatory and Research Compliance","link":"regulatoryandresearchcompliance.html"},{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"}]},{"item":"STEPS TO COMPLETION","link":"steps-to-completion.html"},{"item":"BENEFITS","link":"benifits.html"},{"item":"QUESTIONS?","link":"questions.html"}]
+let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"ANNUAL ASSESSMENTS","link":"annualassessments.html"},{"item":"UNIT REPORTS","link":"#","subItems":[{"item":"Community and Economic Development","link":"communityandeconomicdevelopment.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Innovation Development and Commercialization (OIDC)","link":"innovationdevelopmentandcommercialization(oidc).html"},{"item":"Regulatory and Research Compliance","link":"regulatoryandresearchcompliance.html"},{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"}]},{"item":"STEPS TO COMPLETION","link":"steps-to-completion.html"},{"item":"BENEFITS","link":"benifits.html"},{"item":"PRINT REPORTS","link":"print.html"},{"item":"QUESTIONS?","link":"questions.html"}]
 //SideMenu Start
 //What evet written  before '//SideMenu Start' will be relace with sidemenuItems in automation scripts
 let addsidemenu = function(page){
@@ -142,4 +142,30 @@ function getDate(serial){
     let utc_value = utc_days * 86400;                                        
     let date_info = new Date(utc_value * 1000);
     return (parseInt(date_info.getMonth(),10) + 1) + '/' + (parseInt(date_info.getDate(),10) + 1) + '/' + date_info.getFullYear();//, 0, minutes, seconds);
+}
+
+function printPlanningReport(id){
+    let report = document.getElementById(id);
+    let header = document.getElementsByClassName('content-header')[0];
+    let vision = report.getElementsByClassName("vision");
+    let mission = report.getElementsByClassName("mission");
+    let budget = report.getElementsByClassName("annual-budget");
+    let goals = report.getElementsByClassName("goal");
+    let achievements = report.getElementsByClassName("achievements");
+    let otherthoughts =  report.getElementsByClassName("other-thoughts");
+    let content = '<h1>'+ header.innerHTML +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>';
+    content += "<h2> Mission Statement </h2><p>" +  mission[0].innerHTML + "</p>";
+    content += "<h2> Vision </h2><p>" +  vision[0].innerHTML + "</p>";
+    content += "<h2> Annual Budget </h2>" +  budget[0].innerHTML;
+    content += "<h2></h2>";
+    for(i = 0; i < goals.length; i++){
+        content += '<h2>Goal '+ (i+1) + '</h2>' +  goals[i].innerHTML;
+    }
+    content += "<h2> Achievements </h2>" +  achievements[0].innerHTML;
+    content += "<h2> Other Thoughts </h2>" +  otherthoughts[0].innerHTML;
+    var win = window.open("print.html", "_blank");
+    win.document.write(content); // where 'html' is a variable containing your HTML
+    win.document.close(); 
+    //win.document.body.innerHTML = content;
+    //win.print();
 }

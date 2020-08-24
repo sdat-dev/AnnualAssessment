@@ -38,7 +38,8 @@ let add1920report = function(reportdata){
     let content = '';
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
+    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020' +
+    '<button type="button" style="float:right; background-color: #46166b; color:white" onclick="printPlanningReport(\'FY1920\')">Print</button>';
     content += '<div id = "FY1920">';
 
     let ids= getIds('FY1920');
@@ -155,21 +156,21 @@ let add2021report = function(reportdata){
 let addMissionAndVision = function(ids, data)
 {
     let misionandvision = '<h4>MISSION</h4>'+
-    '<p>'+ data.mission + '</p>' +
+    '<p class="mission">'+ data.mission + '</p>' +
     '<h4>VISION</h4>'+
-    '<p>'+ data.vision + '</p>' ;
+    '<p class="vision">'+ data.vision + '</p>' ;
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Mission and Vision", misionandvision);
 }
 
 let addAnnualBudget = function(ids, data)
 {
     let budgetContent = '<h4> ANNUAL BUDGET </h4>'+
-    '<p>'+ data.annualBudget + '</p>' +
+    '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
     '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
     data.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
-    data.fteRF + '</td></tr></tbody></table>';
+    data.fteRF + '</td></tr></tbody></table></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Annual Budget", budgetContent);
 }
 
@@ -261,22 +262,23 @@ let formatText = function(text){
 }
 let addTopAchievements = function(ids, data)
 {
-    let achievements = '';
+    let achievements = '<div class="achievements">';
     for(var i=0; i<data.length; i++)
     {
         achievements += '<p><b>Achievement '+ (i+1)+': </b><p>';
         achievements += formatText(data[i]);
     }
+    achievements += "</div>";
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3 Achievements", achievements);
 }
 
 let addOtherThoughts = function(ids, data)
 {
-    let otherthoughts = '<p><b>Big Opportunities: </b>'+ (data.opportunities == ''?'N/A':data.opportunities) + '</p>'+
+    let otherthoughts = '<div class="other-thoughts"><p><b>Big Opportunities: </b>'+ (data.opportunities == ''?'N/A':data.opportunities) + '</p>'+
     '<p><b>Big Challenges: </b>'+ (data.challenges == ''?'N/A':data.challenges) +'</p>'+
     '<p><b>Resource Needs: </b>'+ (data.needs == ''?'N/A':data.needs) +'</p>'+
     '<p><b>Strategy Suggestions to Grow Research: </b>'+ (data.strategies == ''?'N/A':data.strategies) +'</p>'+
-    '<p><b>Other Thoughts and Suggestions: </b>'+ (data.suggestions == ''?'N/A':data.suggestions) +'</p>';
+    '<p><b>Other Thoughts and Suggestions: </b>'+ (data.suggestions == ''?'N/A':data.suggestions) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
 }
 
