@@ -304,10 +304,10 @@ let add2020researchreport = function(reportdata){
 
   
     
-    for(var i = 6; i < 11; i++)
+    for(var i = 9; i < 14; i++)
     {
         ids = getIds('FY1920');
-        let goal = new GoalPlan(i-5, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
+        let goal = new GoalPlan(i-8, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
         content += addSmartGoal(ids, goal);
@@ -448,10 +448,10 @@ let add2021researchreport = function(reportdata){
 
     
 
-    for(var i = 6; i < 11; i++)
+    for(var i = 7; i < 12; i++)
     {
         ids = getIds('FY2021');
-        let goal = new GoalPlan(i-5, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
+        let goal = new GoalPlan(i-6, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
         content += addSmartGoalPlan(ids, goal);
@@ -652,7 +652,7 @@ let addMissionAndVision = function(ids, data)
 let addAnnualBudget = function(ids, data)
 {
     let budgetContent = '<h4> ANNUAL BUDGET </h4>'+
-    '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
+    '<div class="annual-budget">' +
     '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
@@ -741,7 +741,12 @@ data.stateAwardsactual + '</td></tr>'+
 data.privateApplicationgoals + '</td></tr>'+
 '<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_actual + '</td><td>'+
 data.awrds_total_goals + '</td></tr>'+
-'</tbody></table></div>' ; +
+'</tbody></table></div>'  +
+
+'</br>'+
+'</br>'+
+
+
 
 
 
@@ -756,7 +761,9 @@ data.awrds_total_goals + '</td></tr>'+
 data.proposal_actual + '</td></tr>'+
 '<tr><th class="border_right">#Awards </th><td>'+ data.lsAwards_goals + '</td><td>'+
 data.lsAwards_actual + '</td></tr>'+
-'</tbody></table></div>' ; +
+'</tbody></table></div>' +
+'</br>'+
+'</br>'+
 
 '<div class="annual-budget">' +
 '<h4> Indicate below,the numbers of STTR/SBIR</h4>'+
@@ -779,6 +786,8 @@ return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.
 
 
 }
+
+
 
 /*
 let adddetailedActivity = function(ids,data){
@@ -911,7 +920,7 @@ data.licensedexecutedactual + '</td></tr>'+
 data.licensedrevenueactual + '</td></tr>'+
 '<th class="border_right padding_bottom padding_top">Start-up Companies </th><td>'+ data.startupcompaniesgoals+ '</td><td>'+
 data.starupcomapnieseactual + '</td></tr>'+
-'</tbody></table></div>' ; +
+'</tbody></table></div>'  +
 
 '</br>'+
  '</br>'+
@@ -923,35 +932,34 @@ data.starupcomapnieseactual + '</td></tr>'+
 '<div class="annual-budget"><p>' +data.listofintelletual +'</p>' +
  '</div>'+
 
- '<br/>'
+ '<br/>' +
 
- '<br/>'
-
-
+ '<br/>' +
 
 
-'<div class="annual-budget"><p>'+  + '</p>' +
+
+
+'<div class="annual-budget">' +
 '<h4> Indicate below,the numbers of Keynote Address or Plenary Invited Presentations</h4>'+
 '<table width="100%">'+
 '<tbody><tr>'+
 '<th class="padding_bottom padding_top">Your Goals for FY 19-20 </th><td>'+ data.yougoaloffy19020 + '</td></tr>'+
-'<tr><th class="">Actual Numbers </th><td>'+ data.actualnumbers + '</td><td>'+
-data.lsAwards_actual + '</td></tr>'+
+'<tr><th class="">Actual Numbers </th><td>'+ data.actualnumbers + '</td>'+
 '</tbody></table></div>' +
-'<br/>'
+'<br/>' +
 
-'<br/>'
+'<br/>' +
 
 
 '<h4> Indicate below ,the list all KeyNote Address or Plenary Invited Presentations </h4>'+
 
 '<div class="annual-budget"><p>' +data.listofkeynote +'</p>' +
  '</div>'+
-'<br/>'
-'<br/>'
+'<br/>' +
+'<br/>' +
 
+'<h4> Indicate below ,the list other Scholarly Activity below, including Faculty/Staff Honors and Awards, not applicable to the above listed categories. </h4>'+
 
- 
 '<div class="annual-budget"><p>' +data.otheracctiites +'</p>' +
 '</div>';
 
