@@ -45,7 +45,8 @@ let add2020researchreport = function(reportdata){
 
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020';
+    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020'+
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
     content += '<div id = "FY1920">';
 
     let ids= getIds('FY1920');
@@ -202,18 +203,18 @@ let add2020researchreport = function(reportdata){
    data["educationandtraining"] = checkNull(reportdata.Q71); 
     data["students_goals_undergraduate"] =checkNull(reportdata.Q71_1_1);
     data["students_goals_graduate"] =checkNull(reportdata.Q71_1_2);
-    data["students_goals_graduate_phd"] =checkNull(reportdata.Q71_1_3);
-    data["students_goals_phd"] =checkNull(reportdata.Q71_1_4);
+    data["students_goals_graduate_phd"] =checkNull(reportdata.Q71_1_4);
+    data["students_goals_phd"] =checkNull(reportdata.Q71_1_5);
 
     data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
     data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
-    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_3);
-    data["students_actual_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] =checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] =checkNull(reportdata.Q71_3_2);
-    data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_3);
-    data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_4); 
+    data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
+    data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
    content += addEducation19(ids, data);
 
 /*
@@ -1192,11 +1193,11 @@ class Goal{
 let addSmartGoal = function(ids, goal)
 {
     let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
-    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p> </div>';
+   /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p></div>';
+    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p> */;
     smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':formatText(goal.actionsImplemented)) +'</p>';
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
     smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
