@@ -84,6 +84,7 @@ let add2020researchreport = function(reportdata){
 
     ids = getIds('FY1920');
     data = {};
+    addData={};
    data["proposals"] = reportdata.Q51; 
     data["federalApplicationgoals"] = checkNull(reportdata.Q51_1_1); 
     data["federalApplicationactual"] = checkNull(reportdata.Q51_2_1); 
@@ -95,13 +96,16 @@ let add2020researchreport = function(reportdata){
     data["privateApplicationgoals"] = checkNull(reportdata.Q51_1_4); 
     data["privateApplicationactual"] =checkNull( reportdata.Q51_2_4); 
 
+    addData={1:data["federalApplicationgoals"],2: data["stateApplicationgoals"],3: data["privateApplicationgoals"]};
+    addData1={1:data["federalApplicationactual"],2: data["stateApplicationactual"],3: data["stateApplicationactual"]};
 
-    data["proposal_total_goals"]=checkNull(reportdata.Q51_1_3);
-    data["proposal_total_actual"]=checkNull(reportdata.Q51_2_3);
+
+    data["proposal_total_goals"]=add(addData);
+    data["proposal_total_actual"]=add(addData1);
 
     data["awards"] = reportdata.Q52; 
     data["federalAwardsgoals"] = checkNull(reportdata.Q52_1_1);
-    data["federalAwardsactual"] = checkNull(reportdata.Q52_2_2);
+    data["federalAwardsactual"] = checkNull(reportdata.Q52_2_1);
 
     
     
@@ -111,21 +115,25 @@ let add2020researchreport = function(reportdata){
     data["privateAwardsgoals"] = checkNull(reportdata.Q52_1_4); 
     data["privateAwardsactual"] = checkNull(reportdata.Q52_2_4); 
 
-    data["awrds_total_goals"]=checkNull(reportdata.Q52_1_3);
-    data["awrds_total_actual"]=checkNull(reportdata.Q52_2_3);
+    addData2={1:data["federalAwardsgoals"],2: data["stateAwardsgoals"],3: data["privateAwardsgoals"]};
+    addData3={1:data["federalAwardsactual"],2: data["stateAwardsactual"],3: data["privateAwardsactual"]};
+
+
+    data["awrds_total_goals"]=add(addData2);
+    data["awrds_total_actual"]=add(addData3);
     
     data["largeScale"] = checkNull(reportdata.Q53); 
     data["proposal_goals"] = checkNull(reportdata.Q53_1_1);
-    data["proposal_actual"] = checkNull(reportdata.Q53_2_1);
-    data["lsAwards_goals"] = checkNull(reportdata.Q53_1_2); 
+    data["proposal_actual"] = checkNull(reportdata.Q53_1_2);
+    data["lsAwards_goals"] = checkNull(reportdata.Q53_2_1); 
     data["lsAwards_actual"] = checkNull(reportdata.Q53_2_2); 
     
     data["strr"] = checkNull(reportdata.Q54);
 
     data["stProposal_goals"] = checkNull(reportdata.Q54_1_1); 
-    data["stProposal_actual"] = checkNull(reportdata.Q54_2_1); 
+    data["stProposal_actual"] = checkNull(reportdata.Q54_1_2); 
 
-    data["stAwards_goals"] = checkNull(reportdata.Q54_1_2); 
+    data["stAwards_goals"] = checkNull(reportdata.Q54_2_1); 
     data["stAwards_actual"] = checkNull(reportdata.Q54_2_2); 
 
     content +=adddetailedActivity(ids,data);
@@ -364,7 +372,9 @@ let add2021researchreport = function(reportdata){
 
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021';
+    '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
+    
     content += '<div id = "FY2021">';
 
     let ids= getIds('FY2021');
@@ -482,6 +492,20 @@ let checkNull =function(value){
 }
 
 
+let add =function(value){
+    var sum=0;
+
+    for(var i=1;i<=Object.keys(value).length;i++){
+
+        sum += value[i];
+    }
+
+return sum;
+}
+
+
+
+
 
 
 
@@ -493,7 +517,7 @@ let checkNull =function(value){
 let addResearchPerformancetarget =function(ids,data){
     let researchContent = '<h4> RESEARCH PERFORMANCE TARGET </h4>'+
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>'+
@@ -511,7 +535,7 @@ let addResearchPerformancetarget =function(ids,data){
    
     '<h4>AWARDS </h4>'+
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>'+
@@ -528,7 +552,7 @@ let addResearchPerformancetarget =function(ids,data){
 
     '<h4>LARGE-SCALE PROPOSALS/AWARDS </h4>'+
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> Number of target for Large-Scale*, Multi-Investigator Proposals/Awards with Multi-Institutions</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
@@ -544,7 +568,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<h4>STRR/SBIR PROPOSALS/AWARDS </h4>'+
 
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> The target numbers are indicated below: </h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
@@ -559,7 +583,7 @@ let addResearchPerformancetarget =function(ids,data){
 
     '<h4>PUBLICATIONS </h4>'+
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4>  The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>'+
@@ -577,7 +601,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<h4>TECHNOLOGY TRANSFER/COMMERCIALIZATION  </h4>'+
 
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>'+
@@ -600,7 +624,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<h4>CONFERENCE/SEMINAR PRESENTATIONS </h4>'+
 
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>'+
@@ -612,7 +636,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<h4>EDUCATION AND TRAINING </h4>'+
 
     '<div class="annual-budget">' +
-    '<h4> The target number are indicated below: .</h4>'+
+    '<h4>Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
     '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>'+
@@ -654,7 +678,7 @@ let addAnnualBudget = function(ids, data)
 {
     let budgetContent = '<h4> ANNUAL BUDGET </h4>'+
     '<div class="annual-budget">' +
-    '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
+    '<h4> Number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
     data.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
@@ -667,7 +691,7 @@ let addResearceAnnualBudget19 =  function(ids,data){
 
 let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>'+
 '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
-'<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
+'<h4> Number of State and RF Employees/FTEs.</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
 '<tbody><tr>'+
@@ -682,7 +706,7 @@ data.fteRF + '</td></tr>'+
 
 
 '<div class="annual-budget"> ' +
-'<h4> Indicate below, the source of other revenue generated</h4>'+
+'<h4> Source of Other Revenue Generated</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -706,7 +730,7 @@ let adddetailedActivity = function(ids,data){
 
     let detailedActivity = '<h4> PROPOSALS</h4>'+
 '<div class="annual-budget">' +
-'<h4> Indicate below, the list of research proposal submitted to extramural sponsors .</h4>'+
+'<h4> Number of Research Proposal Submitted to Extramural Sponsors</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -730,18 +754,18 @@ data.proposal_total_actual + '</td></tr>'+
 
 '<h4> AWARDS</h4>'+
 '<div class="annual-budget">' +
-'<h4> Indicate below, the list of funded  extramural research grants </h4>'+
+'<h4> Numbers of Awards Received from Extramural Sponsors  </h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Federals Awards </th><td>'+ data.federalAwardsactual + '</td><td>'+
-data.federalAwardsgoals + '</td></tr>'+
+'<th class="border_right padding_bottom padding_top">Federals Awards </th><td>'+ data.federalAwardsgoals + '</td><td>'+
+data.federalAwardsactual + '</td></tr>'+
 '<tr><th class="border_right">State Awards </th><td>'+ data.stateAwardsgoals + '</td><td>'+
 data.stateAwardsactual + '</td></tr>'+
 '<th class="border_right padding_bottom padding_top">Private Awards </th><td>'+ data.privateAwardsgoals + '</td><td>'+
-data.privateApplicationgoals + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_actual + '</td><td>'+
-data.awrds_total_goals + '</td></tr>'+
+data.privateAwardsactual + '</td></tr>'+
+'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_goals + '</td><td>'+
+data.awrds_total_actual + '</td></tr>'+
 '</tbody></table></div>'  +
 
 '</br>'+
@@ -754,7 +778,7 @@ data.awrds_total_goals + '</td></tr>'+
 '<h4> LARGE SCALE PROPOSALS/AWARDS</h4>'+
 
 '<div class="annual-budget">' +
-'<h4> Indicate below,the large scale Multi investigator proposal Awards with Multi-Institutions</h4>'+
+'<h4> Number of Large Scale Proposals/Awards </h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -770,7 +794,7 @@ data.lsAwards_actual + '</td></tr>'+
 
 
 '<div class="annual-budget">' +
-'<h4> Indicate below,the numbers of STTR/SBIR</h4>'+
+'<h4>Numbers of STTR/SBIR Proposals/Awards</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -877,7 +901,7 @@ let addresearchActivity = function(ids,data){
 
     let researchActivity = '<h4> PUBLICATIONS </h4>'+
 '<div class="annual-budget">' +
-'<h4> Indicate below, the list of publications by center/Institute or Lab in the past FY.</h4>'+
+'<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -894,7 +918,7 @@ data.publicationsactual + '</td></tr>'+
 '</br>'+
 
 
-'<h4> Indicate below,the list of  all Center,Institute or Lab Publications </h4>'+
+'<h4>List of Publication by Center/Institute/Lab in the past FY</h4>'+
 
 '<div class="annual-budget"><p>' +data.listofpublications +'</p>' +
  '</div>'+
@@ -906,7 +930,7 @@ data.publicationsactual + '</td></tr>'+
 
  '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
 '<div class="annual-budget">' +
-'<h4> Indicate below, the numbers of Intellectual Property </h4>'+
+'<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -931,7 +955,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 
 
- '<h4> Indicate below,the list of  all Center,Intellectual Property Disclosures, Patents Applications, Patents Issued  and Licensed,and Start-up  Companies </h4>'+
+ '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
 
 '<div class="annual-budget"><p>' +data.listofintelletual +'</p>' +
  '</div>'+
@@ -945,7 +969,7 @@ data.starupcomapnieseactual + '</td></tr>'+
  '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
 
 '<div class="annual-budget">' +
-'<h4> Indicate below,the numbers of Keynote Address or Plenary Invited Presentations</h4>'+
+'<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>'+
 '<table width="100%">'+
 '<tbody><tr>'+
 '<th class="padding_bottom padding_top">Your Goals for FY 19-20 </th><td>'+ data.yougoaloffy19020 + '</td></tr>'+
@@ -956,7 +980,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 '<br/>' +
 
 
-'<h4> Indicate below ,the list all KeyNote Address or Plenary Invited Presentations </h4>'+
+'<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
 
 '<div class="annual-budget"><p>' +data.listofkeynote +'</p>' +
  '</div>'+
@@ -965,7 +989,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> OTHER ACTIVITIES</h4>'+
 
-'<h4> Indicate below ,the list other Scholarly Activity below, including Faculty/Staff Honors and Awards, not applicable to the above listed categories. </h4>'+
+'<h4> List of other Scholarly Activity </h4>'+
 
 '<div class="annual-budget"><p>' +data.otheracctiites +'</p>' +
 '</div>';
@@ -1106,7 +1130,7 @@ let addEducation19 = function(ids, data)
 {
     let eduContent = '<h4> EDUCATION AND TRAINING </h4>'+
     '<div class="annual-budget">' +
-    '<h4> Indicate the Number of University Undergraduate & Graduate Student  .</h4>'+
+    '<h4> Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="25%">Undergraduate</th>'+
     '<th class="border_bottom" width="25%">Graduate - Master </th>'+
     '<th class="border_bottom" width=25%">Graduate - PhD </th>'+
