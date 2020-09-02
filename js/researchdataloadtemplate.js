@@ -750,7 +750,7 @@ data.awrds_total_goals + '</td></tr>'+
 
 
 
-'<h4> LARGE SCALE PROPOSAL AWARDS</h4>'+
+'<h4> LARGE SCALE PROPOSALS/AWARDS</h4>'+
 
 '<div class="annual-budget">' +
 '<h4> Indicate below,the large scale Multi investigator proposal Awards with Multi-Institutions</h4>'+
