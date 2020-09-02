@@ -398,15 +398,26 @@ let add2021researchreport = function(reportdata){
    data["proposals"] = reportdata.Q51; 
     data["federalApplication"] = checkNull(reportdata.Q51_1_1); 
     data["stateApplication"] = checkNull(reportdata.Q51_1_2); 
-    data["privateApplication"] = checkNull(reportdata.Q51_1_3); 
-    data["proposal_total"]=checkNull(reportdata.Q51_1_4);
+    data["privateApplication"] = checkNull(reportdata.Q51_1_4); 
+
+
+    addData5={1:data["federalApplication"],2:  data["stateApplication"],3: data["privateApplication"]};
+
+
+        
+
+
+    data["proposal_total"]=add(addData5);
 
 
     data["awards"] = reportdata.Q52; 
     data["federalAwards"] = checkNull(reportdata.Q52_1_1); 
     data["stateAwards"] = checkNull(reportdata.Q52_1_2); 
-    data["privateAwards"] = checkNull(reportdata.Q52_1_3); 
-    data["awrds_total"]=checkNull(reportdata.Q52_1_4);
+    data["privateAwards"] = checkNull(reportdata.Q52_1_4); 
+   
+    addData6={1:data["federalAwards"],2:  data["stateAwards"],3: data["privateAwards"]};
+
+    data["awrds_total"]=add(addData6);
 
     data["largeScale"] =checkNull( reportdata.Q53); 
     data["proposal"] = checkNull(reportdata.Q53_1_1); 
