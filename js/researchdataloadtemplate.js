@@ -490,49 +490,49 @@ let checkNull =function(value){
 
 
 let addResearchPerformancetarget =function(ids,data){
-    let researchContent = '<h4> Research Performanace Target </h4>'+
+    let researchContent = '<h4> RESEARCH PERFORMANCE TARGET </h4>'+
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>'+
     '<td>'+ data.federalApplication + '</td></tr>'+
-    '<tr><th class="border_right">State Application</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">State Application</th><td>'+
      data.stateApplication + '</td></tr>'+
-     '<tr><th class="border_right">Private Application</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Private Application</th><td>'+
      data.privateApplication + '</td></tr>'+
-     '<tr><th class="border_right">Total</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Total</th><td>'+
      data.proposal_total + '</td></tr>'+
 
     '</tbody></table></div>'+
     '</br>' +
     '</br>' +
    
-    '<h4>Awards </h4>'+
+    '<h4>AWARDS </h4>'+
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>'+
     '<td>'+ data.federalAwards + '</td></tr>'+
-    '<tr><th class="border_right">State Awards</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">State Awards</th><td>'+
      data.stateAwards + '</td></tr>'+
-     '<tr><th class="border_right">Private Awards</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Private Awards</th><td>'+
      data.privateAwards + '</td></tr>'+
-     '<tr><th class="border_right">Total</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Total</th><td>'+
      data.awrds_total + '</td></tr>'+
     '</tbody></table></div>'+
     '</br>' +
     '</br>' +
 
-    '<h4>Large-Scale Proposals/Awards </h4>'+
+    '<h4>LARGE-SCALE PROPOSALS/AWARDS </h4>'+
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
     '<td>'+ data.proposal + '</td></tr>'+
-    '<tr><th class="border_right">#Awards</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td>'+
      data.lsAwards + '</td></tr>'+
     '</tbody></table></div>'+
     '</br>' +
@@ -540,15 +540,15 @@ let addResearchPerformancetarget =function(ids,data){
 
 
 
-    '<h4>STRR/SBIR Proposals/Awards </h4>'+
+    '<h4>STRR/SBIR PROPOSALS/AWARDS </h4>'+
 
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
     '<td>'+ data.stProposal + '</td></tr>'+
-    '<tr><th class="border_right">#Awards</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td>'+
      data.stAwards + '</td></tr>'+
      '</tbody></table></div>'+
     
@@ -556,16 +556,16 @@ let addResearchPerformancetarget =function(ids,data){
     '</br>' +
 
 
-    '<h4>Publications </h4>'+
+    '<h4>PUBLICATIONS </h4>'+
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>'+
     '<td>'+ data.booksAuthored + '</td></tr>'+
-    '<tr><th class="border_right">Books Chapters - Authored/Edited </th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">Books Chapters - Authored/Edited </th><td>'+
      data.booksChapters + '</td></tr>'+
-     '<tr><th class="border_right">Publications</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Publications</th><td>'+
      data.publicationsTable + '</td></tr>'+
     '</tbody></table></div>'+
     '</br>' +
@@ -573,54 +573,54 @@ let addResearchPerformancetarget =function(ids,data){
 
 
 
-    '<h4>Technology Transfer/Commercialiazation  </h4>'+
+    '<h4>TECHNOLOGY TRANSFER/COMMERCIALIZATION  </h4>'+
 
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>'+
     '<td>'+ data.intellectual + '</td></tr>'+
-    '<tr><th class="border_right">Patents Applications</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">Patents Applications</th><td>'+
      data.patentsApplications + '</td></tr>'+
-     '<tr><th class="border_right">Patents Isssued</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Patents Isssued</th><td>'+
      data.patentsIssued + '</td></tr>'+
-     '<tr><th class="border_right">Patents Licensed</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Patents Licensed</th><td>'+
      data.patentsLicensed + '</td></tr>'+
-     '<tr><th class="border_right">Licenses Executed</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Licenses Executed</th><td>'+
      data.licensedExecuted + '</td></tr>'+
-     '<tr><th class="border_right">Licenses Revenue</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Licenses Revenue</th><td>'+
      data.licensedRevenue + '</td></tr>'+
-     '<tr><th class="border_right">Start-up Companies</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Start-up Companies</th><td>'+
      data.startupCompanies + '</td></tr>'+
     '</tbody></table></div>'+
     '</br>' +
 
-    '<h4>Conference/Seminar Presentation </h4>'+
+    '<h4>CONFERENCE/SEMINAR PRESENTATIONS </h4>'+
 
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>'+
     '<td>'+ data.goals + '</td></tr>'+
    
     '</tbody></table></div>'+
     '</br>' +
 
-    '<h4>Education & Training </h4>'+
+    '<h4>EDUCATION AND TRAINING </h4>'+
 
     '<div class="annual-budget">' +
     '<h4> The target number are indicated below: .</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">#Students - Your FY goals for 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY 20-21</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>'+
     '<td>'+ data.undergraduate + '</td></tr>'+
-    '<tr><th class="border_right">Graduate - Master</th><td>'+
+    '<tr><th class="border_right padding_bottom padding_top">Graduate - Master</th><td>'+
      data.graduate_masters + '</td></tr>'+
-     '<tr><th class="border_right">Graduate - PhD</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Graduate - PhD</th><td>'+
      data.graduate_phd + '</td></tr>'+
-     '<tr><th class="border_right">Postdoctoral</th><td>'+
+     '<tr><th class="border_right padding_bottom padding_top">Postdoctoral</th><td>'+
      data.post + '</td></tr>'+
     '</tbody></table></div>'+
     '</br>' ;
@@ -703,7 +703,7 @@ return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.
 
 let adddetailedActivity = function(ids,data){
 
-    let detailedActivity = '<h4> Proposals</h4>'+
+    let detailedActivity = '<h4> PROPOSALS</h4>'+
 '<div class="annual-budget">' +
 '<h4> Indicate below, the list of research proposal submitted to extramural sponsors .</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -727,7 +727,7 @@ data.proposal_total_actual + '</td></tr>'+
 
 
 
-'<h4> Awards</h4>'+
+'<h4> AWARDS</h4>'+
 '<div class="annual-budget">' +
 '<h4> Indicate below, the list of funded  extramural research grants </h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -750,7 +750,7 @@ data.awrds_total_goals + '</td></tr>'+
 
 
 
-'<h4> Large Scale Proposal Awards</h4>'+
+'<h4> LARGE SCALE PROPOSAL AWARDS</h4>'+
 
 '<div class="annual-budget">' +
 '<h4> Indicate below,the large scale Multi investigator proposal Awards with Multi-Institutions</h4>'+
@@ -764,6 +764,9 @@ data.lsAwards_actual + '</td></tr>'+
 '</tbody></table></div>' +
 '</br>'+
 '</br>'+
+
+'<h4>STTR/SBIR PROPOSALS/AWARDS</h4>'+
+
 
 '<div class="annual-budget">' +
 '<h4> Indicate below,the numbers of STTR/SBIR</h4>'+
@@ -871,7 +874,7 @@ return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.
 
 let addresearchActivity = function(ids,data){
 
-    let researchActivity = '<h4> Publications </h4>'+
+    let researchActivity = '<h4> PUBLICATIONS </h4>'+
 '<div class="annual-budget">' +
 '<h4> Indicate below, the list of publications by center/Institute or Lab in the past FY.</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -879,10 +882,10 @@ let addresearchActivity = function(ids,data){
 '<tbody><tr>'+
 '<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td>'+ data.booksAuthoredgoals + '</td><td>'+
 data.bookauthoredsactual + '</td></tr>'+
-'<tr><th class="border_right">Books Chapters Authored/Edited  </th><td>'+ data.bookschaptersgoals + '</td><td>'+
+'<tr><th class="border_right  padding_bottom padding_top">Books Chapters Authored/Edited  </th><td>'+ data.bookschaptersgoals + '</td><td>'+
 data.bookschapteractual + '</td></tr>'+
 
-'<tr><th class="border_right">Publications</th><td>'+ data.publicationsgoals + '</td><td>'+
+'<tr><th class="border_right padding_bottom padding_top ">Publications</th><td>'+ data.publicationsgoals + '</td><td>'+
 data.publicationsactual + '</td></tr>'+
 
 '</tbody></table></div>' +
@@ -900,7 +903,7 @@ data.publicationsactual + '</td></tr>'+
 
 
 
- '<h4> Technology Transfer/Commercialization </h4>'+
+ '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
 '<div class="annual-budget">' +
 '<h4> Indicate below, the numbers of Intellectual Property </h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -908,7 +911,7 @@ data.publicationsactual + '</td></tr>'+
 '<tbody><tr>'+
 '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td>'+ data.intellctualgoals + '</td><td>'+
 data.intellctualgoals + '</td></tr>'+
-'<tr><th class="border_right">Patents Applications </th><td>'+ data.patentsactual + '</td><td>'+
+'<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td>'+ data.patentsactual + '</td><td>'+
 data.patnetsgoals + '</td></tr>'+
 '<th class="border_right padding_bottom padding_top">Patents Issued  </th><td>'+ data.patlicenesedlgoals + '</td><td>'+
 data.patlicenesedlgoals + '</td></tr>'+
@@ -938,6 +941,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 
 
+ '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
 
 '<div class="annual-budget">' +
 '<h4> Indicate below,the numbers of Keynote Address or Plenary Invited Presentations</h4>'+
@@ -957,6 +961,8 @@ data.starupcomapnieseactual + '</td></tr>'+
  '</div>'+
 '<br/>' +
 '<br/>' +
+
+'<h4> OTHER ACTIVITIES</h4>'+
 
 '<h4> Indicate below ,the list other Scholarly Activity below, including Faculty/Staff Honors and Awards, not applicable to the above listed categories. </h4>'+
 
@@ -1097,10 +1103,10 @@ let adddetailedActivity_researach =function(ids,data){
 
 let addEducation19 = function(ids, data)
 {
-    let eduContent = '<h4> Education & Training </h4>'+
+    let eduContent = '<h4> EDUCATION AND TRAINING </h4>'+
     '<div class="annual-budget">' +
     '<h4> Indicate the Number of University Undergraduate & Graduate Student  .</h4>'+
-    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="25%">Undergrdaute</th>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="25%">Undergraduate</th>'+
     '<th class="border_bottom" width="25%">Graduate - Master </th>'+
     '<th class="border_bottom" width=25%">Graduate - PhD </th>'+
     '<th class="border_bottom" width="25%">Postdoctoral </th>'+
