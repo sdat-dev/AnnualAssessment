@@ -6,5 +6,6 @@ form.addEventListener('submit', printReport);
 
 function printReport(event) {
     log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
+    console.log(log.textContent);
     event.preventDefault();
 }
