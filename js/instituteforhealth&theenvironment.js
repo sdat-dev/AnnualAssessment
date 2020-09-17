@@ -931,7 +931,7 @@ data.publicationsactual + '</td></tr>'+
 
 '<h4>List of Publication by Center/Institute/Lab in the past FY</h4>'+
 
-'<div class="annual-budget"><p>' +data.listofpublications +'</p>' +
+'<div class="annual-budget">' +formatPara(data.listofpublications)  +
  '</div>'+
 
  '</br>'+
@@ -968,7 +968,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
  '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
 
-'<div class="annual-budget"><p>' +data.listofintelletual +'</p>' +
+'<div class="annual-budget"><p>' +formatPara(data.listofintelletual) +'</p>' +
  '</div>'+
 
  '<br/>' +
@@ -993,7 +993,8 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
 
-'<div class="annual-budget"><p>' +data.listofkeynote +'</p>' +
+'<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
+
  '</div>'+
 '<br/>' +
 '<br/>' +
@@ -1002,7 +1003,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> List of other Scholarly Activity </h4>'+
 
-'<div class="annual-budget"><p>' +data.otheracctiites +'</p>' +
+'<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
 '</div>';
 
 
@@ -1244,6 +1245,34 @@ let addSmartGoal = function(ids, goal)
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
     smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
+}
+
+
+
+let formatPara = function(text){
+    let result = '';
+    if(typeof text === "undefined"){
+
+    }
+    else{
+    let paras = text.split("\n\n");
+    for(var i=0; i< paras.length; i++){
+        let para = paras[i];
+            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i\.|ii\.|iii\.|iv\.|v\.)/);
+          
+           
+                for(var j =0; j< lines.length; j++)
+                {
+                    if(lines[j] == '') continue;
+                    result += '<p>'+lines[j]+'</p>'; 
+                }
+            
+        }        
+    }
+
+
+
+    return result;
 }
 
 let formatText = function(text){
