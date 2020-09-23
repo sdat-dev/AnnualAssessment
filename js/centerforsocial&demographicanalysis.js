@@ -191,7 +191,7 @@ let add2020researchreport = function(reportdata){
     
     data["listofkeynote"]=checkNull(reportdata.Q66);
 
-    data["otheracctiites"]=checkNull(reportdata.Q66);
+    data["otheracctiites"]=checkNull(reportdata.Q67);
 
 
 
@@ -347,6 +347,9 @@ let add2020researchreport = function(reportdata){
 
 
     content += '</div>'
+
+
+    //localStorage.setItem("1920",content);
 
     
     return content;
