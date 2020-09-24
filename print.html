@@ -91,7 +91,7 @@
                         </fieldset>
 
 
-                        <fieldset id="units">
+                        <fieldset id="units_research">
                             <legend>Select Research  Units To Print</legend>
                             <div>
                                 <input type="checkbox" id="report8" class="unit" value="atmosphericsciencesresearchcenter.html">
@@ -220,13 +220,167 @@
             <p>© 2019&nbsp;University at Albany</p>
         </section>
     </footer>
+
+
+
+
     <script src= "libraries/jquery/jquery-3.3.1.slim.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="libraries/bootstrap/js/bootstrap.min.js"></script>
     <script src="js/topmenu.js"></script>
     <script src="js/common.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>addsidemenu("PRINT REPORTS")</script>
     <script src="js/print.js"></script>
+    
+
+    <script>
+      
+
+
+        $(window).on("load", function () {
+
+            localStorage.clear();
+
+            /* Research Cneter dATA*/
+            let atmosphericsciencesresearchcenter = "data/atmosphericsciencesresearchcenter.json";
+            let centerforfunctionalgenomics = "data/centerforfunctionalgenomics.json";
+            let centerforhumanservicesresearch= "data/centerforhumanservicesresearch.json";
+            let centerforsocialdemographicanalysis = "data/centerforsocial&demographicanalysis.json";
+            let centerfortechnologyingovernment ="data/centerfortechnologyingovernment.json";
+            let instituteforhealththeenvironment = "data/instituteforhealth&theenvironment.json";
+            let instituteforinformaticslogicsandsecuritystudies = "data/instituteforinformaticslogicsandsecuritystudies.json";
+            let ionbeamlaboratory = "data/ionbeamlaboratory.json";
+            let nysmesonet ="data/nysmesonet.json";
+            let rnaepitranscriptomicslab = "data/rnaepitranscriptomicslab.json";
+
+            /* Administrative Units*/
+
+            let communityandeconomicdevelopment = "data/communityandeconomicdevelopment.json";
+            let facultyresearchdevelopment = "data/facultyresearchdevelopment.json";
+            let innovationdevelopmentandcommercialization= "data/innovationdevelopmentandcommercialization(oidc).json";
+            let regulatoryandresearchcompliance = "data/regulatoryandresearchcompliance.json";
+            let researchfoundationhumanresources ="data/researchfoundationhumanresources.json";
+            let sponsoredprogramsadministration = "data/sponsoredprogramsadministration.json";
+            let strategicplanningassessmentdataanalyticsandtechnology = "data/strategicplanningassessmentdataanalyticsandtechnology.json";
+           
+
+
+
+
+
+
+  /* Research Cneter request*/
+const atmosphericsciencesresearchcenter_Request = axios.get(atmosphericsciencesresearchcenter);
+const centerforfunctionalgenomics_Request = axios.get(centerforfunctionalgenomics);
+const centerforhumanservicesresearch_request= axios.get(centerforhumanservicesresearch);
+const centerforsocialdemographicanalysis_request= axios.get(centerforsocialdemographicanalysis);
+const centerfortechnologyingovernment_request= axios.get(centerfortechnologyingovernment);
+const instituteforhealththeenvironment_request= axios.get(instituteforhealththeenvironment);
+const instituteforinformaticslogicsandsecuritystudies_request= axios.get(instituteforinformaticslogicsandsecuritystudies);
+const ionbeamlaboratory_request= axios.get(ionbeamlaboratory);
+const nysmesonet_request= axios.get(nysmesonet);
+const rnaepitranscriptomicslab_request= axios.get(rnaepitranscriptomicslab);
+
+
+  /* Administrative Units request*/
+
+  const communityandeconomicdevelopment_Request = axios.get(communityandeconomicdevelopment);
+const facultyresearchdevelopment_Request = axios.get(facultyresearchdevelopment);
+const innovationdevelopmentandcommercialization_request= axios.get(innovationdevelopmentandcommercialization);
+const regulatoryandresearchcompliance_request= axios.get(regulatoryandresearchcompliance);
+const researchfoundationhumanresources_request= axios.get(researchfoundationhumanresources);
+const sponsoredprogramsadministration_request= axios.get(sponsoredprogramsadministration);
+const strategicplanningassessmentdataanalyticsandtechnology_request= axios.get(strategicplanningassessmentdataanalyticsandtechnology);
+
+
+
+  /* calls*/
+axios.all([atmosphericsciencesresearchcenter_Request, 
+centerforfunctionalgenomics_Request,
+centerforhumanservicesresearch_request,
+centerforsocialdemographicanalysis_request,
+centerfortechnologyingovernment_request,
+instituteforhealththeenvironment_request,
+instituteforinformaticslogicsandsecuritystudies_request,
+ionbeamlaboratory_request,
+nysmesonet_request,
+rnaepitranscriptomicslab_request,
+communityandeconomicdevelopment_Request,
+facultyresearchdevelopment_Request,
+innovationdevelopmentandcommercialization_request,
+regulatoryandresearchcompliance_request,
+researchfoundationhumanresources_request,
+sponsoredprogramsadministration_request,
+strategicplanningassessmentdataanalyticsandtechnology_request
+
+
+
+
+
+]).then(axios.spread((...responses) => {
+  const atmosphericsciencesresearchcenter_Reponses = responses[0];
+  const centerforfunctionalgenomics_Reponses = responses[1];
+  const centerforhumanservicesresearch_Reponses = responses[2];
+  const centerforsocialdemographicanalysis_response = responses[3];
+  const centerfortechnologyingovernment_response = responses[4];
+  const instituteforhealththeenvironment_response = responses[5];
+  const instituteforinformaticslogicsandsecuritystudies_response = responses[6];
+  const ionbeamlaboratory_response = responses[7];
+  const nysmesonet_response = responses[8];
+  const rnaepitranscriptomicslab_response = responses[9];
+
+  /* Administrative units*/
+
+
+ const  communityandeconomicdevelopment_Reponses =responses[10];
+ const facultyresearchdevelopment_Reponses = responses[11];
+ const innovationdevelopmentandcommercialization_Reponses =responses[12];
+ const regulatoryandresearchcompliance_Reponses =responses[13];
+ const researchfoundationhumanresources_Reponses =responses[14];
+ const sponsoredprogramsadministration_Reponses =responses[15];
+ const strategicplanningassessmentdataanalyticsandtechnology_Reponses =responses[16];
+
+  /* end Administrative units*/
+
+
+  localStorage.setItem("atmosphericsciencesresearchcenter",JSON.stringify(atmosphericsciencesresearchcenter_Reponses));
+  console.log(localStorage.getItem("atmosphericsciencesresearchcenter"));
+  localStorage.setItem("centerforfunctionalgenomics",JSON.stringify(centerforfunctionalgenomics_Reponses));
+  localStorage.setItem("centerforhumanservicesresearch",JSON.stringify(centerforhumanservicesresearch_Reponses));
+
+  localStorage.setItem("centerforsocial&demographicanalysis",JSON.stringify(centerforsocialdemographicanalysis_response));
+  localStorage.setItem("centerfortechnologyingovernment",JSON.stringify(centerfortechnologyingovernment_response));
+  localStorage.setItem("instituteforhealth&theenvironment",JSON.stringify(instituteforhealththeenvironment_response));
+  localStorage.setItem("instituteforinformaticslogicsandsecuritystudies",
+  JSON.stringify(instituteforinformaticslogicsandsecuritystudies_response));
+  localStorage.setItem("ionbeamlaboratory",JSON.stringify(ionbeamlaboratory_response));
+  localStorage.setItem("nysmesonet",JSON.stringify(nysmesonet_response));
+  localStorage.setItem("rnaepitranscriptomicslab",JSON.stringify(rnaepitranscriptomicslab_response));
+
+
+/* Administrative units*/
+  localStorage.setItem("communityandeconomicdevelopment",JSON.stringify(communityandeconomicdevelopment_Reponses));
+
+  localStorage.setItem("facultyresearchdevelopment",JSON.stringify(facultyresearchdevelopment_Reponses));
+  localStorage.setItem("innovationdevelopmentandcommercialization(oidc)",JSON.stringify(innovationdevelopmentandcommercialization_Reponses));
+  localStorage.setItem("regulatoryandresearchcompliance",JSON.stringify(regulatoryandresearchcompliance_Reponses));
+  localStorage.setItem("researchfoundationhumanresources",JSON.stringify(researchfoundationhumanresources_Reponses));
+  localStorage.setItem("sponsoredprogramsadministration",JSON.stringify(sponsoredprogramsadministration_Reponses));
+  localStorage.setItem("strategicplanningassessmentdataanalyticsandtechnology",JSON.stringify(strategicplanningassessmentdataanalyticsandtechnology_Reponses));
+ 
+
+/* end Administrative units*/
+
+})).catch(errors => {
+  console.log(errors);
+})
+
+        });
+
+    </script>
 </body>
 
 </html>
