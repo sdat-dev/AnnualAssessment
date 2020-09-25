@@ -332,6 +332,15 @@ let add2020researchreport = function(reportdata){
     
     content += addTopAchievements(ids, data);
 
+    ids = getIds('FY1920');
+    data = {};
+    data["noofpartners"]= reportdata.Q141;
+
+    content += addList_partners(ids, data);
+
+
+
+
 
     
     ids = getIds('FY1920');
@@ -1189,7 +1198,18 @@ let addEducation19 = function(ids, data)
 }
 
 
+let addList_partners = function(ids,data){
 
+    let content=
+    '<h4> LIST OF PARTNERS/AFFILIATES</h4>'+
+    
+    '<div class="annual-budget"><p>' +formatPara(data.noofpartners) + '</p>' +
+    
+     '</div>';
+
+     return  generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "List of Partners/Affiliates", content);
+
+}
 
 
 
