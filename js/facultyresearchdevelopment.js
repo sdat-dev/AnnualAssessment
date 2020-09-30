@@ -35,12 +35,6 @@ let getIds = function(year){
     return ids;
 }
 
-
-
-
-
-
-
 let add1920report = function(reportdata){
     let content = '';
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
@@ -96,21 +90,21 @@ let add1920report = function(reportdata){
 
     ids = getIds('FY1920');
     data = [];
-    if(reportdata.Q131_8 != '')
+    if(reportdata.Q131_8.trim() != '')
         data.push(reportdata.Q83);
-    if(reportdata.Q131_9 != '')
+    if(reportdata.Q131_9.trim() != '')
         data.push(reportdata.Q93);
-    if(reportdata.Q131_13 != '')
+    if(reportdata.Q131_13.trim() != '')
         data.push(reportdata.Q103);
-    if(reportdata.Q131_11 != '')
+    if(reportdata.Q131_11.trim() != '')
         data.push(reportdata.Q113);
-    if(reportdata.Q131_12 != '')
+    if(reportdata.Q131_12.trim() != '')
         data.push(reportdata.Q123);
-    if(reportdata.Q132_4 != '')
+    if(reportdata.Q132_4.trim() != '')
         data.push(reportdata.Q132_4);
-    if(reportdata.Q132_5 != '')
+    if(reportdata.Q132_5.trim() != '')
         data.push(reportdata.Q132_5);
-    if(reportdata.Q132_6 != '')
+    if(reportdata.Q132_6.trim() != '')
         data.push(reportdata.Q132_6);
     content += addTopAchievements(ids, data);
 
@@ -268,6 +262,64 @@ let formatText = function(text){
 
     return result;
 }
+
+let achievementsData = function(reportdata)
+{
+    let data = [];
+    if(reportdata.Q132_4.trim() != '')
+        data.push(reportdata.Q132_4);
+    if(reportdata.Q132_5.trim() != '')
+        data.push(reportdata.Q132_5);
+    if(reportdata.Q132_6.trim() != '')
+        data.push(reportdata.Q132_6);
+    if(data.size() == 3)
+        return data;
+    let data1 = [];
+    if(reportdata.Q131_8.trim() != '')
+        data1.push(reportdata.Q83);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    if(reportdata.Q131_9.trim() != '')
+        data1.push(reportdata.Q93);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    if(reportdata.Q131_9.trim() != '')
+        data1.push(reportdata.Q93);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    if(reportdata.Q131_13.trim() != '')
+        data1.push(reportdata.Q103);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    if(reportdata.Q131_11.trim() != '')
+        data1.push(reportdata.Q113);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    if(reportdata.Q131_12.trim() != '')
+        data1.push(reportdata.Q123);
+    if(data.length + data1.length == 3)
+    {
+        data1.concat(data);
+        return data1;
+    }
+    return data;
+}
+
 let addTopAchievements = function(ids, data)
 {
     let achievements = '<div class="achievements">';
