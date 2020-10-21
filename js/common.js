@@ -166,6 +166,4 @@ function printPlanningReport(id){
     var win = window.open("print.html", "_blank");
     win.document.write(content); // where 'html' is a variable containing your HTML
     win.document.close(); 
-    //win.document.body.innerHTML = content;
-    //win.print();
 }

@@ -3,19 +3,15 @@ let content = document.getElementsByClassName('content')[0];
 const form = document.getElementById('form');
 const log = document.getElementById('log');
 form.addEventListener('submit', printReport);
-
 function printReport(event) {
     event.preventDefault();
-
     var units = document.getElementById('units');
     var units_research = document.getElementById('units_research');
     var el = document.getElementById('type');
-
     var units_array=[];
     for(let i=1;i<units.children.length;i++){
         let current=units.children[i].firstElementChild;
         if(current.checked == true){
-
             units_array.push(current.value);
         }
     }
@@ -25,7 +21,6 @@ function printReport(event) {
     for(let j=1;j<units_research.children.length;j++){
         let current_units=units_research.children[j].firstElementChild;
         if(current_units.checked == true){
-
             units_research1.push(current_units.value);
         }
     }
@@ -34,7 +29,6 @@ function printReport(event) {
     for(let k=1;k<el.children.length;k++){
         let current_units_e1=el.children[k].firstElementChild;
         if(current_units_e1.checked == true){
-
             units_e1.push(current_units_e1.value);
         }
     }
@@ -43,126 +37,62 @@ function printReport(event) {
     var contenttotal ='';
     var content_admin_2019_2020 = '';
     var content_research_2019_2020 ='';
-
     var content_admin_2020_2021='';
     var content_research_2020_2021='';
-
-
     total = units_array.concat(units_research1);
     //total = total.concat(units.el);
 
     for(var p=0;p<=units_e1.length;p++){
-
         console.log(units_e1[p]);
-
         for(var l=0;l<total.length;l++){
-         
-
-var splithtml=total[l].split(".");
-console.log(splithtml);
-        var data = localStorage.getItem(splithtml[0]);
-        console.log(data);
+            var splithtml=total[l].split(".");
+            console.log(splithtml);
+            var data = localStorage.getItem(splithtml[0]);
+            console.log(data);
             if(units_e1[p] == '19-20'){
-        
             if(splithtml[0] === "communityandeconomicdevelopment" ||
-            splithtml[0] === "facultyresearchdevelopment" ||
-        splithtml[0] === "innovationdevelopmentandcommercialization(oidc)" ||
-            splithtml[0] === "regulatoryandresearchcompliance" ||
-        splithtml[0] === "researchfoundationhumanresources" ||
-        splithtml[0] === "sponsoredprogramsadministration" ||
-        splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology" 
-            ){
-
-            content_admin_2019_2020   = printadminhUnit19(units_e1[p],splithtml[0],data);
-
-                
+                splithtml[0] === "facultyresearchdevelopment" ||
+                splithtml[0] === "innovationdevelopmentandcommercialization(oidc)" ||
+                splithtml[0] === "regulatoryandresearchcompliance" ||
+                splithtml[0] === "researchfoundationhumanresources" ||
+                splithtml[0] === "sponsoredprogramsadministration" ||
+                splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology"){
+                content_admin_2019_2020   = printadminhUnit19(units_e1[p],splithtml[0],data);
             }
             else{
-
-              content_research_2019_2020   = printResearchUnit(units_e1[p],splithtml[0],data);
-
+                content_research_2019_2020   = printResearchUnit(units_e1[p],splithtml[0],data);
             }
-
-
-
             if(content_admin_2019_2020 !== ''){
                 contenttotal +=content_admin_2019_2020;
-
             }
             if(content_research_2019_2020 !== '')
-             contenttotal +=content_research_2019_2020;
-
-
+                contenttotal +=content_research_2019_2020;
             }
         if(units_e1[p] == '20-21'){
 
             if(splithtml[0] === "communityandeconomicdevelopment" ||
-            splithtml[0] === "facultyresearchdevelopment" ||
-        splithtml[0] === "innovationdevelopmentandcommercialization(oidc)" ||
-            splithtml[0] === "regulatoryandresearchcompliance" ||
-        splithtml[0] === "researchfoundationhumanresources" ||
-        splithtml[0] === "sponsoredprogramsadministration" ||
-        splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology" 
-            ){
-
-
-         content_admin_2020_2021= printadminhUnit20(units_e1[p],splithtml[0],data);
-
+                splithtml[0] === "facultyresearchdevelopment" ||
+                splithtml[0] === "innovationdevelopmentandcommercialization(oidc)" ||
+                splithtml[0] === "regulatoryandresearchcompliance" ||
+                splithtml[0] === "researchfoundationhumanresources" ||
+                splithtml[0] === "sponsoredprogramsadministration" ||
+                splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology"){
+                content_admin_2020_2021= printadminhUnit20(units_e1[p],splithtml[0],data);
             }
             else{
-           content_research_2020_2021 = printResearchUnit2021(units_e1[p],splithtml[0],data);
-        
+               content_research_2020_2021 = printResearchUnit2021(units_e1[p],splithtml[0],data);
             }
-      
-      
-      
-      
-      
             if(content_admin_2020_2021 !== ''){
                 contenttotal +=content_admin_2020_2021;
-
             }
             if(content_research_2020_2021 !== '')
-             contenttotal +=content_research_2020_2021;
-
-
+                contenttotal +=content_research_2020_2021;
             }
-      
-      
-      
-      
-      
-      
-        }
-
-           
+        }         
     }
-       
-
-    
-
-
-
-
-        
-
-
-    
-
-
     var win = window.open("print.html", "reportprinttemplate.html");
     win.document.write(contenttotal); // where 'html' is a variable containing your HTML
     win.document.close(); 
-
-
-
-   
-
-
-
-    
-
-
 }
 
 /* Research 2021*/
@@ -172,266 +102,224 @@ function printResearchUnit2021(year,filename,reportdata_1){
 
     year1 ="FY2021";
     reportdata =   JSON.parse(reportdata_1);
-
     reportdata = reportdata.data.FY2021;
-
-
     let data1 = {};
-   
-
     data1["mission"] = reportdata.Q31; 
-data1["vision"] = reportdata.Q32;
-//  content += addMissionAndVision(ids, data);
+    data1["vision"] = reportdata.Q32;
+    //  content += addMissionAndVision(ids, data);
 
-
-data1["annualBudget"] = reportdata.Q41;
-data1["employeesState"] =checkNull( reportdata.Q42_1_1); 
-data1["employeesRF"] = checkNull(reportdata.Q42_1_2); 
-data1["fteState"] = checkNull(reportdata.Q42_2_1); 
-data1["fteRF"] =checkNull( reportdata.Q42_2_2); 
-// content += addAnnualBudget(ids, data);
-
-
-
-
-data1["proposals"] = reportdata.Q51; 
-data1["federalApplication"] = checkNull(reportdata.Q51_1_1); 
-data1["stateApplication"] = checkNull(reportdata.Q51_1_2); 
-data1["privateApplication"] = checkNull(reportdata.Q51_1_4); 
-
-
-addData9={1:data1["federalApplication"],2:  data1["stateApplication"],3: data1["privateApplication"]};
-
-
+    data1["annualBudget"] = reportdata.Q41;
+    data1["employeesState"] =checkNull( reportdata.Q42_1_1); 
+    data1["employeesRF"] = checkNull(reportdata.Q42_1_2); 
+    data1["fteState"] = checkNull(reportdata.Q42_2_1); 
+    data1["fteRF"] =checkNull( reportdata.Q42_2_2); 
+    // content += addAnnualBudget(ids, data);
+    data1["proposals"] = reportdata.Q51; 
+    data1["federalApplication"] = checkNull(reportdata.Q51_1_1); 
+    data1["stateApplication"] = checkNull(reportdata.Q51_1_2); 
+    data1["privateApplication"] = checkNull(reportdata.Q51_1_4); 
     
+    addData9={1:data1["federalApplication"],2:  data1["stateApplication"],3: data1["privateApplication"]};
+
+    data1["proposal_total"]=add(addData9);
+    data1["awards"] = reportdata.Q52; 
+    data1["federalAwards"] = checkNull(reportdata.Q52_1_1); 
+    data1["stateAwards"] = checkNull(reportdata.Q52_1_2); 
+    data1["privateAwards"] = checkNull(reportdata.Q52_1_4); 
+
+    addData11={1:data1["federalAwards"],2:  data1["stateAwards"],3: data1["privateAwards"]};
+
+    data1["awrds_total"]=add(addData11);
+
+    data1["largeScale"] =checkNull( reportdata.Q53); 
+    data1["proposal"] = checkNull(reportdata.Q53_1_1); 
+    data1["lsAwards"] =checkNull( reportdata.Q53_1_2); 
+
+    data1["strr"] =checkNull( reportdata.Q54);
+    data1["stProposal"] =checkNull( reportdata.Q54_1_1); 
+    data1["stAwards"] = checkNull(reportdata.Q54_1_2); 
+
+    data1["publications"] = checkNull(reportdata.Q55);
+    data1["booksAuthored"] = checkNull(reportdata.Q55_1_1); 
+    data1["booksChapters"] =checkNull( reportdata.Q55_1_2); 
+    data1["publicationsTable"] =checkNull( reportdata.Q54_1_3); 
 
 
-data1["proposal_total"]=add(addData9);
-
-
-data1["awards"] = reportdata.Q52; 
-data1["federalAwards"] = checkNull(reportdata.Q52_1_1); 
-data1["stateAwards"] = checkNull(reportdata.Q52_1_2); 
-data1["privateAwards"] = checkNull(reportdata.Q52_1_4); 
-
-addData11={1:data1["federalAwards"],2:  data1["stateAwards"],3: data1["privateAwards"]};
-
-data1["awrds_total"]=add(addData11);
-
-data1["largeScale"] =checkNull( reportdata.Q53); 
-data1["proposal"] = checkNull(reportdata.Q53_1_1); 
-data1["lsAwards"] =checkNull( reportdata.Q53_1_2); 
-
-data1["strr"] =checkNull( reportdata.Q54);
-data1["stProposal"] =checkNull( reportdata.Q54_1_1); 
-data1["stAwards"] = checkNull(reportdata.Q54_1_2); 
-
-data1["publications"] = checkNull(reportdata.Q55);
-data1["booksAuthored"] = checkNull(reportdata.Q55_1_1); 
-data1["booksChapters"] =checkNull( reportdata.Q55_1_2); 
-data1["publicationsTable"] =checkNull( reportdata.Q54_1_3); 
-
-
-data1["technologyTransfer"] = checkNull(reportdata.Q56);
-data1["intellectual"] = checkNull(reportdata.Q56_1_1); 
-data1["patentsApplications"] =checkNull( reportdata.Q56_2_1); 
-data1["patentsIssued"] = checkNull(reportdata.Q56_3_1); 
-data1["patentsLicensed"] = checkNull(reportdata.Q56_4_1); 
-data1["licensedExecuted"] = checkNull(reportdata.Q56_5_1); 
-data1["licensedRevenue"] = checkNull(reportdata.Q56_6_1);
-data1["startupCompanies"] =checkNull( reportdata.Q56_7_1);
-
-
-
-data1["conference"] =checkNull( reportdata.Q57);
-data1["goals"] = checkNull(reportdata.Q57_1_1); 
+    data1["technologyTransfer"] = checkNull(reportdata.Q56);
+    data1["intellectual"] = checkNull(reportdata.Q56_1_1); 
+    data1["patentsApplications"] =checkNull( reportdata.Q56_2_1); 
+    data1["patentsIssued"] = checkNull(reportdata.Q56_3_1); 
+    data1["patentsLicensed"] = checkNull(reportdata.Q56_4_1); 
+    data1["licensedExecuted"] = checkNull(reportdata.Q56_5_1); 
+    data1["licensedRevenue"] = checkNull(reportdata.Q56_6_1);
+    data1["startupCompanies"] =checkNull( reportdata.Q56_7_1);
 
 
 
-data1["education"] =checkNull( reportdata.Q58);
-data1["undergraduate"] =checkNull( reportdata.Q58_1_1); 
-data1["graduate_masters"] = checkNull(reportdata.Q58_2_1); 
-data1["graduate_phd"] = checkNull(reportdata.Q58_3_1); 
-data1["post"] = checkNull(reportdata.Q58_4_1); 
-
-
-let content_research1='';
-
-content_research1 = '<h4>MISSION</h4>'+
-'<p class="mission">'+ data1.mission + '</p>' +
-'<h4>VISION</h4>'+
-'<p class="vision">'+ data1.vision + '</p>' +
-
-'<h4> ANNUAL BUDGET </h4>'+
-'<div class="annual-budget">' +
-'<h4> Number of State and RF Employees/FTEs.</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">'+ data1.employeesState + '</td><td style=" text-align: center;">'+
-data1.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">'+ data1.fteState + '</td><td style=" text-align: center;">'+
-data1.fteRF + '</td></tr></tbody></table></div>'+
-
-'<h4> RESEARCH PERFORMANCE TARGET </h4>'+
-'<div class="annual-budget">' +
-'<h4> The target numbers are indicated below:</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>'+
-'<td style=" text-align: center;">'+ data1.federalApplication + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">State Application</th><td style=" text-align: center;">'+
- data1.stateApplication + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Private Application</th><td style=" text-align: center;">'+
- data1.privateApplication + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Total</th><td style=" text-align: center;">'+
- data1.proposal_total + '</td></tr>'+
-
-'</tbody></table></div>'+
-'</br>' +
-'</br>' +
-
-'<h4>AWARDS </h4>'+
-'<div class="annual-budget">' +
-'<h4> The target numbers are indicated below:</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>'+
-'<td  style=" text-align: center;" >'+ data1.federalAwards + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">State Awards</th><td  style=" text-align: center;">'+
- data1.stateAwards + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Private Awards</th><td  style=" text-align: center;">'+
- data1.privateAwards + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Total</th><td  style=" text-align: center;">'+
- data1.awrds_total + '</td></tr>'+
-'</tbody></table></div>'+
-'</br>' +
-'</br>' +
-
-'<h4>LARGE-SCALE PROPOSALS/AWARDS </h4>'+
-'<div class="annual-budget">' +
-'<h4> Number of target for Large-Scale*, Multi-Investigator Proposals/Awards with Multi-Institutions</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
-'<td  style=" text-align: center;">'+ data1.proposal + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">'+
- data1.lsAwards + '</td></tr>'+
-'</tbody></table></div>'+
-'</br>' +
-'</br>' +
+    data1["conference"] =checkNull( reportdata.Q57);
+    data1["goals"] = checkNull(reportdata.Q57_1_1); 
 
 
 
-'<h4>STRR/SBIR PROPOSALS/AWARDS </h4>'+
-
-'<div class="annual-budget">' +
-'<h4> The target numbers are indicated below: </h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
-'<td  style=" text-align: center;">'+ data1.stProposal + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">'+
- data1.stAwards + '</td></tr>'+
- '</tbody></table></div>'+
-
-'</br>' +
-'</br>' +
+    data1["education"] =checkNull( reportdata.Q58);
+    data1["undergraduate"] =checkNull( reportdata.Q58_1_1); 
+    data1["graduate_masters"] = checkNull(reportdata.Q58_2_1); 
+    data1["graduate_phd"] = checkNull(reportdata.Q58_3_1); 
+    data1["post"] = checkNull(reportdata.Q58_4_1); 
 
 
-'<h4>PUBLICATIONS </h4>'+
-'<div class="annual-budget">' +
-'<h4>  The target numbers are indicated below:</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>'+
-'<td  style=" text-align: center;">'+ data1.booksAuthored + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">Books Chapters - Authored/Edited </th><td  style=" text-align: center;">'+
- data1.booksChapters + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Publications</th><td  style=" text-align: center;">'+
- data1.publicationsTable + '</td></tr>'+
-'</tbody></table></div>'+
-'</br>' +
-'</br>' +
+    let content_research1='';
 
+    content_research1 = '<h4>MISSION</h4>'+
+    '<p class="mission">'+ data1.mission + '</p>' +
+    '<h4>VISION</h4>'+
+    '<p class="vision">'+ data1.vision + '</p>' +
 
+    '<h4> ANNUAL BUDGET </h4>'+
+    '<div class="annual-budget">' +
+    '<h4> Number of State and RF Employees/FTEs.</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">'+ data1.employeesState + '</td><td style=" text-align: center;">'+
+    data1.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">'+ data1.fteState + '</td><td style=" text-align: center;">'+
+    data1.fteRF + '</td></tr></tbody></table></div>'+
 
-'<h4>TECHNOLOGY TRANSFER/COMMERCIALIZATION  </h4>'+
+    '<h4> RESEARCH PERFORMANCE TARGET </h4>'+
+    '<div class="annual-budget">' +
+    '<h4> The target numbers are indicated below:</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>'+
+    '<td style=" text-align: center;">'+ data1.federalApplication + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">State Application</th><td style=" text-align: center;">'+
+    data1.stateApplication + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Private Application</th><td style=" text-align: center;">'+
+    data1.privateApplication + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Total</th><td style=" text-align: center;">'+
+    data1.proposal_total + '</td></tr>'+
 
-'<div class="annual-budget">' +
-'<h4> The target numbers are indicated below:</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>'+
-'<td  style=" text-align: center;">'+ data1.intellectual + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">Patents Applications</th><td style=" text-align: center;" >'+
- data1.patentsApplications + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Patents Isssued</th><td  style=" text-align: center;">'+
- data1.patentsIssued + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Patents Licensed</th><td  style=" text-align: center;">'+
- data1.patentsLicensed + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Licenses Executed</th><td  style=" text-align: center;">'+
- data1.licensedExecuted + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Licenses Revenue</th><td  style=" text-align: center;">'+
- data1.licensedRevenue + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Start-up Companies</th><td  style=" text-align: center;">'+
- data1.startupCompanies + '</td></tr>'+
-'</tbody></table></div>'+
-'</br>' +
+    '</tbody></table></div>'+
+    '</br>' +
+    '</br>' +
 
-'<h4>CONFERENCE/SEMINAR PRESENTATIONS </h4>'+
+    '<h4>AWARDS </h4>'+
+    '<div class="annual-budget">' +
+    '<h4> The target numbers are indicated below:</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>'+
+    '<td  style=" text-align: center;" >'+ data1.federalAwards + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">State Awards</th><td  style=" text-align: center;">'+
+    data1.stateAwards + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Private Awards</th><td  style=" text-align: center;">'+
+    data1.privateAwards + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Total</th><td  style=" text-align: center;">'+
+    data1.awrds_total + '</td></tr>'+
+    '</tbody></table></div>'+
+    '</br>' +
+    '</br>' +
 
-'<div class="annual-budget">' +
-'<h4> The target numbers are indicated below:</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>'+
-'<td style=" text-align: center;">'+ data1.goals + '</td></tr>'+
-
-'</tbody></table></div>'+
-'</br>' +
-
-'<h4>EDUCATION AND TRAINING </h4>'+
-
-'<div class="annual-budget">' +
-'<h4>Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-'</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY 20-21</th></tr></thead>'+
-'<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>'+
-'<td  style=" text-align: center;">'+ data1.undergraduate + '</td></tr>'+
-'<tr><th class="border_right padding_bottom padding_top">Graduate - Master</th><td  style=" text-align: center;">'+
- data1.graduate_masters + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Graduate - PhD</th><td  style=" text-align: center;">'+
- data1.graduate_phd + '</td></tr>'+
- '<tr><th class="border_right padding_bottom padding_top">Postdoctoral</th><td  style=" text-align: center;">'+
- data1.post + '</td></tr>'+
-'</tbody></table></div>'+
-'</br>' ;
-
-content_research1 += goaldetails2021(reportdata);
+    '<h4>LARGE-SCALE PROPOSALS/AWARDS </h4>'+
+    '<div class="annual-budget">' +
+    '<h4> Number of target for Large-Scale*, Multi-Investigator Proposals/Awards with Multi-Institutions</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
+    '<td  style=" text-align: center;">'+ data1.proposal + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">'+
+    data1.lsAwards + '</td></tr>'+
+    '</tbody></table></div>'+
+    '</br>' +
+    '</br>' +
 
 
 
+    '<h4>STRR/SBIR PROPOSALS/AWARDS </h4>'+
+
+    '<div class="annual-budget">' +
+    '<h4> The target numbers are indicated below: </h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
+    '<td  style=" text-align: center;">'+ data1.stProposal + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">'+
+    data1.stAwards + '</td></tr>'+
+    '</tbody></table></div>'+
+
+    '</br>' +
+    '</br>' +
+
+    '<h4>PUBLICATIONS </h4>'+
+    '<div class="annual-budget">' +
+    '<h4>  The target numbers are indicated below:</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>'+
+    '<td  style=" text-align: center;">'+ data1.booksAuthored + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Books Chapters - Authored/Edited </th><td  style=" text-align: center;">'+
+    data1.booksChapters + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Publications</th><td  style=" text-align: center;">'+
+    data1.publicationsTable + '</td></tr>'+
+    '</tbody></table></div>'+
+    '</br>' +
+    '</br>' +
 
 
 
+    '<h4>TECHNOLOGY TRANSFER/COMMERCIALIZATION  </h4>'+
 
+    '<div class="annual-budget">' +
+    '<h4> The target numbers are indicated below:</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>'+
+    '<td  style=" text-align: center;">'+ data1.intellectual + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Patents Applications</th><td style=" text-align: center;" >'+
+    data1.patentsApplications + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Patents Isssued</th><td  style=" text-align: center;">'+
+    data1.patentsIssued + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Patents Licensed</th><td  style=" text-align: center;">'+
+    data1.patentsLicensed + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Licenses Executed</th><td  style=" text-align: center;">'+
+    data1.licensedExecuted + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Licenses Revenue</th><td  style=" text-align: center;">'+
+    data1.licensedRevenue + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Start-up Companies</th><td  style=" text-align: center;">'+
+    data1.startupCompanies + '</td></tr>'+
+    '</tbody></table></div>'+
+    '</br>' +
 
+    '<h4>CONFERENCE/SEMINAR PRESENTATIONS </h4>'+
 
+    '<div class="annual-budget">' +
+    '<h4> The target numbers are indicated below:</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>'+
+    '<td style=" text-align: center;">'+ data1.goals + '</td></tr>'+
 
+    '</tbody></table></div>'+
+    '</br>' +
 
+    '<h4>EDUCATION AND TRAINING </h4>'+
 
+    '<div class="annual-budget">' +
+    '<h4>Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
+    '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY 20-21</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>'+
+    '<td  style=" text-align: center;">'+ data1.undergraduate + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Graduate - Master</th><td  style=" text-align: center;">'+
+    data1.graduate_masters + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Graduate - PhD</th><td  style=" text-align: center;">'+
+    data1.graduate_phd + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top">Postdoctoral</th><td  style=" text-align: center;">'+
+    data1.post + '</td></tr>'+
+    '</tbody></table></div>'+
+    '</br>' ;
 
-
-
-
-
-
-return content_research1;
-
+    content_research1 += goaldetails2021(reportdata);
+    return content_research1;
 }
-
-
-
-
-
 
 /*Research 19-20*/
 function printResearchUnit(year,filename,reportdata_1){
@@ -440,7 +328,7 @@ function printResearchUnit(year,filename,reportdata_1){
     let reportdata ="";
   //  if(year === '19-20'){
         year1 = "FY1920";
-         reportdata =   JSON.parse(reportdata_1);
+        reportdata = JSON.parse(reportdata_1);
 
         reportdata = reportdata.data.FY1920;
         let data = {};
@@ -463,22 +351,13 @@ function printResearchUnit(year,filename,reportdata_1){
     
         data["total3"] = checkNull(reportdata.Q43_4_1); 
         data["total33"] =checkNull( reportdata.Q43_4_2); 
-       
-    
-        
-    
-    
-    
-    
-    
+
         addData={};
-       data["proposals"] = reportdata.Q51; 
+        data["proposals"] = reportdata.Q51; 
         data["federalApplicationgoals"] = checkNull(reportdata.Q51_1_1); 
         data["federalApplicationactual"] = checkNull(reportdata.Q51_2_1); 
-    
         data["stateApplicationgoals"] = checkNull(reportdata.Q51_1_2); 
         data["stateApplicationactual"] =checkNull(reportdata.Q51_2_2); 
-    
     
         data["privateApplicationgoals"] = checkNull(reportdata.Q51_1_4); 
         data["privateApplicationactual"] =checkNull( reportdata.Q51_2_4); 
@@ -486,16 +365,12 @@ function printResearchUnit(year,filename,reportdata_1){
         addData={1:data["federalApplicationgoals"],2: data["stateApplicationgoals"],3: data["privateApplicationgoals"]};
         addData1={1:data["federalApplicationactual"],2: data["stateApplicationactual"],3: data["stateApplicationactual"]};
     
-    
         data["proposal_total_goals"]=add(addData);
         data["proposal_total_actual"]=add(addData1);
     
         data["awards"] = reportdata.Q52; 
         data["federalAwardsgoals"] = checkNull(reportdata.Q52_1_1);
         data["federalAwardsactual"] = checkNull(reportdata.Q52_2_1);
-    
-        
-        
         data["stateAwardsgoals"] = checkNull(reportdata.Q52_1_2); 
         data["stateAwardsactual"] =checkNull( reportdata.Q52_2_2); 
     
@@ -504,7 +379,6 @@ function printResearchUnit(year,filename,reportdata_1){
     
         addData2={1:data["federalAwardsgoals"],2: data["stateAwardsgoals"],3: data["privateAwardsgoals"]};
         addData3={1:data["federalAwardsactual"],2: data["stateAwardsactual"],3: data["privateAwardsactual"]};
-    
     
         data["awrds_total_goals"]=add(addData2);
         data["awrds_total_actual"]=add(addData3);
@@ -522,25 +396,17 @@ function printResearchUnit(year,filename,reportdata_1){
     
         data["stAwards_goals"] = checkNull(reportdata.Q54_2_1); 
         data["stAwards_actual"] = checkNull(reportdata.Q54_2_2); 
-    
-    
-    
-    
-    
         //detailed research
     
-       data["publications"] = checkNull(reportdata.Q61); 
+        data["publications"] = checkNull(reportdata.Q61); 
         data["booksAuthoredgoals"] = checkNull(reportdata.Q61_1_1); 
         data["bookauthoredsactual"] = checkNull(reportdata.Q61_1_2); 
     
         data["bookschaptersgoals"] = checkNull(reportdata.Q61_2_1); 
-        data["bookschapteractual"] = checkNull(reportdata.Q61_2_2); 
-    
+        data["bookschapteractual"] = checkNull(reportdata.Q61_2_2);
     
         data["publicationsgoals"] = checkNull(reportdata.Q61_3_1); 
         data["publicationsactual"] = checkNull(reportdata.Q61_3_2); 
-    
-    
         data["listofpublications"]=checkNull(reportdata.Q62);
     
         data["intellctualgoals"]=checkNull(reportdata.Q63_1_1);
@@ -551,7 +417,6 @@ function printResearchUnit(year,filename,reportdata_1){
         data["patlicenesedlgoals"]=checkNull(reportdata.Q63_3_1);
         data["patlicensedactual"]=checkNull(reportdata.Q63_3_2);
     
-    
         data["patlicgoals"]=checkNull(reportdata.Q63_4_1);
         data["patlicactuals"]=checkNull(reportdata.Q63_4_2);
     
@@ -561,8 +426,6 @@ function printResearchUnit(year,filename,reportdata_1){
         data["licensedrevenuegoals"]=checkNull(reportdata.Q63_6_1);
         data["licensedrevenueactual"]=checkNull(reportdata.Q63_6_2);
     
-    
-    
         data["startupcompaniesgoals"]=checkNull(reportdata.Q63_7_1);
         data["starupcomapnieseactual"]=checkNull(reportdata.Q63_7_2);
     
@@ -570,11 +433,7 @@ function printResearchUnit(year,filename,reportdata_1){
     
         data["yougoaloffy19020"]=checkNull(reportdata.Q65_1);
         data["actualnumbers"]=checkNull(reportdata.Q65_2);
-    
-    
-        
         data["listofkeynote"]=checkNull(reportdata.Q66);
-    
         data["otheracctiites"]=checkNull(reportdata.Q66);
     
         data["educationandtraining"] = checkNull(reportdata.Q71); 
@@ -592,34 +451,15 @@ function printResearchUnit(year,filename,reportdata_1){
         data["nature_of_mentoring_graduate"] =checkNull(reportdata.Q71_3_2);
         data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
         data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
-    
-    
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        data["noofpartners"]= reportdata.Q141;
+        if(reportdata.hasOwnProperty("partners"))
+            data["partners"]= reportdata.partners;
         let content_research='';
-    
         content_research = '<h3>FY 19-20</h3>';
         content_research += '<h4>MISSION</h4>'+
         '<p class="mission">'+ data.mission + '</p>' +
         '<h4>VISION</h4>'+
         '<p class="vision">'+ data.vision + '</p>' +
-        
-     
     
         '<h4> ANNUAL BUDGET </h4>'+
         '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
@@ -634,9 +474,7 @@ function printResearchUnit(year,filename,reportdata_1){
         '</tbody></table></div>' +
         '</br>' +
         '</br>' +
-        
-        
-        
+                
         '<div class="annual-budget"> ' +
         '<h4> Source of Other Revenue Generated</h4>'+
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -653,102 +491,106 @@ function printResearchUnit(year,filename,reportdata_1){
         '</tbody></table></div>' +
     
         '<h4> PUBLICATIONS </h4>'+
-    '<div class="annual-budget">' +
-    '<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>'+
-    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-    '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-    '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td style=" text-align: center;">'+ data.booksAuthoredgoals + '</td><td style=" text-align: center;">'+
-    data.bookauthoredsactual + '</td></tr>'+
-    '<tr><th class="border_right  padding_bottom padding_top">Books Chapters Authored/Edited  </th><td style=" text-align: center;">'+ data.bookschaptersgoals + '</td><td style=" text-align: center;">'+
-    data.bookschapteractual + '</td></tr>'+
-    
-    '<tr><th class="border_right padding_bottom padding_top ">Publications</th><td style=" text-align: center;">'+ data.publicationsgoals + '</td><td style=" text-align: center;">'+
-    data.publicationsactual + '</td></tr>'+
-    
-    '</tbody></table></div>' +
-    '</br>'+
-    '</br>'+
-    
-    
-    '<h4>List of Publication by Center/Institute/Lab in the past FY</h4>'+
-    
-    '<div class="annual-budget">' +formatPara(data.listofpublications)  +
-     '</div>'+
-    
-     '</br>'+
-     '</br>'+
-    
-    
-    
-     '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
-    '<div class="annual-budget">' +
-    '<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
-    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-    '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-    '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td style=" text-align: center;">'+ data.intellctualgoals + '</td><td style=" text-align: center;">'+
-    data.intellctualgoals + '</td></tr>'+
-    '<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td style=" text-align: center;">'+ data.patentsactual + '</td><td style=" text-align: center;">'+
-    data.patnetsgoals + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">Patents Issued  </th><td style=" text-align: center;">'+ data.patlicenesedlgoals + '</td><td style=" text-align: center;">'+
-    data.patlicenesedlgoals + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">Patents Licensed </th><td style=" text-align: center;">'+ data.patlicgoals+ '</td><td style=" text-align: center;">'+
-    data.patlicactuals + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">License Executed </th><td style=" text-align: center;">'+ data.licensedexecutedgoals+ '</td><td style=" text-align: center;">'+
-    data.licensedexecutedactual + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">License Revenue </th><td style=" text-align: center;">'+ data.licensedrevenuegoals+ '</td><td style=" text-align: center;">'+
-    data.licensedrevenueactual + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">Start-up Companies </th><td style=" text-align: center;">'+ data.startupcompaniesgoals+ '</td><td style=" text-align: center;">'+
-    data.starupcomapnieseactual + '</td></tr>'+
-    '</tbody></table></div>'  +
-    
-    '</br>'+
-     '</br>'+
-    
-    
-    
-     '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
-    
-    '<div class="annual-budget"><p>' +formatPara(data.listofintelletual) +'</p>' +
-     '</div>'+
-    
-     '<br/>' +
-    
-     '<br/>' +
-    
-    
-    
-     '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
-    
-    '<div class="annual-budget">' +
-    '<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>'+
-    '<table width="100%">'+
-    '<tbody><tr>'+
-    '<th class="padding_bottom padding_top">Your Goals for FY 19-20 </th><td style=" text-align: center;">'+ data.yougoaloffy19020 + '</td></tr>'+
-    '<tr><th class="">Actual Numbers </th><td style=" text-align: center;">'+ data.actualnumbers + '</td>'+
-    '</tbody></table></div>' +
-    '<br/>' +
-    
-    '<br/>' +
-    
-    
-    '<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
-    
-    '<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
-    
-     '</div>'+
-    '<br/>' +
-    '<br/>' +
-    
-    '<h4> OTHER ACTIVITIES</h4>'+
-    
-    '<h4> List of other Scholarly Activity </h4>'+
-    
-    '<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
-    '</div>' +
-    
-    '<h4> EDUCATION AND TRAINING </h4>'+
+        '<div class="annual-budget">' +
+        '<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>'+
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+        '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+        '<tbody><tr>'+
+        '<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td style=" text-align: center;">'+ data.booksAuthoredgoals + '</td><td style=" text-align: center;">'+
+        data.bookauthoredsactual + '</td></tr>'+
+        '<tr><th class="border_right  padding_bottom padding_top">Books Chapters Authored/Edited  </th><td style=" text-align: center;">'+ data.bookschaptersgoals + '</td><td style=" text-align: center;">'+
+        data.bookschapteractual + '</td></tr>'+
+        
+        '<tr><th class="border_right padding_bottom padding_top ">Publications</th><td style=" text-align: center;">'+ data.publicationsgoals + '</td><td style=" text-align: center;">'+
+        data.publicationsactual + '</td></tr>'+
+        
+        '</tbody></table></div>' +
+        '</br>'+
+        '</br>'+    
+        '<h4>List of Publication by Center/Institute/Lab in the past FY</h4>'+
+        '<div class="annual-budget">' +formatPara(data.listofpublications)  +
+        '</div>'+
+        '</br>'+
+        '</br>'+
+        
+        '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
+        '<div class="annual-budget">' +
+        '<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+        '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+        '<tbody><tr>'+
+        '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td style=" text-align: center;">'+ data.intellctualgoals + '</td><td style=" text-align: center;">'+
+        data.intellctualgoals + '</td></tr>'+
+        '<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td style=" text-align: center;">'+ data.patentsactual + '</td><td style=" text-align: center;">'+
+        data.patnetsgoals + '</td></tr>'+
+        '<th class="border_right padding_bottom padding_top">Patents Issued  </th><td style=" text-align: center;">'+ data.patlicenesedlgoals + '</td><td style=" text-align: center;">'+
+        data.patlicenesedlgoals + '</td></tr>'+
+        '<th class="border_right padding_bottom padding_top">Patents Licensed </th><td style=" text-align: center;">'+ data.patlicgoals+ '</td><td style=" text-align: center;">'+
+        data.patlicactuals + '</td></tr>'+
+        '<th class="border_right padding_bottom padding_top">License Executed </th><td style=" text-align: center;">'+ data.licensedexecutedgoals+ '</td><td style=" text-align: center;">'+
+        data.licensedexecutedactual + '</td></tr>'+
+        '<th class="border_right padding_bottom padding_top">License Revenue </th><td style=" text-align: center;">'+ data.licensedrevenuegoals+ '</td><td style=" text-align: center;">'+
+        data.licensedrevenueactual + '</td></tr>'+
+        '<th class="border_right padding_bottom padding_top">Start-up Companies </th><td style=" text-align: center;">'+ data.startupcompaniesgoals+ '</td><td style=" text-align: center;">'+
+        data.starupcomapnieseactual + '</td></tr>'+
+        '</tbody></table></div>'  +
+        '</br>'+
+        '</br>'+
+        '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
+        '<div class="partners"><p>Total No of Partners: ' + data.noofpartners +'</p>';
+        let partners = data.hasOwnProperty("partners")? data["partners"]: [];
+        if(partners.length > 0)
+        {
+            content_research += '<table class="table thead-dark table-hover">'+
+                        '<thead><tr>'+
+                        '<th scope="col">#</th>'+
+                        '<th scope="col">Details</th>'+
+                        '</tr></thead>'+
+                        '<tbody>';
+            var i = 0;
+            partners.forEach(element => {
+                i++;
+                content_research +=  '<tr><th scope="row">'+ i +'</th>'+
+                            '<td><p>Full Name : '+ element["FullName"]+'<br/>';
+                if(element["JobTitle"] != '')  
+                    content_research += 'Job Title : '+ element["JobTitle"]+'<br/>';     
+                if(element["Department"] != '')  
+                    content_research += 'Department : '+ element["Department"]+'<br/>';   
+                if(element["School"] != '')  
+                    content_research += 'School : '+ element["School"]+'<br/>'; 
+                if(element["Organization(IfnotUAlbany)"] != '')  
+                    content_research += 'Organization : '+ element["Organization(IfnotUAlbany)"]+'<br/>'; 
+                if(element["Email"] != '')  
+                    content_research += 'Email : <a href="mailto:'+ element["Email"]+'">'+ element["Email"]+'</a></td>';
+                content_research += '</tr>';
+            });
+            content_research += '</tbody></table>';
+        }
+        content_research +='</div>'+
+        '<br/>' +
+        '<br/>' +
+        '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
+        '<div class="annual-budget">' +
+        '<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>'+
+        '<table width="100%">'+
+        '<tbody><tr>'+
+        '<th class="padding_bottom padding_top">Your Goals for FY 19-20 </th><td style=" text-align: center;">'+ data.yougoaloffy19020 + '</td></tr>'+
+        '<tr><th class="">Actual Numbers </th><td style=" text-align: center;">'+ data.actualnumbers + '</td>'+
+        '</tbody></table></div>' +
+        '<br/>' +
+        '<br/>' +
+        '<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
+        '<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
+        '</div>'+
+        '<br/>' +
+        '<br/>' +
+        '<h4> OTHER ACTIVITIES</h4>'+
+        '<h4> List of other Scholarly Activity </h4>'+
+        
+        '<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
+        '</div>' +
+        
+        '<h4> EDUCATION AND TRAINING </h4>'+
         '<div class="annual-budget">' +
         '<h4> Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="25%">Undergraduate</th>'+
@@ -823,9 +665,7 @@ function printResearchUnit(year,filename,reportdata_1){
     
         let data = {};
         data["mission"] = reportdata.Q31; 
-        data["vision"] = reportdata.Q32;
-        
-        
+        data["vision"] = reportdata.Q32;        
         data["annualBudget"] = reportdata.Q41;
         data["employeesState"] = reportdata.Q42_1_1; 
         data["employeesRF"] = reportdata.Q42_1_2; 

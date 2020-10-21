@@ -37,9 +37,6 @@ let getIds = function(year){
 
 
 /*.......Research reports .....*/
-
-
-
 let add2020researchreport = function(reportdata){
 
     let content = '';
@@ -76,29 +73,19 @@ let add2020researchreport = function(reportdata){
     data["total33"] =checkNull( reportdata.Q43_4_2); 
     content += addResearceAnnualBudget19(ids, data);
 
-    
-
-
-
-
-
     ids = getIds('FY1920');
     data = {};
     addData={};
-   data["proposals"] = reportdata.Q51; 
+    data["proposals"] = reportdata.Q51; 
     data["federalApplicationgoals"] = checkNull(reportdata.Q51_1_1); 
     data["federalApplicationactual"] = checkNull(reportdata.Q51_2_1); 
-
     data["stateApplicationgoals"] = checkNull(reportdata.Q51_1_2); 
     data["stateApplicationactual"] =checkNull(reportdata.Q51_2_2); 
-
-
     data["privateApplicationgoals"] = checkNull(reportdata.Q51_1_4); 
-    data["privateApplicationactual"] =checkNull( reportdata.Q51_2_4); 
+    data["privateApplicationactual"] =checkNull(reportdata.Q51_2_4); 
 
     addData={1:data["federalApplicationgoals"],2: data["stateApplicationgoals"],3: data["privateApplicationgoals"]};
     addData1={1:data["federalApplicationactual"],2: data["stateApplicationactual"],3: data["stateApplicationactual"]};
-
 
     data["proposal_total_goals"]=add(addData);
     data["proposal_total_actual"]=add(addData1);
@@ -106,8 +93,6 @@ let add2020researchreport = function(reportdata){
     data["awards"] = reportdata.Q52; 
     data["federalAwardsgoals"] = checkNull(reportdata.Q52_1_1);
     data["federalAwardsactual"] = checkNull(reportdata.Q52_2_1);
-
-    
     
     data["stateAwardsgoals"] = checkNull(reportdata.Q52_1_2); 
     data["stateAwardsactual"] =checkNull( reportdata.Q52_2_2); 
@@ -137,15 +122,11 @@ let add2020researchreport = function(reportdata){
     data["stAwards_actual"] = checkNull(reportdata.Q54_2_2); 
 
     content +=adddetailedActivity(ids,data);
-
-
-
-
     //detailed research
 
     ids = getIds('FY1920');
     data = {};
-   data["publications"] = checkNull(reportdata.Q61); 
+    data["publications"] = checkNull(reportdata.Q61); 
     data["booksAuthoredgoals"] = checkNull(reportdata.Q61_1_1); 
     data["bookauthoredsactual"] = checkNull(reportdata.Q61_1_2); 
 
@@ -186,30 +167,17 @@ let add2020researchreport = function(reportdata){
 
     data["yougoaloffy19020"]=checkNull(reportdata.Q65_1);
     data["actualnumbers"]=checkNull(reportdata.Q65_2);
-
-
-    
+   
     data["listofkeynote"]=checkNull(reportdata.Q66);
 
     data["otheracctiites"]=checkNull(reportdata.Q67);
 
-
-
-
-
-
-
-
     content +=addresearchActivity(ids,data);
-
     //****** */
 
-
-
-    
-   ids = getIds('FY1920');
-   data = {};
-   data["educationandtraining"] = checkNull(reportdata.Q71); 
+    ids = getIds('FY1920');
+    data = {};
+    data["educationandtraining"] = checkNull(reportdata.Q71); 
     data["students_goals_undergraduate"] =checkNull(reportdata.Q71_1_1);
     data["students_goals_graduate"] =checkNull(reportdata.Q71_1_2);
     data["students_goals_graduate_phd"] =checkNull(reportdata.Q71_1_4);
@@ -224,95 +192,8 @@ let add2020researchreport = function(reportdata){
     data["nature_of_mentoring_graduate"] =checkNull(reportdata.Q71_3_2);
     data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
-   content += addEducation19(ids, data);
-
-/*
-
-    ids = getIds('FY1920');
-    data = {};
-   data["publications"] = reportdata.Q61; 
-    data["books_authored_goals"] = reportdata.Q61_1_1; 
-    data["books_authored_actual"] = reportdata.Q61_2_1; 
-
-    data["bookschaptergoals"] = reportdata.Q61_2_1; 
-    data["bookschapteractual"] = reportdata.Q61_2_2; 
-
-
-    data["publicationsgoals"] = reportdata.Q61_3_1; 
-    data["publicationsactual"] = reportdata.Q61_3_2; 
-
-    data["publicationssummary"] = reportdata.Q62
-
-   
-
-
-   
-   data["technology"] = reportdata.Q63; 
-    data["Intellectual_goals"] = reportdata.Q63_1_1; 
-    data["Intellectual_actual"] = reportdata.Q63_1_2; 
-
-    data["patentsgoals"] = reportdata.Q63_2_1; 
-    data["patentsractual"] = reportdata.Q63_2_2; 
-
-
-    data["patentsissuedgoals"] = reportdata.Q63_3_1; 
-    data["patentsissuedactual"] = reportdata.Q63_3_2; 
-
-
-    data["patentlicensedgoals"] = reportdata.Q63_4_1; 
-    data["patentslicenseddactual"] = reportdata.Q63_4_2; 
-
-
-    data["licensedexecutedgoals"] = reportdata.Q63_5_1; 
-    data["licensedexecutedactual"] = reportdata.Q63_5_2; 
-
-
-    
-    data["licencedrevenuegoals"] = reportdata.Q63_6_1; 
-    data["licencedrevenueactual"] = reportdata.Q63_6_2; 
-
-
-
-    data["starupcomapniesgoals"] = reportdata.Q63_7_1; 
-    data["starupcompaniesactual"] = reportdata.Q63_7_2; 
-
-
-    data["summary_intellectual"] = reportdata.Q64; 
-
-
-   
-   data["conference"] = reportdata.Q65; 
-    data["goalforfy1920"] = reportdata.Q65_1_1; 
-    data["actualnumbers"] = reportdata.Q65_1_2; 
-
-    data["keynoteAddress"] = reportdata.Q66; 
-
+    content += addEducation19(ids, data);
   
-   data["otheractivites"] = reportdata.Q67; 
-
-   content +=adddetailedActivity_researach(ids,data);
-
-*/
-   
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    
     for(var i = 9; i < 14; i++)
     {
         ids = getIds('FY1920');
@@ -336,13 +217,10 @@ let add2020researchreport = function(reportdata){
     ids = getIds('FY1920');
     data = {};
     data["noofpartners"]= reportdata.Q141;
+    if(reportdata.hasOwnProperty("partners"))
+        data["partners"]= reportdata.partners;
 
     content += addList_partners(ids, data);
-
-
-
-
-
     
     ids = getIds('FY1920');
     data = {};
@@ -352,27 +230,9 @@ let add2020researchreport = function(reportdata){
     data["strategies"] = reportdata.Q154;
     data["suggestions"] = reportdata.Q155;
     content += addOtherThoughts(ids, data);
-
-
-
     content += '</div>'
-
-
-    //localStorage.setItem("1920",content);
-
-    
     return content;
-
-
-
-
-
 }
-
-
-
-
-
 
 let add2021researchreport = function(reportdata){
 
@@ -1032,124 +892,7 @@ return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.
 
 
 }
-
-
 /* research end */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-let adddetailedActivity_researach =function(ids,data){
-
-
-    let detailedActivity_research = '<h4> Publications</h4>'+
-    '<div class="annual-budget"><p>' + +'</p>' +
-    '<h4> Indicate below, the publications for which the Center,Institute or Lab generated in the past FY</h4>'+
-    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-    '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-    '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Books -Authored/Edited</th><td>'+ data.books_authored_goals + '</td><td>'+
-    data.books_authored_actual + '</td></tr>'+
-    '<tr><th class="border_right">Books Chapters -Authored/Edited </th><td>'+ data.bookschaptergoals + '</td><td>'+
-    data.bookschapteractual + '</td></tr>'+
-    
-    '<tr><th class="border_right">Publications</th><td>'+ data.publicationsgoals + '</td><td>'+
-    data.publicationsactual + '</td></tr>'+
-    '</tbody></table></div>' +
-
-    '<div class="annual-budget"><p>' +data.publicationssummary+'</p>' +
-    '</div>'+
-    '<h4> Technology Transfer</h4>'+
-    '<div class="annual-budget"><p>' + +'</p>' +
-    '<h4> Indicate below, the publications for which the Center,Institute or Lab is cited</h4>'+
-    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-    '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-    '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Intellectual Property</th><td>'+ data.Intellectual_goals + '</td><td>'+
-    data.Intellectual_actual + '</td></tr>'+
-    '<tr><th class="border_right"> Patents Applications </th><td>'+ data.patentsgoals + '</td><td>'+
-    data.patentsractual + '</td></tr>'+
-    
-    '<tr><th class="border_right">Patents Issued</th><td>'+ data.patentsissuedgoals + '</td><td>'+
-    data.patentsissuedactual + '</td></tr>'+
-
-
-    '<tr><th class="border_right">Patents Licensed</th><td>'+ data.patentlicensedgoals + '</td><td>'+
-    data.patentslicenseddactual + '</td></tr>'+
-
-    '<tr><th class="border_right">License Executed</th><td>'+ data.licensedexecutedgoals + '</td><td>'+
-    data.licensedexecutedactual + '</td></tr>'+
-
-    '<tr><th class="border_right">License Revenue</th><td>'+ data.licencedrevenuegoals + '</td><td>'+
-    data.licencedrevenueactual + '</td></tr>'+
-
-
-
-    '<tr><th class="border_right">Start-up Companies</th><td>'+ data.starupcomapniesgoals + '</td><td>'+
-    data.starupcompaniesactual + '</td></tr>'+
-    '</tbody></table></div>' +
-    '<br/>' +
-    '<br/>' +
-
-
-    '<div class="annual-budget"> List out all Intellectual property Disclosures <p>' +data.summary_intellectual+'</p>' +
-    '</div>'+
-    
-
-
-    
-    '<h4> Conference/ Seminar Presentations </h4>'+
-    '<div class="annual-budget"><p>' +data.conference +'</p>' +
-    '<h4> Indicate below, the numbers of KeyNote Address </h4>'+
-    '<table width="100%">'+
-    '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Your Goal for FY 19-20</th><td>'+ data.goalforfy1920 + '</td>'
-    '<tr><th class="border_right"> Actual Numbers </th><td>'+ data.actualnumbers + '</td><td>'+
-
-    '</tbody></table></div>' 
-
-
-
-    '<div class="annual-budget"> List out all Keynote Address  <p>' +data.keynoteAddress+'</p>' +
-    '</div>'+
-
-    '<div class="annual-budget"> Other Activities <p>' +data.otheractivites+'</p>' ;
-    '</div>';
-
-
-
-    
-
-
-    
-    
-    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId,
-         "Detailed Activity Report Research and Scholarly Activities", detailedActivity_research);
-    
-    
-
-}*/
-
-
-
-
-
-
-
-
 let addEducation19 = function(ids, data)
 {
     let eduContent = '<h4> EDUCATION AND TRAINING </h4>'+
@@ -1163,56 +906,60 @@ let addEducation19 = function(ids, data)
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY 19-20</th><td>'+ data.students_goals_undergraduate + '</td>'+
     '<td>'+data.students_goals_graduate+ '</td> '+    
     '<td>'+data.students_goals_graduate_phd+ '</td> '+    
-
     '<td>'+data.students_goals_phd+ '</td> '+    
-
     '</tr>'+
-
     '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td>'+ data.students_actual_undergraduate + '</td>'+
     '<td>'+data.students_actual_graduate+ '</td> '+    
     '<td>'+data.students_actual_gradaute_phd+ '</td> '+    
-
     '<td>'+data.students_goals_phd+ '</td> '+    
-
     '</tr>'+
-
-
     '<tr><th class="border_right padding_bottom padding_top"> Nature of Mentoring</th><td>'+ data.nature_of_mentoring_undergradudate + '</td>'+
     '<td>'+data.nature_of_mentoring_graduate+ '</td> '+    
     '<td>'+data.nature_of_mentoring_gradaute_phd+ '</td> '+    
-
     '<td>'+data.nature_of_mentoringl_phd+ '</td> '+    
-
     '</tr>'+
-
-
-
-
-
-
     '</tbody></table></div>' ;
-
-
-
-
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Education And Training", eduContent);
 }
 
 
 let addList_partners = function(ids,data){
-
     let content=
     '<h4> LIST OF PARTNERS/AFFILIATES</h4>'+
     
-    '<div class="annual-budget"><p>' +formatPara(data.noofpartners) + '</p>' +
-    
-     '</div>';
+    '<div class="partners"><p>Total No. of Partners: ' + data.noofpartners + '</p>';
+    let partners = data.hasOwnProperty("partners")? data["partners"]: [];
+    if(partners.length > 0)
+    {
+        content += '<table class="table thead-dark table-hover">'+
+                    '<thead><tr>'+
+                    '<th scope="col">#</th>'+
+                    '<th scope="col">Details</th>'+
+                    '</tr></thead>'+
+                    '<tbody>';
+        var i = 0;
+        partners.forEach(element => {
+            i++;
+            content +=  '<tr><th scope="row">'+ i +'</th>'+
+                        '<td><p>Full Name : '+ element["FullName"]+'<br/>';
+            if(element["JobTitle"] != '')  
+                content += 'Job Title : '+ element["JobTitle"]+'<br/>';     
+            if(element["Department"] != '')  
+                content += 'Department : '+ element["Department"]+'<br/>';   
+            if(element["School"] != '')  
+                content += 'School : '+ element["School"]+'<br/>'; 
+            if(element["Organization(IfnotUAlbany)"] != '')  
+                content += 'Organization : '+ element["Organization(IfnotUAlbany)"]+'<br/>'; 
+            if(element["Email"] != '')  
+                content += 'Email : <a href="mailto:'+ element["Email"]+'">'+ element["Email"]+'</a></td>';
+            content += '</tr>';
+        });
+        content += '</tbody></table>';
+    }
+    content +='</div>';
 
      return  generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "List of Partners/Affiliates", content);
-
 }
-
-
 
 let addOrganizationalMemberships = function(ids, data)
 {
@@ -1270,8 +1017,6 @@ let addSmartGoal = function(ids, goal)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
-
-
 let formatPara = function(text){
     let result = '';
     if(typeof text === "undefined"){
@@ -1293,9 +1038,6 @@ let formatPara = function(text){
             
         }        
     }
-
-
-
     return result;
 }
 
