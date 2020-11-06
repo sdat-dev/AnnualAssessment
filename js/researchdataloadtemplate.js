@@ -901,15 +901,15 @@ let addList_partners = function(ids,data){
             i++;
             content +=  '<tr><th scope="row">'+ i +'</th>'+
                         '<td><p>Full Name : '+ element["FullName"]+'<br/>';
-            if(element["JobTitle"] != '')  
+            if(element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')  
                 content += 'Job Title : '+ element["JobTitle"]+'<br/>';     
-            if(element["Department"] != '')  
+            if(element.hasOwnProperty("Department") && element["Department"] != '')  
                 content += 'Department : '+ element["Department"]+'<br/>';   
-            if(element["School"] != '')  
+            if(element.hasOwnProperty("School") && element["School"] != '')  
                 content += 'School : '+ element["School"]+'<br/>'; 
-            if(element["Organization(IfnotUAlbany)"] != '')  
+            if(element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')  
                 content += 'Organization : '+ element["Organization(IfnotUAlbany)"]+'<br/>'; 
-            if(element["Email"] != '')  
+            if(element.hasOwnProperty("Email") && element["Email"] != '')  
                 content += 'Email : <a href="mailto:'+ element["Email"]+'">'+ element["Email"]+'</a></td>';
             content += '</tr>';
         });
