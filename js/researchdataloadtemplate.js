@@ -328,19 +328,6 @@ let add2021researchreport = function(reportdata){
     data["post"] = checkNull(reportdata.Q58_4_1); 
     content +=addResearchPerformancetarget(ids,data);
 
-
-
-
-   
-
-
-
-
-
-
-
-    
-
     for(var i = 7; i < 12; i++)
     {
         ids = getIds('FY2021');
@@ -532,13 +519,7 @@ let addResearchPerformancetarget =function(ids,data){
     '</tbody></table></div>'+
     '</br>' ;
 
-
-
-
-
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Research Performanace Target ", researchContent);
-
-
 }
 
 
@@ -584,9 +565,6 @@ data.fteRF + '</td></tr>'+
 '</tbody></table></div>' +
 '</br>' +
 '</br>' +
-
-
-
 '<div class="annual-budget"> ' +
 '<h4> Source of Other Revenue Generated</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
@@ -630,10 +608,6 @@ data.proposal_total_actual + '</td></tr>'+
 '</br>'+
 '</br>'+
 
-
-
-
-
 '<h4> AWARDS</h4>'+
 '<div class="annual-budget">' +
 '<h4> Numbers of Awards Received from Extramural Sponsors  </h4>'+
@@ -652,11 +626,6 @@ data.awrds_total_actual + '</td></tr>'+
 
 '</br>'+
 '</br>'+
-
-
-
-
-
 '<h4> LARGE SCALE PROPOSALS/AWARDS</h4>'+
 
 '<div class="annual-budget">' +
@@ -685,16 +654,7 @@ data.stProposal_actual + '</td></tr>'+
 '<tr><th class="border_right">#Awards </th><td>'+ data.stAwards_goals + '</td><td>'+
 data.stAwards_actual + '</td></tr>'+
 '</tbody></table></div>' ; 
-
-
-
-
-
 return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Proposal and Awards", detailedActivity);
-
-
-
-
 }
 
 
@@ -941,15 +901,15 @@ let addList_partners = function(ids,data){
             i++;
             content +=  '<tr><th scope="row">'+ i +'</th>'+
                         '<td><p>Full Name : '+ element["FullName"]+'<br/>';
-            if(element["JobTitle"] != '')  
+            if(element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')  
                 content += 'Job Title : '+ element["JobTitle"]+'<br/>';     
-            if(element["Department"] != '')  
+            if(element.hasOwnProperty("Department") && element["Department"] != '')  
                 content += 'Department : '+ element["Department"]+'<br/>';   
-            if(element["School"] != '')  
+            if(element.hasOwnProperty("School") && element["School"] != '')  
                 content += 'School : '+ element["School"]+'<br/>'; 
-            if(element["Organization(IfnotUAlbany)"] != '')  
+            if(element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')  
                 content += 'Organization : '+ element["Organization(IfnotUAlbany)"]+'<br/>'; 
-            if(element["Email"] != '')  
+            if(element.hasOwnProperty("Email") && element["Email"] != '')  
                 content += 'Email : <a href="mailto:'+ element["Email"]+'">'+ element["Email"]+'</a></td>';
             content += '</tr>';
         });
