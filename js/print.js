@@ -631,6 +631,8 @@ function printResearchUnit(year,filename,reportdata_1){
         let reportdata ="";
         let data = {};
           
+        year1 = "FY2021";
+
         reportdata =   JSON.parse(reportdata_1);
         data["unit"] = reportdata.data.ExternalReference
         reportdata = reportdata.data.FY2021;
@@ -644,11 +646,12 @@ function printResearchUnit(year,filename,reportdata_1){
         data["fteRF"] = reportdata.Q42_2_2; 
 
 
-        content = '<h1 style="text-align: center;">'+ data.unit +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (20220-2021)</h1>'+
+        content = '<h1 style="text-align: center;">'+ data.unit +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (2020-2021)</h1>'+
         '<h4>MISSION</h4>'+
         '<p class="mission">'+ data.mission + '</p>' +
         '<h4>VISION</h4>'+
         '<p class="vision">'+ data.vision + '</p>' +
+
         '<h4> ANNUAL BUDGET </h4>'+
         '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
         '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>'+
@@ -656,6 +659,7 @@ function printResearchUnit(year,filename,reportdata_1){
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">'+ data.employeesState + '</td><td style=" text-align: center;">'+
         data.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">'+ data.fteState + '</td><td style=" text-align: center;">'+
         data.fteRF + '</td></tr></tbody></table></div>';
+
         content += goaldetails2021_admi(reportdata);
         return content;
     }
@@ -755,7 +759,7 @@ let goaldetails= function (reportdata){
     let content ='';
 for(var i = 9; i < 14; i++)
     {
-      //  ids = getIds('FY1920');
+      ids = getIds('FY1920');
         let goal = new GoalPlan(i-8, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
@@ -891,11 +895,11 @@ return content;
 let addSmartGoalPlan2021 = function(goal)
 {
     let smartgoal = '<h4>FY 20-21 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<p><b>Goal: </b>'+ (goal.goal == ''?'N/A':goal.goal) +'</p>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p>';
+    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p>';
     smartgoal += '<p><b>Primary Leader on this Project: </b>'+ (goal.primaryLeader == ''?'N/A':goal.primaryLeader) +'</p>';
     smartgoal += '<p><b>Circumstances That Could Impact Workplan: </b>'+ (goal.circumstances == ''?'N/A':goal.circumstances) +'</p>';
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>'+ (goal.collaborations == ''?'N/A':goal.collaborations) +'</p>';
@@ -968,7 +972,7 @@ let addSmartGoal = function( goal)
    /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>TimeFrame: </b>"+ time +'</p> */;
+    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p> */;
     smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
