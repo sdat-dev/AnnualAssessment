@@ -748,9 +748,6 @@ let formatPara = function(text){
             
         }        
     }
-
-
-
     return result;
 }
 
@@ -759,7 +756,7 @@ let goaldetails= function (reportdata){
     let content ='';
 for(var i = 9; i < 14; i++)
     {
-      ids = getIds('FY1920');
+        ids = 'FY1920';
         let goal = new GoalPlan(i-8, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
@@ -882,13 +879,7 @@ data["strategies"] = reportdata.Q144;
 data["suggestions"] = reportdata.Q145;
 content += addOtherThoughts( data);
 
-
-
-
-
-
 return content;
-
 
 }
 
