@@ -153,7 +153,10 @@ function printPlanningReport(id){
     let goals = report.getElementsByClassName("goal");
     let achievements = report.getElementsByClassName("achievements");
     let otherthoughts =  report.getElementsByClassName("other-thoughts");
-    let content = '<h1>'+ header.innerHTML +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>';
+    let currentYear = id.substring(2,4);
+    let nextYear = id.substring(4,6);
+    let content = '<h1>'+ header.innerHTML +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (20'+currentYear+'-20'+nextYear+')</h1>';
+    
     content += "<h2> Mission Statement </h2><p>" +  mission[0].innerHTML + "</p>";
     content += "<h2> Vision </h2><p>" +  vision[0].innerHTML + "</p>";
     content += "<h2> Annual Budget </h2>" +  budget[0].innerHTML;
@@ -161,8 +164,13 @@ function printPlanningReport(id){
     for(i = 0; i < goals.length; i++){
         content += '<h2>Goal '+ (i+1) + '</h2>' +  goals[i].innerHTML;
     }
-    content += "<h2> Achievements </h2>" +  achievements[0].innerHTML;
-    content += "<h2> Other Thoughts </h2>" +  otherthoughts[0].innerHTML;
+    if(achievements[0] == null && otherthoughts[0] == null) {
+    }
+    else{
+        content += "<h2> Achievements </h2>" +  achievements[0].innerHTML;
+        content += "<h2> Other Thoughts </h2>" +  otherthoughts[0].innerHTML;
+    }
+
     var win = window.open("print.html", "_blank");
     win.document.write(content); // where 'html' is a variable containing your HTML
     win.document.close(); 
