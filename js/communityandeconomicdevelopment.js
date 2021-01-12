@@ -236,6 +236,10 @@ let addSmartGoal = function(ids, goal)
 
 let formatText = function(text){
     let result = '';
+    if(isNaN(text) == false)
+    {
+        return text;
+    }
     let paras = text.split("\n\n");
     for(var i=0; i< paras.length; i++){
         let para = paras[i];
