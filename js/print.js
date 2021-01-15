@@ -998,8 +998,8 @@ let addOtherThoughts = function(data)
 
 let formatText = function(text){
     let result = '';
-    if(typeof text === "undefined"){
-
+    if(typeof text === "undefined" || isNaN(text) == false){
+        return text;
     }
     else{
     let paras = text.split("\n\n");
