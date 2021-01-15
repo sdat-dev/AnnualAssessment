@@ -44,8 +44,7 @@ let add2020researchreport = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>' +
-    '<br><i>New or updated unit entries will be refreshed every morning at 11:00 AM EST. If you would like to further update your report, please use the link in the email you received from by <a href>sdat@albany.edu</a> since your last submission.</i>'; 
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
     content += '<div id = "FY1920">';
 
     let ids= getIds('FY1920');
@@ -246,8 +245,8 @@ let add2021researchreport = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY2021\')">Print</button>' +
-    '<br><i>New or updated unit entries will be refreshed every morning at 11:00 AM EST. If you would like to further update your report, please use the link in the email you received from by <a href>sdat@albany.edu</a> since your last submission.</i>'; 
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
+    
     content += '<div id = "FY2021">';
 
     let ids= getIds('FY2021');

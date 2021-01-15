@@ -40,8 +40,7 @@ let add1920report = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020' + 
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>' +
-    '<br><i>New or updated unit entries will be refreshed every morning at 11:00 AM EST. If you would like to further update your report, please use the link in the email you received from by <a href>sdat@albany.edu</a> since your last submission.</i>'; 
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
     content += '<div id = "FY1920">';
 
     let ids= getIds('FY1920');
@@ -126,14 +125,13 @@ let add2021report = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY2021\')">Print</button>' +
-    '<br><i>New or updated unit entries will be refreshed every morning at 11:00 AM EST. If you would like to further update your report, please use the link in the email you received from by <a href>sdat@albany.edu</a> since your last submission.</i>'; 
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
     content += '<div id = "FY2021">';
 
     let ids= getIds('FY2021');
     let data = {};
-    data["mission"] = reportdata["1819Mission"]; 
-    data["vision"] = reportdata["1819Vision"];
+    data["mission"] = reportdata.Q31; 
+    data["vision"] = reportdata.Q32;
     content += addMissionAndVision(ids, data);
 
     ids = getIds('FY2021');
@@ -145,9 +143,9 @@ let add2021report = function(reportdata){
     data["fteRF"] = reportdata.Q42_2_2; 
     content += addAnnualBudget(ids, data);
 
-    ids = getIds('FY2021'); 
     for(var i = 6; i < 11; i++)
     {
+        ids = getIds('FY2021');
         let goal = new GoalPlan(i-5, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
@@ -376,4 +374,3 @@ let addSmartGoalPlan = function(ids, goal)
     smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>'+ (goal.impact == ''?'N/A':goal.impact) +'</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
-
