@@ -57,22 +57,15 @@ let add1920report = function(reportdata){
     data["fteState"] = reportdata.Q42_2_1; 
     data["fteRF"] = reportdata.Q42_2_2; 
     content += addAnnualBudget(ids, data);
-    if( reportdata.Q51 == 'Yes')
-    {
+    if (reportdata.Q51 == 'Yes') {
+        data["member1"] = reportdata.Q51;
         ids = getIds('FY1920');
         data = {};
-        for(var i=1; i < 7; i++ )
-        {
-            data['membership' + i] =  reportdata["Q52_" + i];
+        for (var i = 1; i < 7; i++) {
+            data['membership' + i] = reportdata["Q52_" + i];
+            data['benefit' + i] = reportdata["Q61_" + i];
         }
         content += addOrganizationalMemberships(ids, data);
-        ids = getIds('FY1920');
-        data = {};
-        for(var i=1; i < 7; i++ )
-        {
-            data['benifit' + i] =  reportdata["Q61_" + i];
-        }
-        content += addMembershipBenifits(ids, data);
     }
 
     for(var i = 8; i < 13; i++)
@@ -176,28 +169,17 @@ let addAnnualBudget = function(ids, data)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Annual Budget", budgetContent);
 }
 
-let addOrganizationalMemberships = function(ids, data)
-{
-    let organizations = '<ul class="num-list">';
-    for(var i=1; i<7; i++)
-    {
-        if(data['membership'+i]!= "")
-            organizations +='<li>'+ data['membership'+i] +'</li>';
-    }
-    organizations +='</ul>';
-    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Active Organizational Memberships", organizations);
-}
+let addOrganizationalMemberships = function (ids, data) {
+    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>' ;
 
-let addMembershipBenifits = function(ids, data)
-{
-    let membershipBenefit = '<ul class="num-list">';
-    for(var i=1; i<7; i++)
-    {
-        if(data['benefit'+i]!= "")
-            membershipBenefit +='<li>'+ data['benefit'+i] +'</li>';
+    for (var i = 1; i < 7; i++) {
+        if (data['membership' + i] != "")
+            organizations += '<tr><td class="border_right">' + data['membership' + i] + '</td>';
+        if (data['benefit' + i] != "")
+            organizations += '<td>' + data['benefit' + i] + '</td></tr>';
     }
-    membershipBenefit +='</ul>';
-    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Membership Benefit to the Unit", membershipBenefit);
+    organizations += '</tbody></table></div>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Active Organizational Memberships", organizations);
 }
 
 let addHonors = function(collapseId, headerId, parentId, childId, data)
