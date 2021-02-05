@@ -621,15 +621,15 @@ function printResearchUnit(year, filename, reportdata_1) {
             content_research += '<tr><th scope="row">' + i + '</th>' +
                 '<td><p>Full Name : ' + element["FullName"] + '<br/>';
             if (element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')
-                content += 'Job Title : ' + element["JobTitle"] + '<br/>';
+            content_research += 'Job Title : ' + element["JobTitle"] + '<br/>';
             if (element.hasOwnProperty("Department") && element["Department"] != '')
-                content += 'Department : ' + element["Department"] + '<br/>';
+            content_research += 'Department : ' + element["Department"] + '<br/>';
             if (element.hasOwnProperty("School") && element["School"] != '')
-                content += 'School : ' + element["School"] + '<br/>';
+            content_research += 'School : ' + element["School"] + '<br/>';
             if (element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')
-                content += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
+            content_research += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
             if (element.hasOwnProperty("Email") && element["Email"] != '')
-                content += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
+            content_research += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
             content_research += '</tr>';
         });
         content_research += '</tbody></table>';
