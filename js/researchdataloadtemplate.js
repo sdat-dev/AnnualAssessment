@@ -169,7 +169,7 @@ let add2020researchreport = function(reportdata){
    
     data["listofkeynote"]=checkNull(reportdata.Q66);
 
-    data["otheracctiites"]=checkNull(reportdata.Q67);
+    data["otheracctiites"]=checkNull(reportdata.Q66);
 
     content +=addresearchActivity(ids,data);
     //****** */
@@ -833,7 +833,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> OTHER ACTIVITIES</h4>'+
 
-'<h4> List of other Scholarly Activity </h4>'+
+'<h4>List of all Keynote Address or Plenary Invited Presentations:</h4>'+
 
 '<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
 '</div>';
@@ -871,7 +871,7 @@ let addEducation19 = function(ids, data)
     '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td>'+ data.students_actual_undergraduate + '</td>'+
     '<td>'+data.students_actual_graduate+ '</td> '+    
     '<td>'+data.students_actual_gradaute_phd+ '</td> '+    
-    '<td>'+data.students_goals_phd+ '</td> '+    
+    '<td>'+data.students_actual_phd+ '</td> '+    
     '</tr>'+
     '<tr><th class="border_right padding_bottom padding_top"> Nature of Mentoring</th><td>'+ data.nature_of_mentoring_undergradudate + '</td>'+
     '<td>'+data.nature_of_mentoring_graduate+ '</td> '+    
