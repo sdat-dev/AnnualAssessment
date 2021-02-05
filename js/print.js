@@ -43,12 +43,12 @@ function printReport(event) {
     //total = total.concat(units.el);
 
     for(var p=0;p<=units_e1.length;p++){
-        console.log(units_e1[p]);
+        // console.log(units_e1[p]);
         for(var l=0;l<total.length;l++){
             var splithtml=total[l].split(".");
-            console.log(splithtml);
+            // console.log(splithtml);
             var data = localStorage.getItem(splithtml[0]);
-            console.log(data);
+            // console.log(data);
             if(units_e1[p] == '19-20'){
             if(splithtml[0] === "communityandeconomicdevelopment" ||
                 splithtml[0] === "facultyresearchdevelopment" ||
@@ -335,13 +335,13 @@ function printResearchUnit(year,filename,reportdata_1){
     data["employeesRF"] = checkNull(reportdata.Q42_1_2); 
     data["fteState"] = checkNull(reportdata.Q42_2_1); 
     data["fteRF"] = checkNull(reportdata.Q42_2_2); 
-    data["nameOfadditionalsource1"] = checkNull(reportdata.Q43_1_1); 
+    data["nameOfadditionalsource1"] = checkNull(reportdata.Q43_1); 
     data["nameOfadditionalsource11"] = checkNull(reportdata.Q43_1_TEXT); 
 
-    data["nameOfadditionalsource2"] = checkNull(reportdata.Q43_2_1); 
+    data["nameOfadditionalsource2"] = checkNull(reportdata.Q43_2); 
     data["nameOfadditionalsource21"] = checkNull(reportdata.Q43_2_TEXT); 
 
-    data["nameOfadditionalsource3"] =checkNull(reportdata.Q43_3_1); 
+    data["nameOfadditionalsource3"] =checkNull(reportdata.Q43_3); 
     data["nameOfadditionalsource31"] = checkNull(reportdata.Q43_3_TEXT); 
 
     data["total3"] = checkNull(reportdata.Q43_4_1); 
@@ -447,6 +447,7 @@ function printResearchUnit(year,filename,reportdata_1){
     data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
     data["noofpartners"]= reportdata.Q141;
+    let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
     if(reportdata.hasOwnProperty("partners"))
         data["partners"]= reportdata.partners;
     let content_research='';
@@ -473,16 +474,16 @@ function printResearchUnit(year,filename,reportdata_1){
     '<div class="annual-budget"> ' +
     '<h4> Source of Other Revenue Generated</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-    '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>'+
     '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td style=" text-align: center;">'+ data.nameOfadditionalsource1 + '</td><td style=" text-align: center;">'+
-    data.nameOfadditionalsource11 + '</td></tr>'+
-    '<tr><th class="border_right">Name of Additional Source 2</th><td style=" text-align: center;">'+ data.nameOfadditionalsource2 + '</td><td style=" text-align: center;">'+
-    data.nameOfadditionalsource21 + '</td></tr>'+
-    '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td style=" text-align: center;">'+ data.nameOfadditionalsource3 + '</td><td style=" text-align: center;">'+
-    data.nameOfadditionalsource31 + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td style=" text-align: center;">'+ data.nameOfadditionalsource11 + '</td><td style=" text-align: center;">'+
+    data.nameOfadditionalsource1 + '</td></tr>'+
+    '<tr><th class="border_right">Name of Additional Source 2</th><td style=" text-align: center;">'+ data.nameOfadditionalsource21 + '</td><td style=" text-align: center;">'+
+    data.nameOfadditionalsource2 + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td style=" text-align: center;">'+ data.nameOfadditionalsource31 + '</td><td style=" text-align: center;">'+
+    data.nameOfadditionalsource3 + '</td></tr>'+
     '<th class="border_right padding_bottom padding_top">Total </th><td style=" text-align: center;">'+ data.total3 + '</td><td style=" text-align: center;">'+
-    data.total33 + '</td></tr>'+
+    totalBudget + '</td></tr>'+
     '</tbody></table></div>' +
 
     '<h4> PUBLICATIONS </h4>'+
