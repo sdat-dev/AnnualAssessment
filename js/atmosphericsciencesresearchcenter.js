@@ -589,7 +589,7 @@ return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.
 
 
 let adddetailedActivity = function(ids,data){
-
+    let proposal_total_actual = data.federalApplicationactual + data.stateApplicationactual + data.privateApplicationactual;
     let detailedActivity = '<h4> PROPOSALS</h4>'+
 '<div class="annual-budget">' +
 '<h4> Number of Research Proposal Submitted to Extramural Sponsors</h4>'+
@@ -605,7 +605,7 @@ data.stateApplicationactual + '</td></tr>'+
 data.privateApplicationactual + '</td></tr>'+
 
 '<tr><th class="border_right  padding_bottom padding_top">Total</th><td>'+ data.proposal_total_goals + '</td><td>'+
-data.proposal_total_actual + '</td></tr>'+
+proposal_total_actual + '</td></tr>'+
 '</tbody></table></div>' +
 '</br>'+
 '</br>'+
