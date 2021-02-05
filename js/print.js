@@ -429,7 +429,7 @@ function printResearchUnit(year, filename, reportdata_1) {
     data["yougoaloffy19020"] = checkNull(reportdata.Q65_1);
     data["actualnumbers"] = checkNull(reportdata.Q65_2);
     data["listofkeynote"] = checkNull(reportdata.Q66);
-    data["otheracctiites"] = checkNull(reportdata.Q66);
+    data["otheractivities"] = checkNull(reportdata.Q67);
 
     data["educationandtraining"] = checkNull(reportdata.Q71);
     data["students_goals_undergraduate"] = checkNull(reportdata.Q71_1_1);
@@ -655,7 +655,7 @@ function printResearchUnit(year, filename, reportdata_1) {
         '<h4> OTHER ACTIVITIES</h4>' +
         '<h4> List of other Scholarly Activity </h4>' +
 
-        '<div class="annual-budget"><p>' + formatPara(data.otheracctiites) + '</p>' +
+        '<div class="annual-budget"><p>' + formatPara(data.otheractivities) + '</p>' +
         '</div>' +
 
         '<h4> EDUCATION AND TRAINING </h4>' +

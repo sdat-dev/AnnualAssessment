@@ -169,7 +169,7 @@ let add2020researchreport = function(reportdata){
    
     data["listofkeynote"]=checkNull(reportdata.Q66);
 
-    data["otheracctiites"]=checkNull(reportdata.Q66);
+    data["otheractivities"]=checkNull(reportdata.Q67);
 
     content +=addresearchActivity(ids,data);
     //****** */
@@ -823,7 +823,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 '<br/>' +
 
 
-'<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
+'<h4> List of all Keynote Address or Plenary Invited Presentations </h4>'+
 
 '<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
 
@@ -833,10 +833,11 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> OTHER ACTIVITIES</h4>'+
 
-'<h4>List of all Keynote Address or Plenary Invited Presentations:</h4>'+
+'<h4>List of Scholarly Activity:</h4>'+
 
-'<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
+'<div class="annual-budget"><p>'+ formatPara(data.otheractivities) +'</p>' +
 '</div>';
+console.log("TEST",data.otheractivities);
 
 
 

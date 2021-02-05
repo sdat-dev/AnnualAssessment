@@ -170,7 +170,7 @@ let add2020researchreport = function(reportdata){
    
     data["listofkeynote"]=checkNull(reportdata.Q66);
 
-    data["otheracctiites"]=checkNull(reportdata.Q66);
+    data["otheracctiites"]=checkNull(reportdata.Q67);
 
     content +=addresearchActivity(ids,data);
     //****** */
@@ -185,12 +185,12 @@ let add2020researchreport = function(reportdata){
 
     data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
     data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
-    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_graduate_phd"] =checkNull(reportdata.Q71_2_4);
     data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] =checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] =checkNull(reportdata.Q71_3_2);
-    data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
+    data["nature_of_mentoring_graduate_phd"] =checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
     content += addEducation19(ids, data);
   
@@ -824,7 +824,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 '<br/>' +
 
 
-'<h4> List of  all Keynote Address or Plenary Invited Presentations </h4>'+
+'<h4> List of all Keynote Address or Plenary Invited Presentations </h4>'+
 
 '<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
 
@@ -834,7 +834,7 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<h4> OTHER ACTIVITIES</h4>'+
 
-'<h4>List of all Keynote Address or Plenary Invited Presentations:</h4>'+
+'<h4>List of Scholarly Activity:</h4>'+
 
 '<div class="annual-budget"><p>'+ formatPara(data.otheracctiites) +'</p>' +
 '</div>';
@@ -871,12 +871,12 @@ let addEducation19 = function(ids, data)
     '</tr>'+
     '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td>'+ data.students_actual_undergraduate + '</td>'+
     '<td>'+data.students_actual_graduate+ '</td> '+    
-    '<td>'+data.students_actual_gradaute_phd+ '</td> '+    
+    '<td>'+data.students_actual_graduate_phd+ '</td> '+    
     '<td>'+data.students_actual_phd+ '</td> '+    
     '</tr>'+
     '<tr><th class="border_right padding_bottom padding_top"> Nature of Mentoring</th><td>'+ data.nature_of_mentoring_undergradudate + '</td>'+
     '<td>'+data.nature_of_mentoring_graduate+ '</td> '+    
-    '<td>'+data.nature_of_mentoring_gradaute_phd+ '</td> '+    
+    '<td>'+data.nature_of_mentoring_graduate_phd+ '</td> '+    
     '<td>'+data.nature_of_mentoringl_phd+ '</td> '+    
     '</tr>'+
     '</tbody></table></div>' ;
