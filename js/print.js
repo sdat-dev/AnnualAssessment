@@ -606,36 +606,6 @@ function printResearchUnit(year, filename, reportdata_1) {
         '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>' +
         '<div class="annual-budget"><p>' + formatPara(data.listofintelletual) + '</p>' +
         '</div>' +
-        '<div class="partners"><p>LIST OF PARTNERS/AFFILIATES <br>Total No of Partners: ' + data.noofpartners + '</p>';
-    let partners = data.hasOwnProperty("partners") ? data["partners"] : [];
-    if (partners.length > 0) {
-        content_research += '<table class="table thead-dark table-hover">' +
-            '<thead><tr>' +
-            '<th scope="col">#</th>' +
-            '<th scope="col">Details</th>' +
-            '</tr></thead>' +
-            '<tbody>';
-        var i = 0;
-        partners.forEach(element => {
-            i++;
-            content_research += '<tr><th scope="row" style = "vertical-align: top;">' + i + '</th>' +
-                '<td><p>Full Name : ' + element["FullName"] + '<br/>';
-            if (element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')
-            content_research += 'Job Title : ' + element["JobTitle"] + '<br/>';
-            if (element.hasOwnProperty("Department") && element["Department"] != '')
-            content_research += 'Department : ' + element["Department"] + '<br/>';
-            if (element.hasOwnProperty("School") && element["School"] != '')
-            content_research += 'School : ' + element["School"] + '<br/>';
-            if (element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')
-            content_research += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
-            if (element.hasOwnProperty("Email") && element["Email"] != '')
-            content_research += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
-            content_research += '</tr>';
-        });
-        content_research += '</tbody></table>';
-    }
-    content_research += '</div>' +
-        '<br/>' +
         '<br/>' +
         '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>' +
         '<div class="annual-budget">' +
@@ -690,6 +660,27 @@ function printResearchUnit(year, filename, reportdata_1) {
         '</tr>' +
         '</tbody></table></div>';
     content_research += goaldetails(reportdata);
+
+    achievementdata = [];
+    if (reportdata.Q81_4 != '')
+        achievementdata.push(reportdata.Q81_4);
+    if (reportdata.Q81_5 != '')
+        achievementdata.push(reportdata.Q81_5);
+    if (reportdata.Q81_6 != '')
+        achievementdata.push(reportdata.Q81_6);
+
+    content_research += addTopAchievements(achievementdata);
+    content_research += '<br><br>';
+    content_research +=addListOfContacts(data);
+
+    otherdata = {};
+    otherdata["opportunities"] = reportdata.Q151;
+    otherdata["challenges"] = reportdata.Q152;
+    otherdata["needs"] = reportdata.Q153;
+    otherdata["strategies"] = reportdata.Q154;
+    otherdata["suggestions"] = reportdata.Q155;
+    content_research += addOtherThoughts(otherdata);
+
     return content_research;
 }
 
@@ -773,9 +764,6 @@ function printadminhUnit19(year, filename, reportdata_1) {
     return content;
 }
 
-
-
-
 let checkNull = function (value) {
 
     if (typeof value === "undefined" || value === "") {
@@ -786,7 +774,6 @@ let checkNull = function (value) {
     }
 }
 
-
 let add = function (value) {
     var sum = 0;
 
@@ -796,7 +783,6 @@ let add = function (value) {
     }
     return sum;
 }
-
 
 let formatPara = function (text) {
     let result = '';
@@ -831,31 +817,42 @@ let goaldetails = function (reportdata) {
             reportdata["Q" + i + "6"], reportdata["Q" + i + "7"], reportdata["Q" + i + "8"]);
         content += addSmartGoal(goal);
     }
-
-    data = [];
-    if (reportdata.Q81_4 != '')
-        data.push(reportdata.Q81_4);
-    if (reportdata.Q81_5 != '')
-        data.push(reportdata.Q81_5);
-    if (reportdata.Q81_6 != '')
-        data.push(reportdata.Q81_6);
-
-    content += addTopAchievements(data);
-
-
-
-    data = {};
-    data["opportunities"] = reportdata.Q151;
-    data["challenges"] = reportdata.Q152;
-    data["needs"] = reportdata.Q153;
-    data["strategies"] = reportdata.Q154;
-    data["suggestions"] = reportdata.Q155;
-    content += addOtherThoughts(data);
-
-
     return content;
-
 }
+
+let addListOfContacts = function (data){
+    let content = '<div class="partners"><p><b>LIST OF PARTNERS/AFFILIATES </b><br>Total No of Partners: ' + data.noofpartners + '</p>';
+    let partners = data.hasOwnProperty("partners") ? data["partners"] : [];
+    if (partners.length > 0) {
+        content += '<table class="table thead-dark table-hover">' +
+            '<thead><tr>' +
+            '<th scope="col">#</th>' +
+            '<th scope="col">Details</th>' +
+            '</tr></thead>' +
+            '<tbody>';
+        var i = 0;
+        partners.forEach(element => {
+            i++;
+            content += '<tr><th scope="row" style = "vertical-align: top;">' + i + '</th>' +
+                '<td><p>Full Name : ' + element["FullName"] + '<br/>';
+            if (element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')
+            content += 'Job Title : ' + element["JobTitle"] + '<br/>';
+            if (element.hasOwnProperty("Department") && element["Department"] != '')
+            content += 'Department : ' + element["Department"] + '<br/>';
+            if (element.hasOwnProperty("School") && element["School"] != '')
+            content += 'School : ' + element["School"] + '<br/>';
+            if (element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')
+            content += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
+            if (element.hasOwnProperty("Email") && element["Email"] != '')
+            content += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
+            content += '</tr>';
+        });
+        content += '</tbody></table>';
+    }
+    content += '</div>';
+    return content;
+}
+
 let goaldetails2021_admi = function (reportdata) {
 
     let content = '';
