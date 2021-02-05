@@ -10,6 +10,7 @@ request.onload = function(){
     const reportdatajson = request.response;
     //condition for checking if browser is Internet Explorer
     let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
+    localStorage.setItem("communityandeconomicdevelopment",JSON.stringify(reportdata));
     let contentHeadr = document.getElementsByClassName('content-header')[0];
     contentHeadr.textContent = reportdata.ExternalReference;
     let years = ['FY 2019-20', 'FY 2020-21'];
