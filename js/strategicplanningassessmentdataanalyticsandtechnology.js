@@ -176,7 +176,7 @@ let addOrganizationalMemberships = function (ids, data) {
         if (data['membership' + i] != "")
             organizations += '<tr><td style="text-align: left;" class="border_right">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
-            organizations += '<td style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
+        organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
     }
     organizations += '</tbody></table></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Active Organizational Memberships", organizations);
