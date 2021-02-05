@@ -827,7 +827,7 @@ let addListOfContacts = function (data){
         content += '<table class="table thead-dark table-hover">' +
             '<thead><tr>' +
             '<th scope="col">#</th>' +
-            '<th scope="col">Details</th>' +
+            '<th scope="col" style="text-align:left">Details</th>' +
             '</tr></thead>' +
             '<tbody>';
         var i = 0;
