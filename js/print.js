@@ -618,7 +618,7 @@ function printResearchUnit(year, filename, reportdata_1) {
         var i = 0;
         partners.forEach(element => {
             i++;
-            content_research += '<tr><th scope="row">' + i + '</th>' +
+            content_research += '<tr><th scope="row" style = "vertical-align: top;">' + i + '</th>' +
                 '<td><p>Full Name : ' + element["FullName"] + '<br/>';
             if (element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')
             content_research += 'Job Title : ' + element["JobTitle"] + '<br/>';
