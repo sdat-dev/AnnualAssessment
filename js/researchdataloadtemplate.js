@@ -59,13 +59,13 @@ let add2020researchreport = function(reportdata){
     data["employeesRF"] = checkNull(reportdata.Q42_1_2); 
     data["fteState"] = checkNull(reportdata.Q42_2_1); 
     data["fteRF"] = checkNull(reportdata.Q42_2_2); 
-    data["nameOfadditionalsource1"] = checkNull(reportdata.Q43_1_1); 
+    data["nameOfadditionalsource1"] = checkNull(reportdata.Q43_1); 
     data["nameOfadditionalsource11"] = checkNull(reportdata.Q43_1_TEXT); 
 
-    data["nameOfadditionalsource2"] = checkNull(reportdata.Q43_2_1); 
+    data["nameOfadditionalsource2"] = checkNull(reportdata.Q43_2); 
     data["nameOfadditionalsource21"] = checkNull(reportdata.Q43_2_TEXT); 
 
-    data["nameOfadditionalsource3"] =checkNull(reportdata.Q43_3_1); 
+    data["nameOfadditionalsource3"] =checkNull(reportdata.Q43_3); 
     data["nameOfadditionalsource31"] = checkNull(reportdata.Q43_3_TEXT); 
 
     data["total3"] = checkNull(reportdata.Q43_4_1); 
@@ -539,11 +539,12 @@ let addMissionAndVision = function(ids, data)
 
 let addAnnualBudget = function(ids, data)
 {
+    let employeesStateTwoDecimal = Math.round( data.employeesState * 100 + Number.EPSILON ) / 100;
     let budgetContent = '<h4> ANNUAL BUDGET </h4>'+
     '<div class="annual-budget">' +
     '<h4> Number of State and RF Employees/FTEs.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-    '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ employeesStateTwoDecimal + '</td><td>'+
     data.employeesRF + '</td></tr>'+'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
     data.fteRF + '</td></tr></tbody></table></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Annual Budget", budgetContent);
@@ -551,7 +552,7 @@ let addAnnualBudget = function(ids, data)
 
 
 let addResearceAnnualBudget19 =  function(ids,data){
-
+let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
 let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>'+
 '<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
 '<h4> Number of State and RF Employees/FTEs.</h4>'+
@@ -568,16 +569,16 @@ data.fteRF + '</td></tr>'+
 '<div class="annual-budget"> ' +
 '<h4> Source of Other Revenue Generated</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+'<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>'+
 '<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource1 + '</td><td>'+
-data.nameOfadditionalsource11 + '</td></tr>'+
-'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource2 + '</td><td>'+
-data.nameOfadditionalsource21 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource3 + '</td><td>'+
-data.nameOfadditionalsource31 + '</td></tr>'+
+'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource11 + '</td><td>'+
+data.nameOfadditionalsource1 + '</td></tr>'+
+'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource21 + '</td><td>'+
+data.nameOfadditionalsource2 + '</td></tr>'+
+'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource31 + '</td><td>'+
+data.nameOfadditionalsource3 + '</td></tr>'+
 '<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.total3 + '</td><td>'+
-data.total33 + '</td></tr>'+
+totalBudget + '</td></tr>'+
 '</tbody></table></div>' ;
 
 

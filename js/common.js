@@ -159,7 +159,7 @@ function printPlanningReport(id){
     
     content += "<h2> Mission Statement </h2><p>" +  mission[0].innerHTML + "</p>";
     content += "<h2> Vision </h2><p>" +  vision[0].innerHTML + "</p>";
-    content += "<h2> Annual Budget </h2>" +  budget[0].innerHTML;
+    content += "<h2> Financial Summary Budget </h2>" +  budget[0].innerHTML;
     content += "<h2></h2>";
     for(i = 0; i < goals.length; i++){
         content += '<h2>Goal '+ (i+1) + '</h2>' +  goals[i].innerHTML;
