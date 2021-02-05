@@ -439,12 +439,12 @@ function printResearchUnit(year, filename, reportdata_1) {
 
     data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
     data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
-    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_graduate_phd"] =checkNull(reportdata.Q71_2_4);
     data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] = checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] = checkNull(reportdata.Q71_3_2);
-    data["nature_of_mentoring_gradaute_phd"] = checkNull(reportdata.Q71_3_4);
+    data["nature_of_mentoring_graduate_phd"] = checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] = checkNull(reportdata.Q71_3_5);
     data["noofpartners"] = reportdata.Q141;
     let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
@@ -669,14 +669,13 @@ function printResearchUnit(year, filename, reportdata_1) {
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY 19-20</th><td style=" text-align: center;">' + data.students_goals_undergraduate + '</td>' +
         '<td style=" text-align: center;">' + data.students_goals_graduate + '</td> ' +
         '<td style=" text-align: center;">' + data.students_goals_graduate_phd + '</td> ' +
-
         '<td style=" text-align: center;">' + data.students_goals_phd + '</td> ' +
 
         '</tr>' +
 
         '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td style=" text-align: center;">' + data.students_actual_undergraduate + '</td>' +
         '<td style=" text-align: center;">' + data.students_actual_graduate + '</td> ' +
-        '<td style=" text-align: center;">' + data.students_actual_gradaute_phd + '</td> ' +
+        '<td style=" text-align: center;">' + data.students_actual_graduate_phd + '</td> ' +
         '<td style=" text-align: center;">' + data.students_actual_phd + '</td> ' +
 
         '</tr>' +
@@ -684,7 +683,7 @@ function printResearchUnit(year, filename, reportdata_1) {
 
         '<tr><th class="border_right padding_bottom padding_top"> Nature of Mentoring</th><td style=" text-align: center;">' + data.nature_of_mentoring_undergradudate + '</td>' +
         '<td style=" text-align: center;">' + data.nature_of_mentoring_graduate + '</td> ' +
-        '<td style=" text-align: center;">' + data.nature_of_mentoring_gradaute_phd + '</td> ' +
+        '<td style=" text-align: center;">' + data.nature_of_mentoring_graduate_phd + '</td> ' +
 
         '<td style=" text-align: center;">' + data.nature_of_mentoringl_phd + '</td> ' +
 
@@ -1028,7 +1027,8 @@ let addSmartGoal = function (goal) {
 }
 
 let addTopAchievements = function (data) {
-    let achievements = '<div class="achievements">';
+    let achievements = '<div class="achievements">'+
+    '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
     for (var i = 0; i < data.length; i++) {
         achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
         achievements += formatText(data[i]);
@@ -1039,7 +1039,7 @@ let addTopAchievements = function (data) {
 }
 
 let addOtherThoughts = function (data) {
-    let otherthoughts = '<div class="other-thoughts"><p><b>Big Opportunities: </b>' + (data.opportunities == '' ? 'N/A' : data.opportunities) + '</p>' +
+    let otherthoughts = '<div class="other-thoughts"><p><b>OTHER THOUGHTS AND SUGGESTIONS: <br>Big Opportunities: </b>' + (data.opportunities == '' ? 'N/A' : data.opportunities) + '</p>' +
         '<p><b>Big Challenges: </b>' + (data.challenges == '' ? 'N/A' : data.challenges) + '</p>' +
         '<p><b>Resource Needs: </b>' + (data.needs == '' ? 'N/A' : data.needs) + '</p>' +
         '<p><b>Strategy Suggestions to Grow Research: </b>' + (data.strategies == '' ? 'N/A' : data.strategies) + '</p>' +

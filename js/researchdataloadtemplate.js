@@ -184,12 +184,12 @@ let add2020researchreport = function(reportdata){
 
     data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
     data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
-    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_graduate_phd"] =checkNull(reportdata.Q71_2_4);
     data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] =checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] =checkNull(reportdata.Q71_3_2);
-    data["nature_of_mentoring_gradaute_phd"] =checkNull(reportdata.Q71_3_4);
+    data["nature_of_mentoring_graduate_phd"] =checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] =checkNull(reportdata.Q71_3_5); 
     content += addEducation19(ids, data);
   
@@ -870,12 +870,12 @@ let addEducation19 = function(ids, data)
     '</tr>'+
     '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td>'+ data.students_actual_undergraduate + '</td>'+
     '<td>'+data.students_actual_graduate+ '</td> '+    
-    '<td>'+data.students_actual_gradaute_phd+ '</td> '+    
+    '<td>'+data.students_actual_graduate_phd+ '</td> '+    
     '<td>'+data.students_actual_phd+ '</td> '+    
     '</tr>'+
     '<tr><th class="border_right padding_bottom padding_top"> Nature of Mentoring</th><td>'+ data.nature_of_mentoring_undergradudate + '</td>'+
     '<td>'+data.nature_of_mentoring_graduate+ '</td> '+    
-    '<td>'+data.nature_of_mentoring_gradaute_phd+ '</td> '+    
+    '<td>'+data.nature_of_mentoring_graduate_phd+ '</td> '+    
     '<td>'+data.nature_of_mentoringl_phd+ '</td> '+    
     '</tr>'+
     '</tbody></table></div>' ;
