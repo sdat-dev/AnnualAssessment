@@ -437,10 +437,10 @@ function printResearchUnit(year, filename, reportdata_1) {
     data["students_goals_graduate_phd"] = checkNull(reportdata.Q71_1_4);
     data["students_goals_phd"] = checkNull(reportdata.Q71_1_5);
 
-    data["students_actual_undergraduate"] = checkNull(reportdata.Q71_2_1);
-    data["students_actual_graduate"] = checkNull(reportdata.Q71_2_2);
-    data["students_actual_gradaute_phd"] = checkNull(reportdata.Q71_2_4);
-    data["students_actual_phd"] = checkNull(reportdata.Q71_2_5);
+    data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
+    data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
+    data["students_actual_gradaute_phd"] =checkNull(reportdata.Q71_2_4);
+    data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] = checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] = checkNull(reportdata.Q71_3_2);
@@ -544,14 +544,14 @@ function printResearchUnit(year, filename, reportdata_1) {
 
 
         '<div class="annual-budget">' +
-        '<h4>Numbers of STTR/SBIR Proposals/Awards</h4>'+
-        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-        '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-        '<tbody><tr>'+
-        '<th class="border_right padding_bottom padding_top">#Proposals </th><td style=" text-align: center;">'+ data.stProposal_goals + '</td><td style=" text-align: center;">'+
-        data.stProposal_actual + '</td></tr>'+
-        '<tr><th class="border_right">#Awards </th><td style=" text-align: center;">'+ data.stAwards_goals + '</td><td style=" text-align: center;">'+
-        data.stAwards_actual + '</td></tr>'+
+        '<h4>Numbers of STTR/SBIR Proposals/Awards</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<tbody><tr>' +
+        '<th class="border_right padding_bottom padding_top">#Proposals </th><td style=" text-align: center;">' + data.stProposal_goals + '</td><td style=" text-align: center;">' +
+        data.stProposal_actual + '</td></tr>' +
+        '<tr><th class="border_right">#Awards </th><td style=" text-align: center;">' + data.stAwards_goals + '</td><td style=" text-align: center;">' +
+        data.stAwards_actual + '</td></tr>' +
         '</tbody></table></div>' +
 
 
@@ -604,6 +604,8 @@ function printResearchUnit(year, filename, reportdata_1) {
         '</br>' +
         '</br>' +
         '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>' +
+        '<div class="annual-budget"><p>' + formatPara(data.listofintelletual) + '</p>' +
+        '</div>' +
         '<div class="partners"><p>Total No of Partners: ' + data.noofpartners + '</p>';
     let partners = data.hasOwnProperty("partners") ? data["partners"] : [];
     if (partners.length > 0) {
@@ -675,8 +677,7 @@ function printResearchUnit(year, filename, reportdata_1) {
         '<tr><th class="border_right padding_bottom padding_top">#Students - Actual Numbers</th><td style=" text-align: center;">' + data.students_actual_undergraduate + '</td>' +
         '<td style=" text-align: center;">' + data.students_actual_graduate + '</td> ' +
         '<td style=" text-align: center;">' + data.students_actual_gradaute_phd + '</td> ' +
-
-        '<td style=" text-align: center;">' + data.students_goals_phd + '</td> ' +
+        '<td style=" text-align: center;">' + data.students_actual_phd + '</td> ' +
 
         '</tr>' +
 
