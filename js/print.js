@@ -606,7 +606,7 @@ function printResearchUnit(year, filename, reportdata_1) {
         '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>' +
         '<div class="annual-budget"><p>' + formatPara(data.listofintelletual) + '</p>' +
         '</div>' +
-        '<div class="partners"><p>Total No of Partners: ' + data.noofpartners + '</p>';
+        '<div class="partners"><p>LIST OF PARTNERS/AFFILIATES <br>Total No of Partners: ' + data.noofpartners + '</p>';
     let partners = data.hasOwnProperty("partners") ? data["partners"] : [];
     if (partners.length > 0) {
         content_research += '<table class="table thead-dark table-hover">' +
