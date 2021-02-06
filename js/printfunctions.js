@@ -326,10 +326,10 @@ function printResearchUnit(reportdata) {
     data["students_goals_graduate_phd"] = checkNull(reportdata.Q71_1_4);
     data["students_goals_phd"] = checkNull(reportdata.Q71_1_5);
 
-    data["students_actual_undergraduate"] =checkNull(reportdata.Q71_2_1);
-    data["students_actual_graduate"] =checkNull(reportdata.Q71_2_2);
-    data["students_actual_graduate_phd"] =checkNull(reportdata.Q71_2_4);
-    data["students_actual_phd"] =checkNull(reportdata.Q71_2_5);
+    data["students_actual_undergraduate"] = checkNull(reportdata.Q71_2_1);
+    data["students_actual_graduate"] = checkNull(reportdata.Q71_2_2);
+    data["students_actual_graduate_phd"] = checkNull(reportdata.Q71_2_4);
+    data["students_actual_phd"] = checkNull(reportdata.Q71_2_5);
 
     data["nature_of_mentoring_undergradudate"] = checkNull(reportdata.Q71_3_1);
     data["nature_of_mentoring_graduate"] = checkNull(reportdata.Q71_3_2);
@@ -560,7 +560,7 @@ function printResearchUnit(reportdata) {
 
     content_research += addTopAchievements(achievementdata);
     content_research += '<br><br>';
-    content_research +=addListOfContacts(data);
+    content_research += addListOfContacts(data);
 
     otherdata = {};
     otherdata["opportunities"] = reportdata.Q151;
@@ -695,7 +695,7 @@ let goaldetails = function (reportdata) {
     return content;
 }
 
-let addListOfContacts = function (data){
+let addListOfContacts = function (data) {
     let content = '<div class="partners"><p><b>LIST OF PARTNERS/AFFILIATES </b><br>Total No of Partners: ' + data.noofpartners + '</p>';
     let partners = data.hasOwnProperty("partners") ? data["partners"] : [];
     if (partners.length > 0) {
@@ -711,15 +711,15 @@ let addListOfContacts = function (data){
             content += '<tr><th scope="row" style = "vertical-align: top;">' + i + '</th>' +
                 '<td><p>Full Name : ' + element["FullName"] + '<br/>';
             if (element.hasOwnProperty("JobTitle") && element["JobTitle"] != '')
-            content += 'Job Title : ' + element["JobTitle"] + '<br/>';
+                content += 'Job Title : ' + element["JobTitle"] + '<br/>';
             if (element.hasOwnProperty("Department") && element["Department"] != '')
-            content += 'Department : ' + element["Department"] + '<br/>';
+                content += 'Department : ' + element["Department"] + '<br/>';
             if (element.hasOwnProperty("School") && element["School"] != '')
-            content += 'School : ' + element["School"] + '<br/>';
+                content += 'School : ' + element["School"] + '<br/>';
             if (element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')
-            content += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
+                content += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
             if (element.hasOwnProperty("Email") && element["Email"] != '')
-            content += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
+                content += 'Email : <a href="mailto:' + element["Email"] + '">' + element["Email"] + '</a></td>';
             content += '</tr>';
         });
         content += '</tbody></table>';
@@ -762,14 +762,10 @@ let goaldeatils19_admi = function (reportdata) {
 
         for (var i = 1; i < 7; i++) {
             data['membership' + i] = reportdata["Q52_" + i];
+            data['benefit' + i] = reportdata["Q61_" + i];
+
         }
         content += addOrganizationalMemberships(data);
-
-
-        for (var i = 1; i < 7; i++) {
-            data['benifit' + i] = reportdata["Q61_" + i];
-        }
-        content += addMembershipBenifits(data);
     }
 
     for (var i = 8; i < 13; i++) {
@@ -826,12 +822,16 @@ let addSmartGoalPlan2021 = function (goal) {
 
 
 let addOrganizationalMemberships = function (data) {
-    let organizations = '<ul class="num-list">';
+    let organizations = '<p><b>ACTIVE ORGANIZATIONAL MEMBERSHIP:</b></p>'+
+    '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>' ;
+
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
-            organizations += '<li>' + data['membership' + i] + '</li>';
+            organizations += '<tr><td style="text-align: center;" class="border_right">' + data['membership' + i] + '</td>';
+        if (data['benefit' + i] != "")
+        organizations += '<td class="border_bottom" style="text-align: center;">' + data['benefit' + i] + '</td></tr>';
     }
-    organizations += '</ul>';
+    organizations += '</tbody></table></div>';
     return organizations;
 
 }
@@ -892,8 +892,8 @@ let addSmartGoal = function (goal) {
 }
 
 let addTopAchievements = function (data) {
-    let achievements = '<div class="achievements">'+
-    '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
+    let achievements = '<div class="achievements">' +
+        '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
     for (var i = 0; i < data.length; i++) {
         achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
         achievements += formatText(data[i]);
