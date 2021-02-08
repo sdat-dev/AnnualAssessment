@@ -827,9 +827,9 @@ let addOrganizationalMemberships = function (data) {
 
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
-            organizations += '<tr><td style="text-align: center;" class="border_right">' + data['membership' + i] + '</td>';
+            organizations += '<tr><td style="text-align: left; padding-left:175px" class="border_right">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
-        organizations += '<td class="border_bottom" style="text-align: center;">' + data['benefit' + i] + '</td></tr>';
+        organizations += '<td class="border_bottom" style="text-align: left; padding-bottom:10px">' + data['benefit' + i] + '</td></tr>';
     }
     organizations += '</tbody></table></div>';
     return organizations;
