@@ -833,16 +833,6 @@ let printOrganizationalMemberships = function (data) {
 
 }
 
-let addMembershipBenifits = function (data) {
-    let membershipBenefit = '<ul class="num-list">';
-    for (var i = 1; i < 7; i++) {
-        if (data['benefit' + i] != "")
-            membershipBenefit += '<li>' + data['benefit' + i] + '</li>';
-    }
-    membershipBenefit += '</ul>';
-    return membershipBenefit;
-}
-
 class Goal {
     constructor(no, goal, action, metric, timeframe, actionsImplemented, results, changes) {
         this.no = no;

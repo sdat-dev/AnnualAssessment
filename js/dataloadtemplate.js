@@ -187,18 +187,6 @@ let addHonors = function(collapseId, headerId, parentId, childId, data)
     return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Staff Honors, Awards, Other", data.Q71);
 }
 
-class Goal{
-    constructor(no, goal, action, metric, timeframe, actionsImplemented, results, changes){
-        this.no = no;
-        this.goal = goal;
-        this.action = action;
-        this.metric = metric;
-        this.timeFrame = timeframe;
-        this.actionsImplemented = actionsImplemented;
-        this.results = results;
-        this.changes = changes;
-    }
-}
 
 let addSmartGoal = function(ids, goal)
 {
@@ -214,40 +202,6 @@ let addSmartGoal = function(ids, goal)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
-let formatText = function(text){
-    let result = '';
-    if(isNaN(text) == false)
-    {
-        return text;
-    }
-    let paras = text.split("\n\n");
-    for(var i=0; i< paras.length; i++){
-        let para = paras[i];
-        if(para.includes("\n") == false && para.search(/d.\t/) == -1)
-        {
-            result += para;
-        }
-        else
-        {
-            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i\.|ii\.|iii\.|iv\.|v\.)/);
-            if(lines.length == 1)
-            {
-                result += lines[0]; 
-            }
-            else
-            {
-                for(var j =0; j< lines.length; j++)
-                {
-                    if(lines[j] == '') continue;
-                    result += '<p>'+lines[j]+'</p>'; 
-                }
-            }
-        }        
-    }
-
-
-    return result;
-}
 
 let achievementsData = function(reportdata)
 {
@@ -326,20 +280,6 @@ let addOtherThoughts = function(ids, data)
     '<p><b>Strategy Suggestions to Grow Research: </b>'+ (data.strategies == ''?'N/A':data.strategies) +'</p>'+
     '<p><b>Other Thoughts and Suggestions: </b>'+ (data.suggestions == ''?'N/A':data.suggestions) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
-}
-
-class GoalPlan{
-    constructor(no, goal, action, metric, timeframe, primaryLeader, circumstances, collaborations, impact){
-        this.no = no;
-        this.goal = goal;
-        this.action = action;
-        this.metric = metric;
-        this.timeFrame = timeframe;
-        this.primaryLeader = primaryLeader;
-        this.circumstances = circumstances;
-        this.collaborations = collaborations;
-        this.impact = impact;
-    }
 }
 
 let addSmartGoalPlan = function(ids, goal)
