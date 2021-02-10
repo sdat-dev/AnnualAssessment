@@ -1,8 +1,8 @@
 /* Research 2021*/
 function printResearchUnit2021(reportdata) {
     let data = {};
-    data["unit"] = reportdata.data.ExternalReference;
-    reportdata = reportdata.data.FY2021;
+    data["unit"] = reportdata.ExternalReference;
+    reportdata = reportdata.FY2021;
 
     data["mission"] = reportdata.Q31;
     data["vision"] = reportdata.Q32;
@@ -577,8 +577,8 @@ function printResearchUnit(reportdata) {
 
 function printadminhUnit20(reportdata) {
     let data = {};
-    data["unit"] = reportdata.data.ExternalReference
-    reportdata = reportdata.data.FY2021;
+    data["unit"] = reportdata.ExternalReference
+    reportdata = reportdata.FY2021;
     let content = '';
     data["mission"] = reportdata.Q31;
     data["vision"] = reportdata.Q32;
@@ -610,8 +610,8 @@ function printadminhUnit20(reportdata) {
 /* */
 function printadminhUnit19(reportdata) {
     let data = {};
-    data["unit"] = reportdata.data.ExternalReference;
-    reportdata = reportdata.data.FY1920;
+    data["unit"] = reportdata.ExternalReference;
+    reportdata = reportdata.FY1920;
     data["mission"] = reportdata["1819Mission"];
     data["vision"] = reportdata["1819Vision"];
 
