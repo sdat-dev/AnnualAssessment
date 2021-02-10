@@ -9,6 +9,7 @@ request.onload = function(){
     const reportdatajson = request.response;
     //condition for checking if browser is Internet Explorer
     let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
+    localStorage.setItem("data",JSON.stringify(reportdata));
     let contentHeadr = document.getElementsByClassName('content-header')[0];
     contentHeadr.textContent = reportdata.ExternalReference;
     let years = ['FY 2019-20', 'FY 2020-21'];
@@ -43,7 +44,7 @@ let add2020researchreport = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY1920\')">Print</button>';
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2019)">Print</button>';
     content += '<div id = "FY1920">';
 
     let ids= getIds('FY1920');
@@ -244,7 +245,7 @@ let add2021researchreport = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'FY2021\')">Print</button>';
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2021)">Print</button>';
     
     content += '<div id = "FY2021">';
 
@@ -341,47 +342,6 @@ let add2021researchreport = function(reportdata){
 }
     return content;
 }
-
-
-
-/*----check null*/
-let checkNull =function(value){
-
-    if(typeof value === "undefined" || value === ""){
-        return 'N/A';
-
-    }
-    else{
-
-        return value;
-    }
-
-
-
-}
-
-
-let add =function(value){
-    var sum=0;
-
-    for(var i=1;i<=Object.keys(value).length;i++){
-
-        sum += value[i];
-    }
-
-return sum;
-}
-
-
-
-
-
-
-
-
-
-/*......*/
-
 
 let addResearchPerformancetarget =function(ids,data){
     let researchContent = '<h4> RESEARCH PERFORMANCE TARGET </h4>'+
@@ -934,34 +894,9 @@ let addOrganizationalMemberships = function(ids, data)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Active Organizational Memberships", organizations);
 }
 
-let addMembershipBenifits = function(ids, data)
-{
-    let membershipBenefit = '<ul class="num-list">';
-    for(var i=1; i<7; i++)
-    {
-        if(data['benefit'+i]!= "")
-            membershipBenefit +='<li>'+ data['benefit'+i] +'</li>';
-    }
-    membershipBenefit +='</ul>';
-    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Membership Benefit to the Unit", membershipBenefit);
-}
-
 let addHonors = function(collapseId, headerId, parentId, childId, data)
 {
     return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Staff Honors, Awards, Other", data.Q71);
-}
-
-class Goal{
-    constructor(no, goal, action, metric, timeframe, actionsImplemented, results, changes){
-        this.no = no;
-        this.goal = goal;
-        this.action = action;
-        this.metric = metric;
-        this.timeFrame = timeframe;
-        this.actionsImplemented = actionsImplemented;
-        this.results = results;
-        this.changes = changes;
-    }
 }
 
 let addSmartGoal = function(ids, goal)
@@ -978,65 +913,6 @@ let addSmartGoal = function(ids, goal)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
-let formatPara = function(text){
-    let result = '';
-    if(typeof text === "undefined"){
-
-    }
-    else{
-    let paras = text.split("\n\n");
-    for(var i=0; i< paras.length; i++){
-        let para = paras[i];
-
-            let lines = para.split(/\n(?=\d |\d.\t|[1-9]\d([0-9]\d){0,2}| \d.\t|\r\n|•\t|i\.|ii\.|iii\.|iv\.|v\.)/);
-          
-           
-                for(var j =0; j< lines.length; j++)
-                {
-                    if(lines[j] == '' || typeof lines[j] === "undefined") continue;
-                    result += '<p>'+lines[j]+'</p>'; 
-                }
-            
-        }        
-    }
-    return result;
-}
-
-let formatText = function(text){
-    let result = '';
-    if(typeof text === "undefined"){
-
-    }
-    else{
-    let paras = text.split("\n\n");
-    for(var i=0; i< paras.length; i++){
-        let para = paras[i];
-        if(para.includes("\n") == false && para.search(/d.\t/) == -1)
-        {
-            result += para;
-        }
-        else
-        {
-            let lines = para.split(/\n(?=\d. |\d.\t| \d.\t|\r\n|•\t|i\.|ii\.|iii\.|iv\.|v\.)/);
-            if(lines.length == 1)
-            {
-                result += lines[0]; 
-            }
-            else
-            {
-                for(var j =0; j< lines.length; j++)
-                {
-                    if(lines[j] == '') continue;
-                    result += '<p>'+lines[j]+'</p>'; 
-                }
-            }
-        }        
-    }
-}
-
-
-    return result;
-}
 let addTopAchievements = function(ids, data)
 {
     let achievements = '<div class="achievements">';
@@ -1057,20 +933,6 @@ let addOtherThoughts = function(ids, data)
     '<p><b>Strategy Suggestions to Grow Research: </b>'+ (data.strategies == ''?'N/A':data.strategies) +'</p>'+
     '<p><b>Other Thoughts and Suggestions: </b>'+ (data.suggestions == ''?'N/A':data.suggestions) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
-}
-
-class GoalPlan{
-    constructor(no, goal, action, metric, timeframe, primaryLeader, circumstances, collaborations, impact){
-        this.no = no;
-        this.goal = goal;
-        this.action = action;
-        this.metric = metric;
-        this.timeFrame = timeframe;
-        this.primaryLeader = primaryLeader;
-        this.circumstances = circumstances;
-        this.collaborations = collaborations;
-        this.impact = impact;
-    }
 }
 
 let addSmartGoalPlan = function(ids, goal)

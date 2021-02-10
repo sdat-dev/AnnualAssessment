@@ -213,8 +213,8 @@ function printResearchUnit2021(reportdata) {
 /*Research 19-20*/
 function printResearchUnit(reportdata) {
     let data = {};
-    data["unit"] = reportdata.data.ExternalReference;
-    reportdata = reportdata.data.FY1920;
+    data["unit"] = reportdata.ExternalReference;
+    reportdata = reportdata.FY1920;
 
     data["mission"] = reportdata.Q31;
     data["vision"] = reportdata.Q32;
@@ -558,7 +558,7 @@ function printResearchUnit(reportdata) {
     if (reportdata.Q81_6 != '')
         achievementdata.push(reportdata.Q81_6);
 
-    content_research += addTopAchievements(achievementdata);
+    content_research += printTopAchievements(achievementdata);
     content_research += '<br><br>';
     content_research +=addListOfContacts(data);
 
@@ -568,7 +568,7 @@ function printResearchUnit(reportdata) {
     otherdata["needs"] = reportdata.Q153;
     otherdata["strategies"] = reportdata.Q154;
     otherdata["suggestions"] = reportdata.Q155;
-    content_research += addOtherThoughts(otherdata);
+    content_research += printOtherThoughts(otherdata);
 
     return content_research;
 }
@@ -690,7 +690,7 @@ let goaldetails = function (reportdata) {
         let goal = new GoalPlan(i - 8, reportdata["Q" + i + "1"], reportdata["Q" + i + "2"],
             reportdata["Q" + i + "3"], reportdata["Q" + i + "4"], reportdata["Q" + i + "5"],
             reportdata["Q" + i + "6"], reportdata["Q" + i + "7"], reportdata["Q" + i + "8"]);
-        content += addSmartGoal(goal);
+        content += printSmartGoal(goal);
     }
     return content;
 }
@@ -799,14 +799,14 @@ let goaldeatils19_admi = function (reportdata) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6 != '')
         data.push(reportdata.Q132_6);
-    content += addTopAchievements(data);
+    content += printTopAchievements(data);
 
     data["opportunities"] = reportdata.Q141;
     data["challenges"] = reportdata.Q142;
     data["needs"] = reportdata.Q143;
     data["strategies"] = reportdata.Q144;
     data["suggestions"] = reportdata.Q145;
-    content += addOtherThoughts(data);
+    content += printOtherThoughts(data);
     return content;
 }
 
@@ -824,8 +824,7 @@ let addSmartGoalPlan2021 = function (goal) {
     return smartgoal;
 }
 
-
-let addOrganizationalMemberships = function (data) {
+let printOrganizationalMemberships = function (data) {
     let organizations = '<ul class="num-list">';
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
@@ -836,7 +835,6 @@ let addOrganizationalMemberships = function (data) {
 
 }
 
-
 let addMembershipBenifits = function (data) {
     let membershipBenefit = '<ul class="num-list">';
     for (var i = 1; i < 7; i++) {
@@ -846,8 +844,6 @@ let addMembershipBenifits = function (data) {
     membershipBenefit += '</ul>';
     return membershipBenefit;
 }
-
-
 
 class Goal {
     constructor(no, goal, action, metric, timeframe, actionsImplemented, results, changes) {
@@ -876,9 +872,7 @@ class GoalPlan {
     }
 }
 
-
-
-let addSmartGoal = function (goal) {
+let printSmartGoal = function (goal) {
     let smartgoal = '<h4>FY 19-20 SMART GOAL ' + goal.no + '</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p> </div>';
    /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
@@ -891,7 +885,7 @@ let addSmartGoal = function (goal) {
     return smartgoal;
 }
 
-let addTopAchievements = function (data) {
+let printTopAchievements = function (data) {
     let achievements = '<div class="achievements">'+
     '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
     for (var i = 0; i < data.length; i++) {
@@ -903,7 +897,7 @@ let addTopAchievements = function (data) {
 
 }
 
-let addOtherThoughts = function (data) {
+let printOtherThoughts = function (data) {
     let otherthoughts = '<div class="other-thoughts"><p><b>OTHER THOUGHTS AND SUGGESTIONS: <br>Big Opportunities: </b>' + (data.opportunities == '' ? 'N/A' : data.opportunities) + '</p>' +
         '<p><b>Big Challenges: </b>' + (data.challenges == '' ? 'N/A' : data.challenges) + '</p>' +
         '<p><b>Resource Needs: </b>' + (data.needs == '' ? 'N/A' : data.needs) + '</p>' +

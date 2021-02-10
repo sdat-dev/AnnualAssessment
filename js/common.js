@@ -144,33 +144,32 @@ function getDate(serial){
     return (parseInt(date_info.getMonth(),10) + 1) + '/' + (parseInt(date_info.getDate(),10) + 1) + '/' + date_info.getFullYear();//, 0, minutes, seconds);
 }
 
-function printPlanningReport(id){
-    let report = document.getElementById(id);
-    let header = document.getElementsByClassName('content-header')[0];
-    let vision = report.getElementsByClassName("vision");
-    let mission = report.getElementsByClassName("mission");
-    let budget = report.getElementsByClassName("annual-budget");
-    let goals = report.getElementsByClassName("goal");
-    let achievements = report.getElementsByClassName("achievements");
-    let otherthoughts =  report.getElementsByClassName("other-thoughts");
-    let currentYear = id.substring(2,4);
-    let nextYear = id.substring(4,6);
-    let content = '<h1>'+ header.innerHTML +'</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (20'+currentYear+'-20'+nextYear+')</h1>';
-    
-    content += "<h2> Mission Statement </h2><p>" +  mission[0].innerHTML + "</p>";
-    content += "<h2> Vision </h2><p>" +  vision[0].innerHTML + "</p>";
-    content += "<h2> Financial Summary Budget </h2>" +  budget[0].innerHTML;
-    content += "<h2></h2>";
-    for(i = 0; i < goals.length; i++){
-        content += '<h2>Goal '+ (i+1) + '</h2>' +  goals[i].innerHTML;
-    }
-    if(achievements[0] == null && otherthoughts[0] == null) {
+function printPlanningReport(type, year){
+    let data = JSON.parse(localStorage.getItem("data"));
+    let content = '';
+    if(type == 'admin')
+    {
+        if(year == 2019)
+        {
+            content = printadminhUnit19(data);
+        }
+        else
+        {
+            content = printadminhUnit20(data)
+        }
+       
     }
     else{
-        content += "<h2> Achievements </h2>" +  achievements[0].innerHTML;
-        content += "<h2> Other Thoughts </h2>" +  otherthoughts[0].innerHTML;
+        if(year == 2019)
+        {
+            content = printResearchUnit(data);
+        }
+        else
+        {
+            content = printResearchUnit2021(data)
+        }
     }
-
+    
     var win = window.open("print.html", "_blank");
     win.document.write(content); // where 'html' is a variable containing your HTML
     win.document.close(); 

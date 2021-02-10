@@ -57,13 +57,13 @@ function printReport(event) {
                     splithtml[0] === "researchfoundationhumanresources" ||
                     splithtml[0] === "sponsoredprogramsadministration" ||
                     splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology") {
-                    content_admin_2019_2020 = printadminhUnit19(JSON.parse(data));
+                    content_admin_2019_2020 = printadminhUnit19(JSON.parse(data).data);
                     if (content_admin_2019_2020 !== '') {
                         contenttotal += content_admin_2019_2020;
                     }
                 }
                 else {
-                    content_research_2019_2020 = printResearchUnit(JSON.parse(data));
+                    content_research_2019_2020 = printResearchUnit(JSON.parse(data).data);
                     if (content_research_2019_2020 !== '')
                         contenttotal += content_research_2019_2020;
                 } 
@@ -77,13 +77,13 @@ function printReport(event) {
                     splithtml[0] === "researchfoundationhumanresources" ||
                     splithtml[0] === "sponsoredprogramsadministration" ||
                     splithtml[0] === "strategicplanningassessmentdataanalyticsandtechnology") {
-                    content_admin_2020_2021 = printadminhUnit20(JSON.parse(data));
+                    content_admin_2020_2021 = printadminhUnit20(JSON.parse(data).data);
                     if (content_admin_2020_2021 !== '') {
                         contenttotal += content_admin_2020_2021;
                     }
                 }
                 else {
-                    content_research_2020_2021 = printResearchUnit2021(JSON.parse(data));
+                    content_research_2020_2021 = printResearchUnit2021(JSON.parse(data).data);
                     if (content_research_2020_2021 !== '')
                         contenttotal += content_research_2020_2021;
                 }
