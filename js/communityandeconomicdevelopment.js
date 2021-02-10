@@ -10,7 +10,6 @@ request.onload = function(){
     const reportdatajson = request.response;
     //condition for checking if browser is Internet Explorer
     let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
-    localStorage.setItem("communityandeconomicdevelopment",JSON.stringify(reportdata));
     let contentHeadr = document.getElementsByClassName('content-header')[0];
     contentHeadr.textContent = reportdata.ExternalReference;
     let years = ['FY 2019-20', 'FY 2020-21'];
@@ -175,7 +174,7 @@ let addOrganizationalMemberships = function (ids, data) {
 
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
-            organizations += '<tr><td style="text-align: left;" class="border_right">' + data['membership' + i] + '</td>';
+            organizations += '<tr><td style="text-align: left;" class="border_right border_bottom">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
         organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
     }
