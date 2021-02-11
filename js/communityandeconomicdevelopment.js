@@ -48,6 +48,7 @@ let add1920report = function(reportdata){
     let ids= getIds('FY1920');
     let data = {};
     data["mission"] = reportdata["1819Mission"]; 
+    console.log(data["mission"]);
     data["vision"] = reportdata["1819Vision"];
     content += addMissionAndVision(ids, data);
 

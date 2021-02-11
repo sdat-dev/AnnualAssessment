@@ -775,7 +775,7 @@ let goaldeatils19_admi = function (reportdata) {
         let no = i - 7;
         let goal = new Goal(no, reportdata["1819Goal" + no], reportdata["1819Activities" + no],
             reportdata["1819Metrics" + no], reportdata["1819Timeframe" + no], reportdata["Q" + i + "2"], reportdata["Q" + i + "3"], reportdata["Q" + i + "4"]);
-        content += addSmartGoal(goal);
+        content += addSmartGoalPlan2021(goal);
     }
 
     data = [];
