@@ -765,7 +765,7 @@ let goaldeatils19_admi = function (reportdata) {
             data['benefit' + i] = reportdata["Q61_" + i];
 
         }
-        content += addOrganizationalMemberships(data);
+        content += printOrganizationalMemberships(data);
     }
 
     for (var i = 8; i < 13; i++) {
@@ -821,12 +821,13 @@ let addSmartGoalPlan2021 = function (goal) {
 }
 
 let printOrganizationalMemberships = function (data) {
-    let organizations = '<ul class="num-list">';
+    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>' ;
+
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
-            organizations += '<tr><td style="text-align: left; padding-left:175px" class="border_right">' + data['membership' + i] + '</td>';
+            organizations += '<tr><td style="text-align: left;" class="border_right border_bottom">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
-        organizations += '<td class="border_bottom" style="text-align: left; padding-bottom:10px">' + data['benefit' + i] + '</td></tr>';
+        organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
     }
     organizations += '</tbody></table></div>';
     return organizations;
