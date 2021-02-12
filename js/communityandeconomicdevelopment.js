@@ -41,14 +41,12 @@ let add1920report = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020' + 
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2019)">Print</button>';
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2019)">Print</button>';
     content += '<div id = "FY1920">';
-
 
     let ids= getIds('FY1920');
     let data = {};
     data["mission"] = reportdata["1819Mission"]; 
-    console.log(data["mission"]);
     data["vision"] = reportdata["1819Vision"];
     content += addMissionAndVision(ids, data);
 
@@ -121,7 +119,7 @@ let add2021report = function(reportdata){
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
     '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
-    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2021)">Print</button>';
+    '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2021)">Print</button>';
     content += '<div id = "FY2021">';
 
     let ids= getIds('FY2021');
@@ -154,7 +152,7 @@ let add2021report = function(reportdata){
 let addMissionAndVision = function(ids, data)
 {
     let misionandvision = '<h4>MISSION</h4>'+
-    '<p class="mission">'+ data.mission + '</p>';
+    '<p class="mission">'+ data.mission + '</p>' +
     '<h4>VISION</h4>'+
     '<p class="vision">'+ data.vision + '</p>' ;
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Mission and Vision", misionandvision);
