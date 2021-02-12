@@ -798,7 +798,6 @@ data.starupcomapnieseactual + '</td></tr>'+
 
 '<div class="annual-budget"><p>'+ formatPara(data.otheractivities) +'</p>' +
 '</div>';
-console.log("TEST",data.otheractivities);
 
 
 

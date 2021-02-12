@@ -613,7 +613,6 @@ function printadminhUnit19(reportdata) {
     data["unit"] = reportdata.ExternalReference;
     reportdata = reportdata.FY1920;
     data["mission"] = reportdata["1819Mission"];
-    console.log(data["mission"]);
     data["vision"] = reportdata["1819Vision"];
 
     data["annualBudget"] = reportdata.Q41;

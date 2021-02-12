@@ -147,18 +147,15 @@ function getDate(serial){
 function printPlanningReport(type, year){
     let data = JSON.parse(localStorage.getItem("data"));
     let content = '';
-    console.log("type",type);
     if(type == 'admin')
     {
         if(year == 2019)
         {
             content = printadminhUnit19(data);
-            console.log("content for if",content);
         }
         else
         {
             content = printadminhUnit20(data)
-            console.log("content for else",content);
         }
        
     }
@@ -166,14 +163,10 @@ function printPlanningReport(type, year){
         if(year == 2019)
         {
             content = printResearchUnit(data);
-            console.log("content for research if",content);
-
         }
         else
         {
             content = printResearchUnit2021(data)
-            console.log("content for research else",content);
-
         }
     }
     
