@@ -634,8 +634,7 @@ function printadminhUnit19(reportdata) {
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">' + data.employeesState + '</td><td style=" text-align: center;">' +
         data.employeesRF + '</td></tr>' + '<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">' + data.fteState + '</td><td style=" text-align: center;">' +
         data.fteRF + '</td></tr></tbody></table></div><br>';
-
-    content += goaldeatils19_admi(reportdata);
+    content += goaldetails19_admi(reportdata);
     return content;
 }
 
@@ -754,7 +753,7 @@ let goaldetails2021 = function (reportdata) {
     return content;
 }
 
-let goaldeatils19_admi = function (reportdata) {
+let goaldetails19_admi = function (reportdata) {
 
     let content = '';
     let data = {};
@@ -775,7 +774,7 @@ let goaldeatils19_admi = function (reportdata) {
         let no = i - 7;
         let goal = new Goal(no, reportdata["1819Goal" + no], reportdata["1819Activities" + no],
             reportdata["1819Metrics" + no], reportdata["1819Timeframe" + no], reportdata["Q" + i + "2"], reportdata["Q" + i + "3"], reportdata["Q" + i + "4"]);
-        content += addSmartGoalPlan2021(goal);
+        content += printSmartGoal(goal);
     }
 
     data = [];
@@ -821,13 +820,13 @@ let addSmartGoalPlan2021 = function (goal) {
 }
 
 let printOrganizationalMemberships = function (data) {
-    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>' ;
+    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>';
 
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
             organizations += '<tr><td style="text-align: left;" class="border_right border_bottom">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
-        organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
+            organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
     }
     organizations += '</tbody></table></div>';
     return organizations;
@@ -875,8 +874,8 @@ let printSmartGoal = function (goal) {
 }
 
 let printTopAchievements = function (data) {
-    let achievements = '<div class="achievements">'+
-    '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
+    let achievements = '<div class="achievements">' +
+        '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
     for (var i = 0; i < data.length; i++) {
         achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
         achievements += formatText(data[i]);
