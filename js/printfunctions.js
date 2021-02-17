@@ -775,6 +775,7 @@ let goaldetails19_admi = function (reportdata) {
         let goal = new Goal(no, reportdata["1819Goal" + no], reportdata["1819Activities" + no],
             reportdata["1819Metrics" + no], reportdata["1819Timeframe" + no], reportdata["Q" + i + "2"], reportdata["Q" + i + "3"], reportdata["Q" + i + "4"]);
         content += printSmartGoal(goal);
+        console.log(content);
     }
 
     data = [];
@@ -861,15 +862,15 @@ class GoalPlan {
 }
 
 let printSmartGoal = function (goal) {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL ' + goal.no + '</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p> </div>';
-   /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
+    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p> */;
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.timeFrame == '' ? 'N/A' : formatText(goal.timeFrame)) + '</p></div>';
+    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p></div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':formatText(goal.actionsImplemented)) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
     return smartgoal;
 }
 
