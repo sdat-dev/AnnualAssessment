@@ -531,13 +531,13 @@ data.fteRF + '</td></tr>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>'+
 '<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource11 + '</td><td>'+
+'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource11 + '</td><td>$'+
 data.nameOfadditionalsource1 + '</td></tr>'+
-'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource21 + '</td><td>'+
+'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource21 + '</td><td>$'+
 data.nameOfadditionalsource2 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource31 + '</td><td>'+
+'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource31 + '</td><td>$'+
 data.nameOfadditionalsource3 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.total3 + '</td><td>'+
+'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.total3 + '</td><td>$'+
 totalBudget + '</td></tr>'+
 '</tbody></table></div>' ;
 
