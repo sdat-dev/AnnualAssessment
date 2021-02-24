@@ -378,7 +378,7 @@ function printResearchUnit(reportdata) {
 
         '<h4> PROPOSALS</h4>' +
         '<div class="annual-budget">' +
-        '<h4> Number of Research Proposal Submitted to Extramural Sponsors</h4>' +
+        '<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
         '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
@@ -463,7 +463,7 @@ function printResearchUnit(reportdata) {
         '</tbody></table></div>' +
         '</br>' +
         '</br>' +
-        '<h4>List of Publication by Center/Institute/Lab in the past FY</h4>' +
+        '<h4>List of Publications by Center/Institute/Lab in the past FY</h4>' +
         '<div class="annual-budget">' + formatPara(data.listofpublications) +
         '</div>' +
         '</br>' +
