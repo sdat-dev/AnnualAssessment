@@ -366,13 +366,13 @@ function printResearchUnit(reportdata) {
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
         '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>' +
         '<tbody><tr>' +
-        '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td style=" text-align: center;">' + data.nameOfadditionalsource11 + '</td><td style=" text-align: center;">' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td style=" text-align: center;">' + data.nameOfadditionalsource11 + '</td><td style=" text-align: center;">$' +
         data.nameOfadditionalsource1 + '</td></tr>' +
-        '<tr><th class="border_right">Name of Additional Source 2</th><td style=" text-align: center;">' + data.nameOfadditionalsource21 + '</td><td style=" text-align: center;">' +
+        '<tr><th class="border_right">Name of Additional Source 2</th><td style=" text-align: center;">' + data.nameOfadditionalsource21 + '</td><td style=" text-align: center;">$' +
         data.nameOfadditionalsource2 + '</td></tr>' +
-        '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td style=" text-align: center;">' + data.nameOfadditionalsource31 + '</td><td style=" text-align: center;">' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td style=" text-align: center;">' + data.nameOfadditionalsource31 + '</td><td style=" text-align: center;">$' +
         data.nameOfadditionalsource3 + '</td></tr>' +
-        '<th class="border_right padding_bottom padding_top">Total </th><td style=" text-align: center;">' + data.total3 + '</td><td style=" text-align: center;">' +
+        '<th class="border_right padding_bottom padding_top">Total </th><td style=" text-align: center;">' + data.total3 + '</td><td style=" text-align: center;">$' +
         totalBudget + '</td></tr>' +
         '</tbody></table></div>' +
 
