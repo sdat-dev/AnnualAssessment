@@ -512,39 +512,48 @@ let addAnnualBudget = function(ids, data)
 }
 
 
-let addResearceAnnualBudget19 =  function(ids,data){
-let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
-let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>'+
-'<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
-'<h4> Number of State and RF Employees/FTEs.</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
-data.employeesRF + '</td></tr>'+
-'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
-data.fteRF + '</td></tr>'+
-'</tbody></table></div>' +
-'</br>' +
-'</br>' +
-'<div class="annual-budget"> ' +
-'<h4> Source of Other Revenue Generated</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource11 + '</td><td>$'+
-data.nameOfadditionalsource1 + '</td></tr>'+
-'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource21 + '</td><td>$'+
-data.nameOfadditionalsource2 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource31 + '</td><td>$'+
-data.nameOfadditionalsource3 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.total3 + '</td><td>$'+
-totalBudget + '</td></tr>'+
-'</tbody></table></div>' ;
+let addResearceAnnualBudget19 = function (ids, data) {
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+    let totalBudget = formatter.format(data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3);
+    let currencyFormat1 = formatter.format(data.nameOfadditionalsource1);
+    let currencyFormat2 = formatter.format(data.nameOfadditionalsource2);
+    let currencyFormat3 = formatter.format(data.nameOfadditionalsource3);
+
+
+    let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>' +
+        '<div class="annual-budget"><p>' + data.annualBudget + '</p>' +
+        '<h4> Number of State and RF Employees/FTEs.</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
+        '<th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>' +
+        '<tbody><tr>' +
+        '<th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>' + data.employeesState + '</td><td>' +
+        data.employeesRF + '</td></tr>' +
+        '<tr><th class="border_right">#FTEs</th><td>' + data.fteState + '</td><td>' +
+        data.fteRF + '</td></tr>' +
+        '</tbody></table></div>' +
+        '</br>' +
+        '</br>' +
+        '<div class="annual-budget"> ' +
+        '<h4> Source of Other Revenue Generated</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
+        '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>' +
+        '<tbody><tr>' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>' + data.nameOfadditionalsource11 + '</td><td>' +
+        currencyFormat1 + '</td></tr>' +
+        '<tr><th class="border_right">Name of Additional Source 2</th><td>' + data.nameOfadditionalsource21 + '</td><td>' +
+        currencyFormat2 + '</td></tr>' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>' + data.nameOfadditionalsource31 + '</td><td>' +
+        currencyFormat3 + '</td></tr>' +
+        '<th class="border_right padding_bottom padding_top">Total </th><td>' + data.total3 + '</td><td>' +
+        totalBudget + '</td></tr>' +
+        '</tbody></table></div>';
 
 
 
-return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Financial Summary Budget", financialbudgetContent);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Financial Summary Budget", financialbudgetContent);
 }
 
 
