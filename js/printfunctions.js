@@ -62,7 +62,9 @@ function printResearchUnit2021(reportdata) {
     data["post"] = checkNull(reportdata.Q58_4_1);
 
     let content_research1 = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (2020-2021)</h1>';
-    content_research1 += '<h4>MISSION</h4>' +
+    content_research1 +=
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
         '<p class="vision">' + data.vision + '</p>' +
@@ -349,7 +351,10 @@ function printResearchUnit(reportdata) {
         data["partners"] = reportdata.partners;
     let content_research = '';
     content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>';
-    content_research += '<h4>MISSION</h4>' +
+    content_research +=
+
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
         '<p class="vision">' + data.vision + '</p>' +
@@ -597,6 +602,7 @@ function printadminhUnit20(reportdata) {
 
 
     content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (2020-2021)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
@@ -629,6 +635,7 @@ function printadminhUnit19(reportdata) {
     data["fteRF"] = reportdata.Q42_2_2;
     let content = '';
     content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
@@ -782,7 +789,6 @@ let goaldetails19_admi = function (reportdata) {
         let goal = new Goal(no, reportdata["1819Goal" + no], reportdata["1819Activities" + no],
             reportdata["1819Metrics" + no], reportdata["1819Timeframe" + no], reportdata["Q" + i + "2"], reportdata["Q" + i + "3"], reportdata["Q" + i + "4"]);
         content += printSmartGoal(goal);
-        console.log(content);
     }
 
     data = [];
@@ -869,15 +875,15 @@ class GoalPlan {
 }
 
 let printSmartGoal = function (goal) {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
-    smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
-    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
-    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p></div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':formatText(goal.actionsImplemented)) +'</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
+    let smartgoal = '<h4>FY 19-20 SMART GOAL ' + goal.no + '</h4>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
+    smartgoal += "<p><b>Action(s): </b>" + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
+    smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
+    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
+    smartgoal += "<p><b>Time Frame: </b>" + time + '</p></div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.actionsImplemented == '' ? 'N/A' : formatText(goal.actionsImplemented)) + '</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.results == '' ? 'N/A' : formatText(goal.results)) + '</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.changes == '' ? 'N/A' : formatText(goal.changes)) + '</p></div>';
     return smartgoal;
 }
 
