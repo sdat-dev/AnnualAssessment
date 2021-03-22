@@ -700,7 +700,7 @@ let goaldetails = function (reportdata) {
     let content = '';
     for (var i = 9; i < 14; i++) {
         ids = 'FY1920';
-        let goal = new GoalPlan(i - 8, reportdata["Q" + i + "1"], reportdata["Q" + i + "2"],
+        let goal = new Goal(i - 8, reportdata["Q" + i + "1"], reportdata["Q" + i + "2"],
             reportdata["Q" + i + "3"], reportdata["Q" + i + "4"], reportdata["Q" + i + "5"],
             reportdata["Q" + i + "6"], reportdata["Q" + i + "7"], reportdata["Q" + i + "8"]);
         content += printSmartGoal(goal);
@@ -875,15 +875,15 @@ class GoalPlan {
 }
 
 let printSmartGoal = function (goal) {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL ' + goal.no + '</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
-    smartgoal += "<p><b>Action(s): </b>" + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-    smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
-    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>" + time + '</p></div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.actionsImplemented == '' ? 'N/A' : formatText(goal.actionsImplemented)) + '</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.results == '' ? 'N/A' : formatText(goal.results)) + '</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.changes == '' ? 'N/A' : formatText(goal.changes)) + '</p></div>';
+    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p> </div>';
+   /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
+    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
+    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p> */;
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
     return smartgoal;
 }
 
