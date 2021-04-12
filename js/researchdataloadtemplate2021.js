@@ -1,27 +1,30 @@
-let request = new XMLHttpRequest();
+let data2020URL = "data/communitypartners.json"; 
+let data2021URL = "data/communitypartnersdata.json"; 
 //getting content Element to append grants information
-let maincontentContainer = document.getElementsByClassName('main-content')[0];
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-request.onload = function(){
-    let content = '';
-    const reportdatajson = request.response;
-    //condition for checking if browser is Internet Explorer
-    let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
-    localStorage.setItem("data",JSON.stringify(reportdata));
-    let contentHeadr = document.getElementsByClassName('content-header')[0];
-    contentHeadr.textContent = reportdata.ExternalReference;
-    let years = ['FY 2019-20', 'FY 2020-21'];
-    content += createTabNavigation(years, "year");
-    let tabcontent = [];
-    tabcontent.push(addassessmentreport(reportdata.FY2021));
-    tabcontent.push(addplanningreport(reportdata.FY2122));
-    content += buildTabContent(years, 'year', tabcontent);
-    let contentElement = document.createElement('div');
-    contentElement.classList.add('content');
-    contentElement.innerHTML = content.trim();
-    maincontentContainer.appendChild(contentElement);
+window.onload = function () {
+    let request2020 =  axios.get(data2020URL);
+    let request2021 =  axios.get(data2020URL);
+    let maincontentContainer = document.getElementsByClassName('main-content')[0];
+    axios.all([request2020, request2021]).then(axios.spread((...responses) => {
+        let data2020 =  responses[0].data;
+        let data2021  = responses[1].data;
+        localStorage.setItem("data2020",JSON.stringify(data2020));
+        localStorage.setItem("data2021",JSON.stringify(data2021));
+        let contentHeadr = document.getElementsByClassName('content-header')[0];
+        contentHeadr.textContent = data2021.ExternalReference;
+        let years = ['FY 2020-21', 'FY 2021-22'];
+        content += createTabNavigation(years, "year");
+        let tabcontent = [];
+        tabcontent.push(addassessmentreport(data2021.FY1920));
+        tabcontent.push(addplanningreport(data2021.FY2021));
+        content += buildTabContent(years, 'year', tabcontent);
+        let contentElement = document.createElement('div');
+        contentElement.classList.add('content');
+        contentElement.innerHTML = content.trim();
+        maincontentContainer.appendChild(contentElement);
+    })).catch(errors => {
+        console.log(errors);
+    })
 }
 
 let counter = 1;
@@ -34,7 +37,6 @@ let getIds = function(year){
     counter++;
     return ids;
 }
-
 
 /*.......Research reports .....*/
 let addassessmentreport = function(reportdata){
@@ -234,7 +236,7 @@ let addassessmentreport = function(reportdata){
     return content;
 }
 
-let addplanningreport = function(reportdata){
+let add2021researchreport = function(reportdata){
 
     let content = '';
     if(typeof reportdata === "undefined"){
