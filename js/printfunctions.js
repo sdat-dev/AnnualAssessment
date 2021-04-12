@@ -62,7 +62,9 @@ function printResearchUnit2021(reportdata) {
     data["post"] = checkNull(reportdata.Q58_4_1);
 
     let content_research1 = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (2020-2021)</h1>';
-    content_research1 += '<h4>MISSION</h4>' +
+    content_research1 +=
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
         '<p class="vision">' + data.vision + '</p>' +
@@ -336,13 +338,23 @@ function printResearchUnit(reportdata) {
     data["nature_of_mentoring_graduate_phd"] = checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] = checkNull(reportdata.Q71_3_5);
     data["noofpartners"] = reportdata.Q141;
-    let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+    let totalBudget = formatter.format(data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3);
+    let currencyFormat1 = formatter.format(data.nameOfadditionalsource1);
+    let currencyFormat2 = formatter.format(data.nameOfadditionalsource2);
+    let currencyFormat3 = formatter.format(data.nameOfadditionalsource3);
     let proposal_total_actual = data.federalApplicationactual + data.stateApplicationactual + data.privateApplicationactual;
     if (reportdata.hasOwnProperty("partners"))
         data["partners"] = reportdata.partners;
     let content_research = '';
     content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>';
-    content_research += '<h4>MISSION</h4>' +
+    content_research +=
+
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
         '<p class="vision">' + data.vision + '</p>' +
@@ -367,18 +379,18 @@ function printResearchUnit(reportdata) {
         '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td style=" text-align: center;">' + data.nameOfadditionalsource11 + '</td><td style=" text-align: center;">' +
-        data.nameOfadditionalsource1 + '</td></tr>' +
+        currencyFormat1 + '</td></tr>' +
         '<tr><th class="border_right">Name of Additional Source 2</th><td style=" text-align: center;">' + data.nameOfadditionalsource21 + '</td><td style=" text-align: center;">' +
-        data.nameOfadditionalsource2 + '</td></tr>' +
+        currencyFormat2 + '</td></tr>' +
         '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td style=" text-align: center;">' + data.nameOfadditionalsource31 + '</td><td style=" text-align: center;">' +
-        data.nameOfadditionalsource3 + '</td></tr>' +
+        currencyFormat3 + '</td></tr>' +
         '<th class="border_right padding_bottom padding_top">Total </th><td style=" text-align: center;">' + data.total3 + '</td><td style=" text-align: center;">' +
         totalBudget + '</td></tr>' +
         '</tbody></table></div>' +
 
         '<h4> PROPOSALS</h4>' +
         '<div class="annual-budget">' +
-        '<h4> Number of Research Proposal Submitted to Extramural Sponsors</h4>' +
+        '<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
         '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
@@ -463,7 +475,7 @@ function printResearchUnit(reportdata) {
         '</tbody></table></div>' +
         '</br>' +
         '</br>' +
-        '<h4>List of Publication by Center/Institute/Lab in the past FY</h4>' +
+        '<h4>List of Publications by Center/Institute/Lab in the past FY</h4>' +
         '<div class="annual-budget">' + formatPara(data.listofpublications) +
         '</div>' +
         '</br>' +
@@ -590,6 +602,7 @@ function printadminhUnit20(reportdata) {
 
 
     content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (2020-2021)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
@@ -622,6 +635,7 @@ function printadminhUnit19(reportdata) {
     data["fteRF"] = reportdata.Q42_2_2;
     let content = '';
     content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
         '<h4>VISION</h4>' +
@@ -634,8 +648,7 @@ function printadminhUnit19(reportdata) {
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">' + data.employeesState + '</td><td style=" text-align: center;">' +
         data.employeesRF + '</td></tr>' + '<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">' + data.fteState + '</td><td style=" text-align: center;">' +
         data.fteRF + '</td></tr></tbody></table></div><br>';
-
-    content += goaldeatils19_admi(reportdata);
+    content += goaldetails19_admi(reportdata);
     return content;
 }
 
@@ -687,7 +700,7 @@ let goaldetails = function (reportdata) {
     let content = '';
     for (var i = 9; i < 14; i++) {
         ids = 'FY1920';
-        let goal = new GoalPlan(i - 8, reportdata["Q" + i + "1"], reportdata["Q" + i + "2"],
+        let goal = new Goal(i - 8, reportdata["Q" + i + "1"], reportdata["Q" + i + "2"],
             reportdata["Q" + i + "3"], reportdata["Q" + i + "4"], reportdata["Q" + i + "5"],
             reportdata["Q" + i + "6"], reportdata["Q" + i + "7"], reportdata["Q" + i + "8"]);
         content += printSmartGoal(goal);
@@ -715,7 +728,7 @@ let addListOfContacts = function (data) {
             if (element.hasOwnProperty("Department") && element["Department"] != '')
                 content += 'Department : ' + element["Department"] + '<br/>';
             if (element.hasOwnProperty("School") && element["School"] != '')
-                content += 'School : ' + element["School"] + '<br/>';
+                content += 'School: ' + element["School"] + '<br/>';
             if (element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')
                 content += 'Organization : ' + element["Organization(IfnotUAlbany)"] + '<br/>';
             if (element.hasOwnProperty("Email") && element["Email"] != '')
@@ -754,7 +767,7 @@ let goaldetails2021 = function (reportdata) {
     return content;
 }
 
-let goaldeatils19_admi = function (reportdata) {
+let goaldetails19_admi = function (reportdata) {
 
     let content = '';
     let data = {};
@@ -775,7 +788,7 @@ let goaldeatils19_admi = function (reportdata) {
         let no = i - 7;
         let goal = new Goal(no, reportdata["1819Goal" + no], reportdata["1819Activities" + no],
             reportdata["1819Metrics" + no], reportdata["1819Timeframe" + no], reportdata["Q" + i + "2"], reportdata["Q" + i + "3"], reportdata["Q" + i + "4"]);
-        content += addSmartGoalPlan2021(goal);
+        content += printSmartGoal(goal);
     }
 
     data = [];
@@ -812,7 +825,7 @@ let addSmartGoalPlan2021 = function (goal) {
     smartgoal += "<p><b>Action(s): </b>" + (goal.action == '' ? 'N/A' : goal.action) + '</p>';
     smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : goal.metric) + '</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>" + time + '</p>';
+    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>" + time + '</p>';
     smartgoal += '<p><b>Primary Leader on this Project: </b>' + (goal.primaryLeader == '' ? 'N/A' : goal.primaryLeader) + '</p>';
     smartgoal += '<p><b>Circumstances That Could Impact Workplan: </b>' + (goal.circumstances == '' ? 'N/A' : goal.circumstances) + '</p>';
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>' + (goal.collaborations == '' ? 'N/A' : goal.collaborations) + '</p>';
@@ -821,13 +834,13 @@ let addSmartGoalPlan2021 = function (goal) {
 }
 
 let printOrganizationalMemberships = function (data) {
-    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>' ;
+    let organizations = '<div><table width="100%"><thead><tr><th class="border_bottom border_right" width="36.5%">Name of Organization/Membership​</th><th class="border_bottom" width="36.5%">Benefits</th></tr></thead><tbody>';
 
     for (var i = 1; i < 7; i++) {
         if (data['membership' + i] != "")
             organizations += '<tr><td style="text-align: left;" class="border_right border_bottom">' + data['membership' + i] + '</td>';
         if (data['benefit' + i] != "")
-        organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
+            organizations += '<td class="border_bottom" style="text-align: left;">' + data['benefit' + i] + '</td></tr>';
     }
     organizations += '</tbody></table></div>';
     return organizations;
@@ -862,21 +875,21 @@ class GoalPlan {
 }
 
 let printSmartGoal = function (goal) {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL ' + goal.no + '</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p> </div>';
+    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p> </div>';
    /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p> */;
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.timeFrame == '' ? 'N/A' : formatText(goal.timeFrame)) + '</p></div>';
+    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p> */;
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
     return smartgoal;
 }
 
 let printTopAchievements = function (data) {
-    let achievements = '<div class="achievements">'+
-    '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
+    let achievements = '<div class="achievements">' +
+        '<p><br><b>TOP 3 ACHIEVEMENTS:</b></p>';
     for (var i = 0; i < data.length; i++) {
         achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
         achievements += formatText(data[i]);

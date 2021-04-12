@@ -512,39 +512,48 @@ let addAnnualBudget = function(ids, data)
 }
 
 
-let addResearceAnnualBudget19 =  function(ids,data){
-let totalBudget = data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3;
-let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>'+
-'<div class="annual-budget"><p>'+ data.annualBudget + '</p>' +
-'<h4> Number of State and RF Employees/FTEs.</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>'+ data.employeesState + '</td><td>'+
-data.employeesRF + '</td></tr>'+
-'<tr><th class="border_right">#FTEs</th><td>'+ data.fteState + '</td><td>'+
-data.fteRF + '</td></tr>'+
-'</tbody></table></div>' +
-'</br>' +
-'</br>' +
-'<div class="annual-budget"> ' +
-'<h4> Source of Other Revenue Generated</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>'+ data.nameOfadditionalsource11 + '</td><td>'+
-data.nameOfadditionalsource1 + '</td></tr>'+
-'<tr><th class="border_right">Name of Additional Source 2</th><td>'+ data.nameOfadditionalsource21 + '</td><td>'+
-data.nameOfadditionalsource2 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>'+ data.nameOfadditionalsource31 + '</td><td>'+
-data.nameOfadditionalsource3 + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.total3 + '</td><td>'+
-totalBudget + '</td></tr>'+
-'</tbody></table></div>' ;
+let addResearceAnnualBudget19 = function (ids, data) {
+    var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    });
+    let totalBudget = formatter.format(data.nameOfadditionalsource1 + data.nameOfadditionalsource2 + data.nameOfadditionalsource3);
+    let currencyFormat1 = formatter.format(data.nameOfadditionalsource1);
+    let currencyFormat2 = formatter.format(data.nameOfadditionalsource2);
+    let currencyFormat3 = formatter.format(data.nameOfadditionalsource3);
+
+
+    let financialbudgetContent = '<h4> ANNUAL BUDGET </h4>' +
+        '<div class="annual-budget"><p>' + data.annualBudget + '</p>' +
+        '<h4> Number of State and RF Employees/FTEs.</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
+        '<th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>' +
+        '<tbody><tr>' +
+        '<th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td>' + data.employeesState + '</td><td>' +
+        data.employeesRF + '</td></tr>' +
+        '<tr><th class="border_right">#FTEs</th><td>' + data.fteState + '</td><td>' +
+        data.fteRF + '</td></tr>' +
+        '</tbody></table></div>' +
+        '</br>' +
+        '</br>' +
+        '<div class="annual-budget"> ' +
+        '<h4> Source of Other Revenue Generated</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
+        '<th class="border_bottom" width="36.5%">Funding Source</th><th class="border_bottom" width="36.5%">Amount</th></tr></thead>' +
+        '<tbody><tr>' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 1 </th><td>' + data.nameOfadditionalsource11 + '</td><td>' +
+        currencyFormat1 + '</td></tr>' +
+        '<tr><th class="border_right">Name of Additional Source 2</th><td>' + data.nameOfadditionalsource21 + '</td><td>' +
+        currencyFormat2 + '</td></tr>' +
+        '<th class="border_right padding_bottom padding_top">Name of Additional Source 3 </th><td>' + data.nameOfadditionalsource31 + '</td><td>' +
+        currencyFormat3 + '</td></tr>' +
+        '<th class="border_right padding_bottom padding_top">Total </th><td>' + data.total3 + '</td><td>' +
+        totalBudget + '</td></tr>' +
+        '</tbody></table></div>';
 
 
 
-return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Financial Summary Budget", financialbudgetContent);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Financial Summary Budget", financialbudgetContent);
 }
 
 
@@ -552,7 +561,7 @@ let adddetailedActivity = function(ids,data){
     let proposal_total_actual = data.federalApplicationactual + data.stateApplicationactual + data.privateApplicationactual;
     let detailedActivity = '<h4> PROPOSALS</h4>'+
 '<div class="annual-budget">' +
-'<h4> Number of Research Proposal Submitted to Extramural Sponsors</h4>'+
+'<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>'+
 '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
 '<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
 '<tbody><tr>'+
@@ -722,7 +731,7 @@ data.publicationsactual + '</td></tr>'+
 '</br>'+
 
 
-'<h4>List of Publication by Center/Institute/Lab in the past FY</h4>'+
+'<h4>List of Publications by Center/Institute/Lab in the past FY</h4>'+
 
 '<div class="annual-budget">' +formatPara(data.listofpublications)  +
  '</div>'+
@@ -868,7 +877,7 @@ let addList_partners = function(ids,data){
             if(element.hasOwnProperty("Department") && element["Department"] != '')  
                 content += 'Department : '+ element["Department"]+'<br/>';   
             if(element.hasOwnProperty("School") && element["School"] != '')  
-                content += 'School : '+ element["School"]+'<br/>'; 
+                content += 'School: '+ element["School"]+'<br/>'; 
             if(element.hasOwnProperty("Organization(IfnotUAlbany)") && element["Organization(IfnotUAlbany)"] != '')  
                 content += 'Organization : '+ element["Organization(IfnotUAlbany)"]+'<br/>'; 
             if(element.hasOwnProperty("Email") && element["Email"] != '')  
@@ -906,7 +915,7 @@ let addSmartGoal = function(ids, goal)
    /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p> */;
+    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p> */;
     smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
@@ -942,7 +951,7 @@ let addSmartGoalPlan = function(ids, goal)
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Time Frame: </b>"+ time +'</p>';
+    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p>';
     smartgoal += '<p><b>Primary Leader on this Project: </b>'+ (goal.primaryLeader == ''?'N/A':goal.primaryLeader) +'</p>';
     smartgoal += '<p><b>Circumstances That Could Impact Workplan: </b>'+ (goal.circumstances == ''?'N/A':goal.circumstances) +'</p>';
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>'+ (goal.collaborations == ''?'N/A':goal.collaborations) +'</p>';
