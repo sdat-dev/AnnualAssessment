@@ -1,28 +1,49 @@
-let requestURL = "data/centerforfunctionalgenomics.json"
-let request = new XMLHttpRequest();
+let data2019_2020URL = "data/centerforfunctionalgenomics2019.json"
+let data2020_2021URL = "data/centerforfunctionalgenomics.json"
 //getting content Element to append grants information
-let maincontentContainer = document.getElementsByClassName('main-content')[0];
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-request.onload = function(){
+window.onload = function () {
+    let request2019_2020 =  axios.get(data2019_2020URL);
+    let request2020_2021 =  axios.get(data2020_2021URL);
+    axios.all([request2019_2020, request2020_2021]).then(axios.spread((...responses) => {
+        let data2019_2020 =  responses[0].data;
+        let data2020_2021  = responses[1].data;
+        localStorage.setItem("FY2020-2021",JSON.stringify(data2020_2021));
+        localStorage.setItem("FY2019-2020",JSON.stringify(data2019_2020));
+        let contentHeadr = document.getElementsByClassName('report-header')[0];
+        let headercontent = data2020_2021.ExternalReference + ' <select id="selectperiod" onchange="changeReportPeriod()">' +
+        '<option value="FY2020-2021">(FY2020-2021)</option>'+
+        '<option value="FY2019-2020">(FY2019-2020)</option>'+
+        '</select>';
+        contentHeadr.innerHTML = headercontent;
+        buildReport(data2020_2021, 'FY2020-2021');
+    })).catch(errors => {
+        console.log(errors);
+    })
+}
+
+let buildReport = function(data, period){
+    let maincontentContainer = document.getElementsByClassName('report')[0];
+    let years = [];
+    let tabheaders =[];
+    let tabcontent = []; 
     let content = '';
-    const reportdatajson = request.response;
-    //condition for checking if browser is Internet Explorer
-    let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
-    localStorage.setItem("data",JSON.stringify(reportdata));
-    let contentHeadr = document.getElementsByClassName('content-header')[0];
-    contentHeadr.textContent = reportdata.ExternalReference;
-    let years = ['FY 2019-20', 'FY 2020-21'];
-    content += createTabNavigation(years, "year");
-    let tabcontent = [];
-    tabcontent.push(add2020researchreport(reportdata.FY1920));
-    tabcontent.push(add2021researchreport(reportdata.FY2021));
+    if(period == 'FY2020-2021')
+    {
+        years = ['FY 2020-21', 'FY 2021-22'];
+        tabheaders =['Assessment FY21 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY22 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
+        tabcontent.push(addAssessmentReport(data.FY2021, '2020', '2021'));
+        tabcontent.push(addPlanningReport(data.FY2122, '2021', '2022'));
+    }
+    else if(period == 'FY2019-2020'){
+        years = ['FY 2019-20', 'FY 2020-21'];
+        tabheaders = ['Assessment FY20 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY21 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
+        tabcontent.push(addAssessmentReport(data.FY1920, '2019', '2020'));
+        tabcontent.push(addPlanningReport(data.FY2021, '2020', '2021'));
+    }
+  
+    content += createTabNavigation(tabheaders, "year");
     content += buildTabContent(years, 'year', tabcontent);
-    let contentElement = document.createElement('div');
-    contentElement.classList.add('content');
-    contentElement.innerHTML = content.trim();
-    maincontentContainer.appendChild(contentElement);
+    maincontentContainer.innerHTML = content.trim();;
 }
 
 let counter = 1;
@@ -38,23 +59,23 @@ let getIds = function(year){
 
 
 /*.......Research reports .....*/
-let add2020researchreport = function(reportdata){
+let addAssessmentReport = function(reportdata, year1, year2){
 
     let content = '';
 
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020'+
+    '<br><b>Reporting Period: </b>July 1, '+year1+' to June 30, '+year2+
     '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2019)">Print</button>';
-    content += '<div id = "FY1920">';
+    content += '<div id = "FY'+year1+'">';
 
-    let ids= getIds('FY1920');
+    let ids= getIds('FY'+year1);
     let data = {};
     data["mission"] = reportdata.Q31; 
     data["vision"] = reportdata.Q32;
     content += addMissionAndVision(ids, data);
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["annualBudget"] = reportdata.Q41;
     data["employeesState"] = checkNull(reportdata.Q42_1_1); 
@@ -74,7 +95,7 @@ let add2020researchreport = function(reportdata){
     data["total33"] =checkNull( reportdata.Q43_4_2); 
     content += addResearceAnnualBudget19(ids, data);
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     addData={};
     data["proposals"] = reportdata.Q51; 
@@ -122,10 +143,10 @@ let add2020researchreport = function(reportdata){
     data["stAwards_goals"] = checkNull(reportdata.Q54_2_1); 
     data["stAwards_actual"] = checkNull(reportdata.Q54_2_2); 
 
-    content +=adddetailedActivity(ids,data);
+    content +=adddetailedActivity(ids,data, year1);
     //detailed research
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["publications"] = checkNull(reportdata.Q61); 
     data["booksAuthoredgoals"] = checkNull(reportdata.Q61_1_1); 
@@ -159,8 +180,6 @@ let add2020researchreport = function(reportdata){
     data["licensedrevenuegoals"]=checkNull(reportdata.Q63_6_1);
     data["licensedrevenueactual"]=checkNull(reportdata.Q63_6_2);
 
-
-
     data["startupcompaniesgoals"]=checkNull(reportdata.Q63_7_1);
     data["starupcomapnieseactual"]=checkNull(reportdata.Q63_7_2);
 
@@ -173,10 +192,10 @@ let add2020researchreport = function(reportdata){
 
     data["otheractivities"]=checkNull(reportdata.Q67);
 
-    content +=addresearchActivity(ids,data);
+    content +=addresearchActivity(ids,data, year1);
     //****** */
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["educationandtraining"] = checkNull(reportdata.Q71); 
     data["students_goals_undergraduate"] =checkNull(reportdata.Q71_1_1);
@@ -197,14 +216,14 @@ let add2020researchreport = function(reportdata){
   
     for(var i = 9; i < 14; i++)
     {
-        ids = getIds('FY1920');
+        ids = getIds('FY'+year1);
         let goal = new GoalPlan(i-8, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
-        content += addSmartGoal(ids, goal);
+        content += addSmartGoal(ids, goal, year1);
     }
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = [];
     if(reportdata.Q81_4 != '')
         data.push(reportdata.Q81_4);
@@ -215,7 +234,7 @@ let add2020researchreport = function(reportdata){
     
     content += addTopAchievements(ids, data);
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["noofpartners"]= reportdata.Q141;
     if(reportdata.hasOwnProperty("partners"))
@@ -223,7 +242,7 @@ let add2020researchreport = function(reportdata){
 
     content += addList_partners(ids, data);
     
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["opportunities"] = reportdata.Q151;
     data["challenges"] = reportdata.Q152;
@@ -235,7 +254,7 @@ let add2020researchreport = function(reportdata){
     return content;
 }
 
-let add2021researchreport = function(reportdata){
+let addPlanningReport = function(reportdata, year1, year2){
 
     let content = '';
     if(typeof reportdata === "undefined"){
@@ -245,18 +264,18 @@ let add2021researchreport = function(reportdata){
 
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
+    '<br><b>Reporting Period: </b>July 1, '+year1+' to June 30, '+year2+
     '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2021)">Print</button>';
     
-    content += '<div id = "FY2021">';
+    content += '<div id = "FY'+year1+'">';
 
-    let ids= getIds('FY2021');
+    let ids= getIds('FY'+year1);
     let data = {};
     data["mission"] = reportdata.Q31; 
     data["vision"] = reportdata.Q32;
     content += addMissionAndVision(ids, data);
 
-    ids = getIds('FY2021');
+    ids = getIds('FY'+year1);
     data = {};
     data["annualBudget"] = reportdata.Q41;
     data["employeesState"] =checkNull( reportdata.Q42_1_1); 
@@ -267,23 +286,16 @@ let add2021researchreport = function(reportdata){
 
 
 
-    ids = getIds('FY2021');
+    ids = getIds('FY'+year1);
     data = {};
-   data["proposals"] = reportdata.Q51; 
+    data["proposals"] = reportdata.Q51; 
     data["federalApplication"] = checkNull(reportdata.Q51_1_1); 
     data["stateApplication"] = checkNull(reportdata.Q51_1_2); 
     data["privateApplication"] = checkNull(reportdata.Q51_1_4); 
 
-
     addData5={1:data["federalApplication"],2:  data["stateApplication"],3: data["privateApplication"]};
 
-
-        
-
-
     data["proposal_total"]=add(addData5);
-
-
     data["awards"] = reportdata.Q52; 
     data["federalAwards"] = checkNull(reportdata.Q52_1_1); 
     data["stateAwards"] = checkNull(reportdata.Q52_1_2); 
@@ -315,13 +327,9 @@ let add2021researchreport = function(reportdata){
     data["licensedExecuted"] = checkNull(reportdata.Q56_5_1); 
     data["licensedRevenue"] = checkNull(reportdata.Q56_6_1);
     data["startupCompanies"] =checkNull( reportdata.Q56_7_1);
-
-
     
     data["conference"] =checkNull( reportdata.Q57);
     data["goals"] = checkNull(reportdata.Q57_1_1); 
-
-
 
     data["education"] =checkNull( reportdata.Q58);
     data["undergraduate"] =checkNull( reportdata.Q58_1_1); 
@@ -332,11 +340,11 @@ let add2021researchreport = function(reportdata){
 
     for(var i = 7; i < 12; i++)
     {
-        ids = getIds('FY2021');
+        ids = getIds('FY'+year1);
         let goal = new GoalPlan(i-6, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
-        content += addSmartGoalPlan(ids, goal);
+        content += addSmartGoalPlan(ids, goal, year1);
     }
     content += '</div>'
 
@@ -557,274 +565,183 @@ let addResearceAnnualBudget19 = function (ids, data) {
 }
 
 
-let adddetailedActivity = function(ids,data){
+let adddetailedActivity = function(ids,data, year){
+    let period = getPeriod(year);
     let proposal_total_actual = data.federalApplicationactual + data.stateApplicationactual + data.privateApplicationactual;
     let detailedActivity = '<h4> PROPOSALS</h4>'+
-'<div class="annual-budget">' +
-'<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Federal Applications</th><td>'+ data.federalApplicationgoals + '</td><td>'+
-data.federalApplicationactual + '</td></tr>'+
-'<tr><th class="border_right  padding_bottom padding_top ">State Applications</th><td>'+ data.stateApplicationgoals + '</td><td>'+
-data.stateApplicationactual + '</td></tr>'+
+    '<div class="annual-budget">' +
+    '<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">Federal Applications</th><td>'+ data.federalApplicationgoals + '</td><td>'+
+    data.federalApplicationactual + '</td></tr>'+
+    '<tr><th class="border_right  padding_bottom padding_top ">State Applications</th><td>'+ data.stateApplicationgoals + '</td><td>'+
+    data.stateApplicationactual + '</td></tr>'+
 
-'<tr><th class="border_right  padding_bottom padding_top ">Private/Other Sponsors Applications</th><td>'+ data.privateApplicationgoals + '</td><td>'+
-data.privateApplicationactual + '</td></tr>'+
+    '<tr><th class="border_right  padding_bottom padding_top ">Private/Other Sponsors Applications</th><td>'+ data.privateApplicationgoals + '</td><td>'+
+    data.privateApplicationactual + '</td></tr>'+
 
-'<tr><th class="border_right  padding_bottom padding_top">Total</th><td>'+ data.proposal_total_goals + '</td><td>'+
-proposal_total_actual + '</td></tr>'+
-'</tbody></table></div>' +
-'</br>'+
-'</br>'+
+    '<tr><th class="border_right  padding_bottom padding_top">Total</th><td>'+ data.proposal_total_goals + '</td><td>'+
+    proposal_total_actual + '</td></tr>'+
+    '</tbody></table></div>' +
+    '</br>'+
+    '</br>'+
 
-'<h4> AWARDS</h4>'+
-'<div class="annual-budget">' +
-'<h4> Numbers of Awards Received from Extramural Sponsors  </h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Federals Awards </th><td>'+ data.federalAwardsgoals + '</td><td>'+
-data.federalAwardsactual + '</td></tr>'+
-'<tr><th class="border_right">State Awards </th><td>'+ data.stateAwardsgoals + '</td><td>'+
-data.stateAwardsactual + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Private Awards </th><td>'+ data.privateAwardsgoals + '</td><td>'+
-data.privateAwardsactual + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_goals + '</td><td>'+
-data.awrds_total_actual + '</td></tr>'+
-'</tbody></table></div>'  +
+    '<h4> AWARDS</h4>'+
+    '<div class="annual-budget">' +
+    '<h4> Numbers of Awards Received from Extramural Sponsors  </h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">Federals Awards </th><td>'+ data.federalAwardsgoals + '</td><td>'+
+    data.federalAwardsactual + '</td></tr>'+
+    '<tr><th class="border_right">State Awards </th><td>'+ data.stateAwardsgoals + '</td><td>'+
+    data.stateAwardsactual + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Private Awards </th><td>'+ data.privateAwardsgoals + '</td><td>'+
+    data.privateAwardsactual + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_goals + '</td><td>'+
+    data.awrds_total_actual + '</td></tr>'+
+    '</tbody></table></div>'  +
 
-'</br>'+
-'</br>'+
-'<h4> LARGE SCALE PROPOSALS/AWARDS</h4>'+
+    '</br>'+
+    '</br>'+
+    '<h4> LARGE SCALE PROPOSALS/AWARDS</h4>'+
 
-'<div class="annual-budget">' +
-'<h4> Number of Large Scale Proposals/Awards </h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.proposal_goals + '</td><td>'+
-data.proposal_actual + '</td></tr>'+
-'<tr><th class="border_right">#Awards </th><td>'+ data.lsAwards_goals + '</td><td>'+
-data.lsAwards_actual + '</td></tr>'+
-'</tbody></table></div>' +
-'</br>'+
-'</br>'+
+    '<div class="annual-budget">' +
+    '<h4> Number of Large Scale Proposals/Awards </h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+ period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.proposal_goals + '</td><td>'+
+    data.proposal_actual + '</td></tr>'+
+    '<tr><th class="border_right">#Awards </th><td>'+ data.lsAwards_goals + '</td><td>'+
+    data.lsAwards_actual + '</td></tr>'+
+    '</tbody></table></div>' +
+    '</br>'+
+    '</br>'+
 
-'<h4>STTR/SBIR PROPOSALS/AWARDS</h4>'+
+    '<h4>STTR/SBIR PROPOSALS/AWARDS</h4>'+
 
 
-'<div class="annual-budget">' +
-'<h4>Numbers of STTR/SBIR Proposals/Awards</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.stProposal_goals + '</td><td>'+
-data.stProposal_actual + '</td></tr>'+
-'<tr><th class="border_right">#Awards </th><td>'+ data.stAwards_goals + '</td><td>'+
-data.stAwards_actual + '</td></tr>'+
-'</tbody></table></div>' ; 
-return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Proposal and Awards", detailedActivity);
+    '<div class="annual-budget">' +
+    '<h4>Numbers of STTR/SBIR Proposals/Awards</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.stProposal_goals + '</td><td>'+
+    data.stProposal_actual + '</td></tr>'+
+    '<tr><th class="border_right">#Awards </th><td>'+ data.stAwards_goals + '</td><td>'+
+    data.stAwards_actual + '</td></tr>'+
+    '</tbody></table></div>' ; 
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Proposal and Awards", detailedActivity);
 }
 
 
-
-/*
-let adddetailedActivity = function(ids,data){
-
-    let detailedActivity = '<h4> Proposals</h4>'+
-'<div class="annual-budget"><p>' + +'</p>' +
-'<h4> Indicate below, the list of research proposal submitted to extramural sponsors .</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Federal Applications</th><td>'+ data.federalApplicationgoals + '</td><td>'+
-data.federalApplicationactual + '</td></tr>'+
-'<tr><th class="border_right">Private Applications</th><td>'+ data.privateApplicationgoals + '</td><td>'+
-data.privateApplicationactual + '</td></tr>'+
-
-'<tr><th class="border_right">State Applications</th><td>'+ data.stateApplicationgoals + '</td><td>'+
-data.stateAwardsactual + '</td></tr>'+
-
-'<tr><th class="border_right">Total</th><td>'+ data.proposal_total_goals + '</td><td>'+
-data.proposal_total_actual + '</td></tr>'+
-'</tbody></table></div>' +
-
-
-'<div class="annual-budget"><p>'+  + '</p>' +
-'<h4> Indicate below, the list of funded  extramural research grants </h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Federals Awards </th><td>'+ data.federalAwardsactual + '</td><td>'+
-data.federalAwardsgoals + '</td></tr>'+
-'<tr><th class="border_right">State Awards </th><td>'+ data.stateAwardsgoals + '</td><td>'+
-data.stateAwardsactual + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Private Awards </th><td>'+ data.privateAwardsgoals + '</td><td>'+
-data.privateApplicationgoals + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Total </th><td>'+ data.awrds_total_actual + '</td><td>'+
-data.awrds_total_goals + '</td></tr>'+
-'</tbody></table></div>' ; +
-
-
-
-
-'<div class="annual-budget"><p>'+  + '</p>' +
-'<h4> Indicate below,the large scale Multi investigator proposal Awards with Multi-Institutions</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.proposal_goals + '</td><td>'+
-data.proposal_actual + '</td></tr>'+
-'<tr><th class="border_right">#Awards </th><td>'+ data.lsAwards_goals + '</td><td>'+
-data.lsAwards_actual + '</td></tr>'+
-'</tbody></table></div>' ; +
-
-'<div class="annual-budget"><p>'+  + '</p>' +
-'<h4> Indicate below,the numbers of STTR/SBIR</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">#Proposals </th><td>'+ data.stProposal_goals + '</td><td>'+
-data.stProposal_actual + '</td></tr>'+
-'<tr><th class="border_right">#Awards </th><td>'+ data.stAwards_goals + '</td><td>'+
-data.stAwards_actual + '</td></tr>'+
-'</tbody></table></div>' ; 
-
-
-
-
-
-return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Proposal and Awards", detailedActivity);
-
-
-
-
-} 
-*/
-
-//detailed reserarch
-
-
-
-
-
-let addresearchActivity = function(ids,data){
-
+let addresearchActivity = function(ids,data, year){
+   
+    let period = getPeriod(year);
     let researchActivity = '<h4> PUBLICATIONS </h4>'+
-'<div class="annual-budget">' +
-'<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td>'+ data.booksAuthoredgoals + '</td><td>'+
-data.bookauthoredsactual + '</td></tr>'+
-'<tr><th class="border_right  padding_bottom padding_top">Books Chapters Authored/Edited  </th><td>'+ data.bookschaptersgoals + '</td><td>'+
-data.bookschapteractual + '</td></tr>'+
+    '<div class="annual-budget">' +
+    '<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td>'+ data.booksAuthoredgoals + '</td><td>'+
+    data.bookauthoredsactual + '</td></tr>'+
+    '<tr><th class="border_right  padding_bottom padding_top">Books Chapters Authored/Edited  </th><td>'+ data.bookschaptersgoals + '</td><td>'+
+    data.bookschapteractual + '</td></tr>'+
 
-'<tr><th class="border_right padding_bottom padding_top ">Publications</th><td>'+ data.publicationsgoals + '</td><td>'+
-data.publicationsactual + '</td></tr>'+
+    '<tr><th class="border_right padding_bottom padding_top ">Publications</th><td>'+ data.publicationsgoals + '</td><td>'+
+    data.publicationsactual + '</td></tr>'+
 
-'</tbody></table></div>' +
-'</br>'+
-'</br>'+
-
-
-'<h4>List of Publications by Center/Institute/Lab in the past FY</h4>'+
-
-'<div class="annual-budget">' +formatPara(data.listofpublications)  +
- '</div>'+
-
- '</br>'+
- '</br>'+
+    '</tbody></table></div>' +
+    '</br>'+
+    '</br>'+
 
 
+    '<h4>List of Publications by Center/Institute/Lab in the past FY</h4>'+
 
- '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
-'<div class="annual-budget">' +
-'<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
-'<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
-'<th class="border_bottom" width="36.5%">Your Goal in FY 19-20</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
-'<tbody><tr>'+
-'<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td>'+ data.intellctualgoals + '</td><td>'+
-data.intellctualgoals + '</td></tr>'+
-'<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td>'+ data.patentsactual + '</td><td>'+
-data.patnetsgoals + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Patents Issued  </th><td>'+ data.patlicenesedlgoals + '</td><td>'+
-data.patlicenesedlgoals + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Patents Licensed </th><td>'+ data.patlicgoals+ '</td><td>'+
-data.patlicactuals + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">License Executed </th><td>'+ data.licensedexecutedgoals+ '</td><td>'+
-data.licensedexecutedactual + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">License Revenue </th><td>'+ data.licensedrevenuegoals+ '</td><td>'+
-data.licensedrevenueactual + '</td></tr>'+
-'<th class="border_right padding_bottom padding_top">Start-up Companies </th><td>'+ data.startupcompaniesgoals+ '</td><td>'+
-data.starupcomapnieseactual + '</td></tr>'+
-'</tbody></table></div>'  +
+    '<div class="annual-budget">' +formatPara(data.listofpublications)  +
+    '</div>'+
 
-'</br>'+
- '</br>'+
+    '</br>'+
+    '</br>'+
 
 
 
- '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
+    '<h4> TECHNOLOGY TRANSFER/COMMERCIALIZATION </h4>'+
+    '<div class="annual-budget">' +
+    '<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
+    '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
+    '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
+    '<tbody><tr>'+
+    '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td>'+ data.intellctualgoals + '</td><td>'+
+    data.intellctualgoals + '</td></tr>'+
+    '<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td>'+ data.patentsactual + '</td><td>'+
+    data.patnetsgoals + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Patents Issued  </th><td>'+ data.patlicenesedlgoals + '</td><td>'+
+    data.patlicenesedlgoals + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Patents Licensed </th><td>'+ data.patlicgoals+ '</td><td>'+
+    data.patlicactuals + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">License Executed </th><td>'+ data.licensedexecutedgoals+ '</td><td>'+
+    data.licensedexecutedactual + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">License Revenue </th><td>'+ data.licensedrevenuegoals+ '</td><td>'+
+    data.licensedrevenueactual + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Start-up Companies </th><td>'+ data.startupcompaniesgoals+ '</td><td>'+
+    data.starupcomapnieseactual + '</td></tr>'+
+    '</tbody></table></div>'  +
 
-'<div class="annual-budget"><p>' +formatPara(data.listofintelletual) +'</p>' +
- '</div>'+
-
- '<br/>' +
-
- '<br/>' +
-
-
-
- '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
-
-'<div class="annual-budget">' +
-'<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>'+
-'<table width="100%">'+
-'<tbody><tr>'+
-'<th class="padding_bottom padding_top">Your Goals for FY 19-20 </th><td>'+ data.yougoaloffy19020 + '</td></tr>'+
-'<tr><th class="">Actual Numbers </th><td>'+ data.actualnumbers + '</td>'+
-'</tbody></table></div>' +
-'<br/>' +
-
-'<br/>' +
-
-
-'<h4> List of all Keynote Address or Plenary Invited Presentations </h4>'+
-
-'<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
-
- '</div>'+
-'<br/>' +
-'<br/>' +
-
-'<h4> OTHER ACTIVITIES</h4>'+
-
-'<h4>List of Scholarly Activity:</h4>'+
-
-'<div class="annual-budget"><p>'+ formatPara(data.otheractivities) +'</p>' +
-'</div>';
+    '</br>'+
+    '</br>'+
 
 
 
+    '<h4>List of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>'+
+
+    '<div class="annual-budget"><p>' +formatPara(data.listofintelletual) +'</p>' +
+    '</div>'+
+
+    '<br/>' +
+
+    '<br/>' +
 
 
 
+    '<h4> CONFERENCE/SEMINAR PRESENTATIONS</h4>'+
+
+    '<div class="annual-budget">' +
+    '<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>'+
+    '<table width="100%">'+
+    '<tbody><tr>'+
+    '<th class="padding_bottom padding_top">Your Goals for FY '+period+' </th><td>'+ data.yougoaloffy19020 + '</td></tr>'+
+    '<tr><th class="">Actual Numbers </th><td>'+ data.actualnumbers + '</td>'+
+    '</tbody></table></div>' +
+    '<br/>' +
+
+    '<br/>' +
 
 
+    '<h4> List of all Keynote Address or Plenary Invited Presentations </h4>'+
 
-return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Research and Scholarly Activities", researchActivity);
+    '<div class="annual-budget"><p>' +formatPara(data.listofkeynote) + '</p>' +
 
+    '</div>'+
+    '<br/>' +
+    '<br/>' +
 
+    '<h4> OTHER ACTIVITIES</h4>'+
 
+    '<h4>List of Scholarly Activity:</h4>'+
 
+    '<div class="annual-budget"><p>'+ formatPara(data.otheractivities) +'</p>' +
+    '</div>';
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Research and Scholarly Activities", researchActivity);
 }
 /* research end */
-let addEducation19 = function(ids, data)
+let addEducation19 = function(ids, data, year)
 {
+    let period = getPeriod(year);
     let eduContent = '<h4> EDUCATION AND TRAINING </h4>'+
     '<div class="annual-budget">' +
     '<h4> Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
@@ -833,7 +750,7 @@ let addEducation19 = function(ids, data)
     '<th class="border_bottom" width=25%">Graduate - PhD </th>'+
     '<th class="border_bottom" width="25%">Postdoctoral </th>'+
     '</tr></thead>'+
-    '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY 19-20</th><td>'+ data.students_goals_undergraduate + '</td>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY '+period+'</th><td>'+ data.students_goals_undergraduate + '</td>'+
     '<td>'+data.students_goals_graduate+ '</td> '+    
     '<td>'+data.students_goals_graduate_phd+ '</td> '+    
     '<td>'+data.students_goals_phd+ '</td> '+    
@@ -908,14 +825,11 @@ let addHonors = function(collapseId, headerId, parentId, childId, data)
     return generateAccordionElem(1, collapseId, headerId, parentId, childId, "Staff Honors, Awards, Other", data.Q71);
 }
 
-let addSmartGoal = function(ids, goal)
+let addSmartGoal = function(ids, goal, year)
 {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
+    let period = getPeriod(year);
+    let smartgoal = '<h4>FY '+period+' SMART GOAL '+ goal.no +'</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p> </div>';
-   /*  smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
-    smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
-    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p> */;
     smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
@@ -944,9 +858,10 @@ let addOtherThoughts = function(ids, data)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
 }
 
-let addSmartGoalPlan = function(ids, goal)
+let addSmartGoalPlan = function(ids, goal, year)
 {
-    let smartgoal = '<h4>FY 20-21 SMART GOAL '+ goal.no +'</h4>';
+    let period = getPeriod(year);
+    let smartgoal = '<h4>FY '+period+' SMART GOAL '+ goal.no +'</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
@@ -957,4 +872,16 @@ let addSmartGoalPlan = function(ids, goal)
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>'+ (goal.collaborations == ''?'N/A':goal.collaborations) +'</p>';
     smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>'+ (goal.impact == ''?'N/A':goal.impact) +'</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
+}
+
+let getPeriod = function(year){
+    let period = '';
+    if(year == 2019)
+        period = '19-20';
+    else if(year == 2020)
+        period = '20-21';
+    else
+        period = '21-22';
+    
+    return period;
 }

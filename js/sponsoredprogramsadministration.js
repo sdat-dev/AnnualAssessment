@@ -1,28 +1,49 @@
-let requestURL = "data/sponsoredprogramsadministration.json"
-let request = new XMLHttpRequest();
+let data2019_2020URL = "data/sponsoredprogramsadministration2019.json"
+let data2020_2021URL = "data/sponsoredprogramsadministration.json"
 //getting content Element to append grants information
-let maincontentContainer = document.getElementsByClassName('main-content')[0];
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
-request.onload = function(){
+window.onload = function () {
+    let request2019_2020 =  axios.get(data2019_2020URL);
+    let request2020_2021 =  axios.get(data2020_2021URL);
+    axios.all([request2019_2020, request2020_2021]).then(axios.spread((...responses) => {
+        let data2019_2020 =  responses[0].data;
+        let data2020_2021  = responses[1].data;
+        localStorage.setItem("FY2020-2021",JSON.stringify(data2020_2021));
+        localStorage.setItem("FY2019-2020",JSON.stringify(data2019_2020));
+        let contentHeadr = document.getElementsByClassName('report-header')[0];
+        let headercontent = data2020_2021.ExternalReference + ' <select id="selectperiod" onchange="changeReportPeriod()">' +
+        '<option value="FY2020-2021">(FY2020-2021)</option>'+
+        '<option value="FY2019-2020">(FY2019-2020)</option>'+
+        '</select>';
+        contentHeadr.innerHTML = headercontent;
+        buildReport(data2020_2021, 'FY2020-2021');
+    })).catch(errors => {
+        console.log(errors);
+    })
+}
+
+let buildReport = function(data, period){
+    let maincontentContainer = document.getElementsByClassName('report')[0];
+    let years = [];
+    let tabheaders =[];
+    let tabcontent = []; 
     let content = '';
-    const reportdatajson = request.response;
-    //condition for checking if browser is Internet Explorer
-    let reportdata =  ((false || !!document.documentMode))? JSON.parse(reportdatajson): reportdatajson;
-    localStorage.setItem("data",JSON.stringify(reportdata));
-    let contentHeadr = document.getElementsByClassName('content-header')[0];
-    contentHeadr.textContent = reportdata.ExternalReference;
-    let years = ['FY 2019-20', 'FY 2020-21'];
-    content += createTabNavigation(years, "year");
-    let tabcontent = [];
-    tabcontent.push(add1920report(reportdata.FY1920));
-    tabcontent.push(add2021report(reportdata.FY2021));
+    if(period == 'FY2020-2021')
+    {
+        years = ['FY 2020-21', 'FY 2021-22'];
+        tabheaders =['Assessment FY21 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY22 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
+        tabcontent.push(addAssessmentReport(data.FY2021, '2020', '2021'));
+        tabcontent.push(addPlanningReport(data.FY2122, '2021', '2022'));
+    }
+    else if(period == 'FY2019-2020'){
+        years = ['FY 2019-20', 'FY 2020-21'];
+        tabheaders = ['Assessment FY20 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY21 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
+        tabcontent.push(addAssessmentReport(data.FY1920, '2019', '2020'));
+        tabcontent.push(addPlanningReport(data.FY2021, '2020', '2021'));
+    }
+  
+    content += createTabNavigation(tabheaders, "year");
     content += buildTabContent(years, 'year', tabcontent);
-    let contentElement = document.createElement('div');
-    contentElement.classList.add('content');
-    contentElement.innerHTML = content.trim();
-    maincontentContainer.appendChild(contentElement);
+    maincontentContainer.innerHTML = content.trim();;
 }
 
 let counter = 1;
@@ -36,21 +57,28 @@ let getIds = function(year){
     return ids;
 }
 
-let add1920report = function(reportdata){
+let addAssessmentReport = function(reportdata, year1, year2){
     let content = '';
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2019 to June 30, 2020' + 
+    '<br><b>Reporting Period: </b>July 1, '+year1+' to June 30, '+year2+
     '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2019)">Print</button>';
-    content += '<div id = "FY1920">';
+    content += '<div id = "FY'+year1+'">';
 
-    let ids= getIds('FY1920');
+    let ids= getIds('FY'+year1);
     let data = {};
-    data["mission"] = reportdata["1819Mission"]; 
-    data["vision"] = reportdata["1819Vision"];
+    if(year1 == '2019')
+    {
+        data["mission"] = reportdata["1819Mission"]; 
+        data["vision"] = reportdata["1819Vision"];
+    }
+    else{
+        data["mission"] = reportdata.Q31; 
+        data["vision"] = reportdata.Q32;
+    }
     content += addMissionAndVision(ids, data);
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["annualBudget"] = reportdata.Q41;
     data["employeesState"] = reportdata.Q42_1_1; 
@@ -60,7 +88,7 @@ let add1920report = function(reportdata){
     content += addAnnualBudget(ids, data);
     if (reportdata.Q51 == 'Yes') {
         data["member1"] = reportdata.Q51;
-        ids = getIds('FY1920');
+        ids = getIds('FY'+year1);
         data = {};
         for (var i = 1; i < 7; i++) {
             data['membership' + i] = reportdata["Q52_" + i];
@@ -75,14 +103,24 @@ let add1920report = function(reportdata){
         {
             break;
         }
-        ids = getIds('FY1920');
+        ids = getIds('FY'+year1);
         let no = i-7;
-        let goal = new Goal(no, reportdata["1819Goal"+no], reportdata["1819Activities"+no], 
-        reportdata["1819Metrics"+no], reportdata["1819Timeframe"+no], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
-        content += addSmartGoal(ids, goal);
+        if(year1 == 2019)
+        {
+            let goal = new Goal(no, reportdata["1819Goal"+no], reportdata["1819Activities"+no], 
+            reportdata["1819Metrics"+no], reportdata["1819Timeframe"+no], reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
+            content += addSmartGoal(ids, goal, year1);
+        }
+        else
+        {
+            let goal = new Goal(no, reportdata["Q"+i+"1"], "", 
+            "", "", reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
+            content += addSmartGoal(ids, goal, year1);
+        }
+        
     }
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = [];
     if(reportdata.Q131_8.trim() != '')
         data.push(reportdata.Q83);
@@ -102,7 +140,7 @@ let add1920report = function(reportdata){
         data.push(reportdata.Q132_6);
     content += addTopAchievements(ids, data);
 
-    ids = getIds('FY1920');
+    ids = getIds('FY'+year1);
     data = {};
     data["opportunities"] = reportdata.Q141;
     data["challenges"] = reportdata.Q142;
@@ -114,21 +152,21 @@ let add1920report = function(reportdata){
     return content;
 }
 
-let add2021report = function(reportdata){
+let addPlanningReport = function(reportdata, year1, year2){
     let content = '';
     content += '<p><b>Director\'s Name: </b>'+ reportdata.RecipientFirstName + ' '+ reportdata.RecipientLastName + 
     '<br><b>Director\'s Email: </b>'+ reportdata.RecipientEmail +
-    '<br><b>Reporting Period: </b>July 1, 2020 to June 30, 2021'+
+    '<br><b>Reporting Period: </b>July 1, '+year1+' to June 30, '+year2+
     '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2021)">Print</button>';
-    content += '<div id = "FY2021">';
+    content += '<div id = "FY'+year2+'">';
 
-    let ids= getIds('FY2021');
+    let ids= getIds('FY'+year2);
     let data = {};
     data["mission"] = reportdata.Q31; 
     data["vision"] = reportdata.Q32;
     content += addMissionAndVision(ids, data);
 
-    ids = getIds('FY2021');
+    ids = getIds('FY'+year2);
     data = {};
     data["annualBudget"] = reportdata.Q41;
     data["employeesState"] = reportdata.Q42_1_1; 
@@ -139,11 +177,11 @@ let add2021report = function(reportdata){
 
     for(var i = 6; i < 11; i++)
     {
-        ids = getIds('FY2021');
+        ids = getIds('FY'+year2);
         let goal = new GoalPlan(i-5, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
         reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], 
         reportdata["Q"+i+"6"], reportdata["Q"+i+"7"], reportdata["Q"+i+"8"]);
-        content += addSmartGoalPlan(ids, goal);
+        content += addSmartGoalPlan(ids, goal, year1);
     }
     content += '</div>'
     return content;
@@ -189,9 +227,10 @@ let addHonors = function(collapseId, headerId, parentId, childId, data)
 }
 
 
-let addSmartGoal = function(ids, goal)
+let addSmartGoal = function(ids, goal, year)
 {
-    let smartgoal = '<h4>FY 19-20 SMART GOAL '+ goal.no +'</h4>';
+    let period = getPeriod(year);
+    let smartgoal = '<h4>FY '+period+' SMART GOAL '+ goal.no +'</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
@@ -283,9 +322,10 @@ let addOtherThoughts = function(ids, data)
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Other Thoughts and Suggestions", otherthoughts);
 }
 
-let addSmartGoalPlan = function(ids, goal)
+let addSmartGoalPlan = function(ids, goal, year)
 {
-    let smartgoal = '<h4>FY 20-21 SMART GOAL '+ goal.no +'</h4>';
+    let period = getPeriod(year);
+    let smartgoal = '<h4>FY '+period+' SMART GOAL '+ goal.no +'</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p>';
     smartgoal += "<p><b>Action(s): </b>"+ (goal.action == ''?'N/A':goal.action) +'</p>';
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':goal.metric) +'</p>';
@@ -296,4 +336,16 @@ let addSmartGoalPlan = function(ids, goal)
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>'+ (goal.collaborations == ''?'N/A':goal.collaborations) +'</p>';
     smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>'+ (goal.impact == ''?'N/A':goal.impact) +'</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
+}
+
+let getPeriod = function(year){
+    let period = '';
+    if(year == 2019)
+        period = '19-20';
+    else if(year == 2020)
+        period = '20-21';
+    else
+        period = '21-22';
+    
+    return period;
 }

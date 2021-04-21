@@ -174,3 +174,9 @@ function printPlanningReport(type, year){
     win.document.write(content); // where 'html' is a variable containing your HTML
     win.document.close(); 
 }
+
+function changeReportPeriod(){
+    var period = document.getElementById("selectperiod").value;
+    let data = JSON.parse(localStorage.getItem(period));
+    buildReport(data, period);
+}
