@@ -327,13 +327,13 @@ let addPlanningReport = function(reportdata, year1, year2){
     data["startupCompanies"] =checkNull( reportdata.Q56_7_1);
     
     data["conference"] =checkNull( reportdata.Q57);
-    data["goals"] = checkNull(reportdata.Q57_1_1); 
+    data["goals"] = checkNull(reportdata.Q57_1); 
 
     data["education"] =checkNull( reportdata.Q58);
     data["undergraduate"] =checkNull( reportdata.Q58_1_1); 
-    data["graduate_masters"] = checkNull(reportdata.Q58_2_1); 
-    data["graduate_phd"] = checkNull(reportdata.Q58_3_1); 
-    data["post"] = checkNull(reportdata.Q58_4_1); 
+    data["graduate_masters"] = checkNull(reportdata.Q58_1_2); 
+    data["graduate_phd"] = checkNull(reportdata.Q58_1_4); 
+    data["post"] = checkNull(reportdata.Q58_1_5); 
     content +=addResearchPerformancetarget(ids,data, year1);
 
     for(var i = 7; i < 12; i++)
