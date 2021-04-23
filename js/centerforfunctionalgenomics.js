@@ -336,7 +336,7 @@ let addPlanningReport = function(reportdata, year1, year2){
     data["graduate_masters"] = checkNull(reportdata.Q58_2_1); 
     data["graduate_phd"] = checkNull(reportdata.Q58_3_1); 
     data["post"] = checkNull(reportdata.Q58_4_1); 
-    content +=addResearchPerformancetarget(ids,data);
+    content +=addResearchPerformancetarget(ids,data, year1);
 
     for(var i = 7; i < 12; i++)
     {
@@ -352,12 +352,13 @@ let addPlanningReport = function(reportdata, year1, year2){
     return content;
 }
 
-let addResearchPerformancetarget =function(ids,data){
+let addResearchPerformancetarget =function(ids,data, year ){
+    let period = getPeriod(year);
     let researchContent = '<h4> RESEARCH PERFORMANCE TARGET </h4>'+
     '<div class="annual-budget">' +
     '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>'+
     '<td>'+ data.federalApplication + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">State Application</th><td>'+
@@ -375,7 +376,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>'+
     '<td>'+ data.federalAwards + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">State Awards</th><td>'+
@@ -392,7 +393,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4> Number of target for Large-Scale*, Multi-Investigator Proposals/Awards with Multi-Institutions</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
     '<td>'+ data.proposal + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td>'+
@@ -408,7 +409,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4> The target numbers are indicated below: </h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>'+
     '<td>'+ data.stProposal + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td>'+
@@ -423,7 +424,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4>  The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>'+
     '<td>'+ data.booksAuthored + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">Books Chapters - Authored/Edited </th><td>'+
@@ -441,7 +442,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>'+
     '<td>'+ data.intellectual + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">Patents Applications</th><td>'+
@@ -464,8 +465,8 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4> The target numbers are indicated below:</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">Your Goal for FY 20-21</th></tr></thead>'+
-    '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>'+
+    '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>'+
+    '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY '+period+'</th>'+
     '<td>'+ data.goals + '</td></tr>'+
    
     '</tbody></table></div>'+
@@ -476,7 +477,7 @@ let addResearchPerformancetarget =function(ids,data){
     '<div class="annual-budget">' +
     '<h4>Number of Undergraduate/Graduate/Postdoc Trained.</h4>'+
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">'+
-    '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY 20-21</th></tr></thead>'+
+    '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY '+period+'</th></tr></thead>'+
     '<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>'+
     '<td>'+ data.undergraduate + '</td></tr>'+
     '<tr><th class="border_right padding_bottom padding_top">Graduate - Master</th><td>'+
