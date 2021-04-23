@@ -111,8 +111,8 @@ let addAssessmentReport = function(reportdata, year1, year2){
         }
         else
         {
-            let goal = new Goal(no, reportdata["Q"+i+"1"], "", 
-            "", "", reportdata["Q"+i+"2"], reportdata["Q"+i+"3"], reportdata["Q"+i+"4"]);
+            let goal = new Goal(no, reportdata["Q"+i+"1"], reportdata["Q"+i+"2"], 
+            reportdata["Q"+i+"3"], reportdata["Q"+i+"4"], reportdata["Q"+i+"5"], reportdata["Q"+i+"6"], reportdata["Q"+i+"7"]);
             content += addSmartGoal(ids, goal, year1);
         }
         
