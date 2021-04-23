@@ -307,16 +307,16 @@ let addPlanningReport = function(reportdata, year1, year2){
 
     data["largeScale"] =checkNull( reportdata.Q53); 
     data["proposal"] = checkNull(reportdata.Q53_1_1); 
-    data["lsAwards"] =checkNull( reportdata.Q53_1_2); 
+    data["lsAwards"] =checkNull( reportdata.Q53_2_1); 
     
     data["strr"] =checkNull( reportdata.Q54);
     data["stProposal"] =checkNull( reportdata.Q54_1_1); 
-    data["stAwards"] = checkNull(reportdata.Q54_1_2); 
+    data["stAwards"] = checkNull(reportdata.Q54_2_1); 
 
     data["publications"] = checkNull(reportdata.Q55);
     data["booksAuthored"] = checkNull(reportdata.Q55_1_1); 
-    data["booksChapters"] =checkNull( reportdata.Q55_1_2); 
-    data["publicationsTable"] =checkNull( reportdata.Q54_1_3); 
+    data["booksChapters"] =checkNull( reportdata.Q55_2_1); 
+    data["publicationsTable"] =checkNull( reportdata.Q55_3_1); 
 
 
     data["technologyTransfer"] = checkNull(reportdata.Q56);
