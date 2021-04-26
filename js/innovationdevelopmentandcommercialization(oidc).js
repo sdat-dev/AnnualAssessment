@@ -309,7 +309,7 @@ let addTopAchievements = function(ids, data)
         achievements += formatText(data[i]);
     }
     achievements += "</div>";
-    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 5 Achievements", achievements);
+    return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3-5 Achievements", achievements);
 }
 
 let addOtherThoughts = function(ids, data)
