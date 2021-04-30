@@ -285,6 +285,10 @@ Primary use:    Common.css file used for styling header and
     color: white;
 }
 
+.yellowHighlight{
+    background-color: #edba32;
+}
+
 .highlight{
     color:  #46166C;
     font-weight: bold;
