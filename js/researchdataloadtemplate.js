@@ -229,6 +229,10 @@ let addAssessmentReport = function(reportdata, year1, year2){
         data.push(reportdata.Q81_5);
     if(reportdata.Q81_6 != '')
         data.push(reportdata.Q81_6);
+    if(reportdata.Q81_7 != '')
+        data.push(reportdata.Q81_7);
+    if(reportdata.Q81_8 != '')
+        data.push(reportdata.Q81_8);
     
     content += addTopAchievements(ids, data);
 
