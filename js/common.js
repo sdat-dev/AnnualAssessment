@@ -144,29 +144,63 @@ function getDate(serial){
     return (parseInt(date_info.getMonth(),10) + 1) + '/' + (parseInt(date_info.getDate(),10) + 1) + '/' + date_info.getFullYear();//, 0, minutes, seconds);
 }
 
-function printPlanningReport(type, year){
-    let data = JSON.parse(localStorage.getItem("data"));
+function printAssessmentReport(type){
+    var period = document.getElementById("selectperiod").value;
+    let data = JSON.parse(localStorage.getItem(period));
     let content = '';
     if(type == 'admin')
     {
-        if(year == 2019)
+        if(year == 'FY2019-2020')
         {
-            content = printadminhUnit19(data);
+            content = printAdminAssessment20(data.FY1920);
         }
         else
         {
-            content = printadminhUnit20(data)
+            content = printAdminAssessment(data.FY2021)
         }
        
     }
-    else{
-        if(year == 2019)
+    else
+    {
+        if(year == 'FY2019-2020')
         {
-            content = printResearchUnit(data);
+            content = printResearchAssessment20(data.FY1920);
         }
         else
         {
-            content = printResearchUnit2021(data)
+            content = printResearchUnit2021(data.FY2021)
+        }
+    }
+    
+    var win = window.open("print.html", "_blank");
+    win.document.write(content); // where 'html' is a variable containing your HTML
+    win.document.close(); 
+}
+
+function printPlanningReport(type){
+    var period = document.getElementById("selectperiod").value;
+    let data = JSON.parse(localStorage.getItem(period));
+    let content = '';
+    if(type == 'admin')
+    {
+        if(period == 'FY2019-2020')
+        {
+            content = printAdminPlanning20(data.FY2021);
+        }
+        else
+        {
+            content = printAdminPlanning(data.FY2122)
+        }       
+    }
+    else
+    {
+        if(year == 'FY2019-2020')
+        {
+            content = printResearchPlanning20(data.FY2021);
+        }
+        else
+        {
+            content = printResearchPlanning(data.FY2122)
         }
     }
     

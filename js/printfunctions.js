@@ -1,4 +1,64 @@
-/* Research 2021*/
+/* Assessment Report 19-20*/
+function printAdminAssessment20(reportdata){
+    let data = {};
+    data["unit"] = reportdata["ExternalReference"];
+    data["mission"] = reportdata["1819Mission"];
+    data["vision"] = reportdata["1819Vision"];
+
+    data["annualBudget"] = reportdata.Q41;
+    data["employeesState"] = reportdata.Q42_1_1;
+    data["employeesRF"] = reportdata.Q42_1_2;
+    data["fteState"] = reportdata.Q42_2_1;
+    data["fteRF"] = reportdata.Q42_2_2;
+    let content = '';
+    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
+        '<p class="mission">' + data.mission + '</p>' +
+        '<h4>VISION</h4>' +
+        '<p class="vision">' + data.vision + '</p>' +
+
+        '<h4> ANNUAL BUDGET </h4>' +
+        '<div class="annual-budget"><p>' + data.annualBudget + '</p>' +
+        '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>' +
+        '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">' + data.employeesState + '</td><td style=" text-align: center;">' +
+        data.employeesRF + '</td></tr>' + '<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">' + data.fteState + '</td><td style=" text-align: center;">' +
+        data.fteRF + '</td></tr></tbody></table></div><br>';
+    content += goaldetails19_admi(reportdata);
+    return content;
+}
+/* Assessment Report 20-21 onwards*/
+function printAdminAssessment(reportdata){
+    let data = {};
+    data["unit"] = reportdata["ExternalReference"];
+    data["mission"] = reportdata.Q31;
+    data["vision"] = reportdata.Q32;
+
+    data["annualBudget"] = reportdata.Q41;
+    data["employeesState"] = reportdata.Q42_1_1;
+    data["employeesRF"] = reportdata.Q42_1_2;
+    data["fteState"] = reportdata.Q42_2_1;
+    data["fteRF"] = reportdata.Q42_2_2;
+    let content = '';
+    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report (2019-2020)</h1>' +
+        '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
+        '<h4>MISSION</h4>' +
+        '<p class="mission">' + data.mission + '</p>' +
+        '<h4>VISION</h4>' +
+        '<p class="vision">' + data.vision + '</p>' +
+
+        '<h4> ANNUAL BUDGET </h4>' +
+        '<div class="annual-budget"><p>' + data.annualBudget + '</p>' +
+        '<h4> Indicate below, the number of State and RF Employees/FTEs.</h4>' +
+        '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td><th class="border_bottom" width="36.5%">State</th><th class="border_bottom" width="36.5%">RF</th></tr></thead>' +
+        '<tbody><tr><th class="border_right padding_bottom padding_top">#Employees (Headcounts)</th><td style=" text-align: center;">' + data.employeesState + '</td><td style=" text-align: center;">' +
+        data.employeesRF + '</td></tr>' + '<tr><th class="border_right">#FTEs</th><td style=" text-align: center;">' + data.fteState + '</td><td style=" text-align: center;">' +
+        data.fteRF + '</td></tr></tbody></table></div><br>';
+    content += goalDetails_admin_assessment(reportdata);
+    return content;
+}
+
 function printResearchUnit2021(reportdata) {
     let data = {};
     data["unit"] = reportdata.ExternalReference;
