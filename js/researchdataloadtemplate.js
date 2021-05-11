@@ -860,7 +860,7 @@ let addSmartGoal = function (ids, goal, year) {
     else {
         smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
         smartgoal += "<p><b>Actions Implemented: </b>" + (goal.actions == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-        smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
+        smartgoal += "<p><b>Noteworthy Results: </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
         let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
         smartgoal += "<p><b>Changes Made/Planned: </b>" + time + '</p></div>';
     }
