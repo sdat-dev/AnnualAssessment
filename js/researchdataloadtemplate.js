@@ -160,8 +160,8 @@ let addAssessmentReport = function(reportdata, year1, year2){
 
     data["listofpublications"]=checkNull(reportdata.Q62);
 
-    data["intellectualgoals"]=checkNull(reportdata.Q63_1_1);
-    data["intellectualactual"]=checkNull(reportdata.Q63_1_2);
+    data["intellctualgoals"]=checkNull(reportdata.Q63_1_1);
+    data["intellctualactual"]=checkNull(reportdata.Q63_1_2);
 
     data["patnetsgoals"]=checkNull(reportdata.Q63_2_1);
     data["patentsactual"]=checkNull(reportdata.Q63_2_2);
@@ -229,10 +229,6 @@ let addAssessmentReport = function(reportdata, year1, year2){
         data.push(reportdata.Q81_5);
     if(reportdata.Q81_6 != '')
         data.push(reportdata.Q81_6);
-    if(reportdata.Q81_7 != '')
-        data.push(reportdata.Q81_7);
-    if(reportdata.Q81_8 != '')
-        data.push(reportdata.Q81_8);
     
     content += addTopAchievements(ids, data);
 
@@ -679,12 +675,12 @@ let addresearchActivity = function(ids,data, year){
     '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>'+
     '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>'+
     '<tbody><tr>'+
-    '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td>'+ data.intellectualgoals + '</td><td>'+
-    data.intellectualactual + '</td></tr>'+
-    '<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td>'+ data.patnetsgoals + '</td><td>'+
-    data.patentsactual + '</td></tr>'+
+    '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td>'+ data.intellctualgoals + '</td><td>'+
+    data.intellctualgoals + '</td></tr>'+
+    '<tr><th class="border_right  padding_bottom padding_top">Patents Applications </th><td>'+ data.patentsactual + '</td><td>'+
+    data.patnetsgoals + '</td></tr>'+
     '<th class="border_right padding_bottom padding_top">Patents Issued  </th><td>'+ data.patlicenesedlgoals + '</td><td>'+
-    data.patlicensedactual + '</td></tr>'+
+    data.patlicenesedlgoals + '</td></tr>'+
     '<th class="border_right padding_bottom padding_top">Patents Licensed </th><td>'+ data.patlicgoals+ '</td><td>'+
     data.patlicactuals + '</td></tr>'+
     '<th class="border_right padding_bottom padding_top">License Executed </th><td>'+ data.licensedexecutedgoals+ '</td><td>'+
@@ -837,9 +833,9 @@ let addSmartGoal = function(ids, goal, year)
     smartgoal += "<p><b>Metric(s): </b>"+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
     let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == ''?'N/A':goal.timeFrame) : getDate(goal.timeFrame);
     smartgoal += "<p><b>Goal Evaluation Time Frame: </b>"+ time +'</p></div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.actionsImplemented == ''?'N/A':formatText(goal.actionsImplemented)) +'</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.results == ''?'N/A':formatText(goal.results)) +'</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.changes == ''?'N/A':formatText(goal.changes)) +'</p></div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal "+ goal.no, smartgoal);
 }
 
