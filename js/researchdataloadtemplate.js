@@ -847,14 +847,23 @@ let addHonors = function (collapseId, headerId, parentId, childId, data) {
 let addSmartGoal = function (ids, goal, year) {
     let period = getPeriod(year);
     let smartgoal = '<h4>FY ' + period + ' SMART GOAL ' + goal.no + '</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
-    smartgoal += "<p><b>Action(s): </b>" + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-    smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
-    let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
-    smartgoal += "<p><b>Goal Evaluation Time Frame: </b>" + time + '</p></div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.timeFrame == '' ? 'N/A' : formatText(goal.timeFrame)) + '</p></div>';
+    if (year == "2020") {
+        smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
+        smartgoal += "<p><b>Action(s): </b>" + (goal.actions == '' ? 'N/A' : formatText(goal.action)) + '</p>';
+        smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
+        let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
+        smartgoal += "<p><b>Goal Evaluation Time Frame: </b>" + time + '</p></div>';
+        smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.actionsImplemented == '' ? 'N/A' : formatText(goal.actionsImplemented)) + '</p>';
+        smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.results == '' ? 'N/A' : formatText(goal.results)) + '</p>';
+        smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.changes == '' ? 'N/A' : formatText(goal.changes)) + '</p></div>';
+    }
+    else {
+        smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
+        smartgoal += "<p><b>Actions Implemented: </b>" + (goal.actions == '' ? 'N/A' : formatText(goal.action)) + '</p>';
+        smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
+        let time = (isNaN(goal.timeFrame) || goal.timeFrame == '') ? (goal.timeFrame == '' ? 'N/A' : goal.timeFrame) : getDate(goal.timeFrame);
+        smartgoal += "<p><b>Changes Made/Planned: </b>" + time + '</p></div>';
+    }
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal " + goal.no, smartgoal);
 }
 
