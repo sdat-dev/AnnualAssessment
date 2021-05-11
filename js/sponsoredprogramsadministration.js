@@ -327,7 +327,6 @@ let achievementsData = function(reportdata)
 let addTopAchievements = function(ids, data)
 {
     let achievements = '<div class="achievements">';
-    console.log("data.length ", data.length);
     for (var i = 0; i < data.length; i++) {
         if (data.length == 1) {
             achievements += '<p>No Achievements Available<p>';
