@@ -307,13 +307,8 @@ let achievementsData = function (reportdata) {
 let addTopAchievements = function (ids, data) {
     let achievements = '<div class="achievements">';
     for (var i = 0; i < data.length; i++) {
-        if (data.length == 1) {
-            achievements += '<p>No Achievements Available<p>';
-        }
-        else {
             achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
             achievements += formatText(data[i]);
-        }
     }
     achievements += "</div>";
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3-5 Achievements", achievements);
