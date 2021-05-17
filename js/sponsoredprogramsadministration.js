@@ -7,6 +7,7 @@ window.onload = function () {
     axios.all([request2019_2020, request2020_2021]).then(axios.spread((...responses) => {
         let data2019_2020 = responses[0].data;
         let data2020_2021 = responses[1].data;
+        localStorage.clear();
         localStorage.setItem("FY2020-2021", JSON.stringify(data2020_2021));
         localStorage.setItem("FY2019-2020", JSON.stringify(data2019_2020));
         let contentHeadr = document.getElementsByClassName('report-header')[0];
