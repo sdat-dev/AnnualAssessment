@@ -18,7 +18,7 @@ function printAdminAssessment(reportdata, year1, year2){
     data["fteState"] = reportdata.Q42_2_1;
     data["fteRF"] = reportdata.Q42_2_2;
     let content = '';
-    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report ('+ year1 +'-'+ year2 +')</h1>' +
+    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report ('+ year1 +'-'+ year2 +')</h1>' +
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
@@ -266,7 +266,7 @@ function printResearchAssessment(reportdata, year1, year2){
         data["partners"] = reportdata.partners;
     let content_research = '';
     let period = getPeriod(year1);
-    content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Report ('+year1+'-'+year2+')</h1>';
+    content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report ('+year1+'-'+year2+')</h1>';
     content_research +=
 
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +

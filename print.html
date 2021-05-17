@@ -57,94 +57,96 @@
                 </h1>
                 <div  class="content">
                     <form id="form">
+                        <fieldset>
+                            <legend>Select Period To Print</legend>
+                            <select id="period" onchange="changePeriod()"> 
+                                <option value="FY2020-2021"> FY2020-2021 </option> 
+                                <option value="FY2019-2020"> FY2019-2020 </option> 
+                            </select>
+                        </fieldset>
                         <fieldset id="units">
                             <legend>Select Administrative Units To Print</legend>
                             <div>
-                                <input type="checkbox" id="report1" class="unit" value="communityandeconomicdevelopment.html">
-                                <label for="coding">Community and Economic Development</label>
+                                <input type="checkbox" id="report1" class="unit" value="communityandeconomicdevelopment">
+                                <label>Community and Economic Development</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report2" class="unit" value="facultyresearchdevelopment.html">
-                                <label for="music">Faculty Research Development</label>
+                                <input type="checkbox" id="report2" class="unit" value="facultyresearchdevelopment">
+                                <label>Faculty Research Development</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report3" class="unit" value="innovationdevelopmentandcommercialization(oidc).html">
-                                <label for="art">Innovation Development and Commercialization (OIDC)</label>
+                                <input type="checkbox" id="report3" class="unit" value="innovationdevelopmentandcommercialization(oidc)">
+                                <label>Innovation Development and Commercialization (OIDC)</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report4" class="unit" value="regulatoryandresearchcompliance.html">
-                                <label for="sports">Regulatory and Research Compliance</label>
+                                <input type="checkbox" id="report4" class="unit" value="regulatoryandresearchcompliance">
+                                <label>Regulatory and Research Compliance</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report5" class="unit" value="researchfoundationhumanresources.html">
-                                <label for="cooking">Research Foundation Human Resources</label>
+                                <input type="checkbox" id="report5" class="unit" value="researchfoundationhumanresources">
+                                <label>Research Foundation Human Resources</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report6" class="unit" value="sponsoredprogramsadministration.html">
-                                <label for="cooking">Sponsored Programs Administration</label>
+                                <input type="checkbox" id="report6" class="unit" value="sponsoredprogramsadministration">
+                                <label>Sponsored Programs Administration</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report6" class="unit" value="strategicplanningassessmentdataanalyticsandtechnology.html">
-                                <label for="cooking">Strategic Planning, Assessment, Data Analytics, and Technology</label>
+                                <input type="checkbox" id="report6" class="unit" value="strategicplanningassessmentdataanalyticsandtechnology">
+                                <label>Strategic Planning, Assessment, Data Analytics, and Technology</label>
                             </div>
- 
                         </fieldset>
-
-
                         <fieldset id="units_research">
                             <legend>Select Research  Units To Print</legend>
                             <div>
-                                <input type="checkbox" id="report8" class="unit" value="atmosphericsciencesresearchcenter.html">
-                                <label for="coding">Atmospheric Sciences Research Center</label>
+                                <input type="checkbox" id="report8" class="unit" value="atmosphericsciencesresearchcenter">
+                                <label>Atmospheric Sciences Research Center</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report9" class="unit" value="centerforfunctionalgenomics.html">
-                                <label for="music"> Center for Functional Genomics</label> </label>
+                                <input type="checkbox" id="report9" class="unit" value="centerforfunctionalgenomics">
+                                <label> Center for Functional Genomics</label> </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report10" class="unit" value="centerforhumanservicesresearch.html">
-                                <label for="art">Center for Human Services Research</label>
+                                <input type="checkbox" id="report10" class="unit" value="centerforhumanservicesresearch">
+                                <label>Center for Human Services Research</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report11" class="unit" value="centerforsocial&demographicanalysis.html">
-                                <label for="sports">Center for Social & Demographic Analysis</label>
+                                <input type="checkbox" id="report11" class="unit" value="centerforsocial&demographicanalysis">
+                                <label>Center for Social & Demographic Analysis</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report12" class="unit" value="centerfortechnologyingovernment.html">
-                                <label for="cooking">Center for Technology in Government </label>
+                                <input type="checkbox" id="report12" class="unit" value="centerfortechnologyingovernment">
+                                <label>Center for Technology in Government </label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report13" class="unit" value="instituteforhealth&theenvironment.html">
-                                <label for="cooking">Institute for Health & the Environment</label>
+                                <input type="checkbox" id="report13" class="unit" value="instituteforhealth&theenvironment">
+                                <label>Institute for Health & the Environment</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report14" class="unit" value="instituteforinformaticslogicsandsecuritystudies.html">
-                                <label for="cooking">Institute for Informatics, Logics and Security Studies</label>
+                                <input type="checkbox" id="report14" class="unit" value="instituteforinformaticslogicsandsecuritystudies">
+                                <label>Institute for Informatics, Logics and Security Studies</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report15" class="unit" value="ionbeamlaboratory.html">
-                                <label for="cooking">Ion Beam Laboratory</label>
+                                <input type="checkbox" id="report15" class="unit" value="ionbeamlaboratory">
+                                <label>Ion Beam Laboratory</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report16" class="unit" value="nysmesonet.html">
-                                <label for="cooking">NYS Mesonet</label>
+                                <input type="checkbox" id="report16" class="unit" value="nysmesonet">
+                                <label>NYS Mesonet</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="report17" class="unit" value="rnaepitranscriptomicslab.html">
-                                <label for="cooking">RNA Epitranscriptomics Lab</label>
+                                <input type="checkbox" id="report17" class="unit" value="rnaepitranscriptomicslab">
+                                <label>RNA Epitranscriptomics Lab</label>
                             </div>
-                        </fieldset>
-                       
-                        
+                        </fieldset> 
                         <fieldset id="type">
                             <legend>Select Type of Report to print</legend>
                             <div>
-                                <input type="checkbox" id="type1" class="type" value="19-20">
-                                <label for="coding">Assessment (2019-2020)</label>
+                                <input type="checkbox" id="type1" class="type" value="assessment">
+                                <label id="assessment-label">Assessment (2020-2021)</label>
                             </div>
                             <div>
-                                <input type="checkbox" id="type2" class="type" value="20-21">
-                                <label for="music">Planning (2020-2021)</label>
+                                <input type="checkbox" id="type2" class="type" value="planning">
+                                <label id="planning-label">Planning (2021-2022)</label>
                             </div>
                         </fieldset>
                         <div>
@@ -235,116 +237,6 @@
     <script>addsidemenu("PRINT REPORTS")</script>
     <script src="js/printfunctions.js"></script>
     <script src="js/print.js"></script>
-    <script>
-        $(window).on("load", function () {
-            localStorage.clear();
-            /* Research Cneter dATA*/
-            let atmosphericsciencesresearchcenter = "data/atmosphericsciencesresearchcenter.json";
-            let centerforfunctionalgenomics = "data/centerforfunctionalgenomics.json";
-            let centerforhumanservicesresearch= "data/centerforhumanservicesresearch.json";
-            let centerforsocialdemographicanalysis = "data/centerforsocial&demographicanalysis.json";
-            let centerfortechnologyingovernment ="data/centerfortechnologyingovernment.json";
-            let instituteforhealththeenvironment = "data/instituteforhealth&theenvironment.json";
-            let instituteforinformaticslogicsandsecuritystudies = "data/instituteforinformaticslogicsandsecuritystudies.json";
-            let ionbeamlaboratory = "data/ionbeamlaboratory.json";
-            let nysmesonet ="data/nysmesonet.json";
-            let rnaepitranscriptomicslab = "data/rnaepitranscriptomicslab.json";
-            /* Administrative Units*/
-            let communityandeconomicdevelopment = "data/communityandeconomicdevelopment.json";
-            let facultyresearchdevelopment = "data/facultyresearchdevelopment.json";
-            let innovationdevelopmentandcommercialization= "data/innovationdevelopmentandcommercialization(oidc).json";
-            let regulatoryandresearchcompliance = "data/regulatoryandresearchcompliance.json";
-            let researchfoundationhumanresources ="data/researchfoundationhumanresources.json";
-            let sponsoredprogramsadministration = "data/sponsoredprogramsadministration.json";
-            let strategicplanningassessmentdataanalyticsandtechnology = "data/strategicplanningassessmentdataanalyticsandtechnology.json";
-            /* Research Cneter request*/
-            const atmosphericsciencesresearchcenter_Request = axios.get(atmosphericsciencesresearchcenter);
-            const centerforfunctionalgenomics_Request = axios.get(centerforfunctionalgenomics);
-            const centerforhumanservicesresearch_request= axios.get(centerforhumanservicesresearch);
-            const centerforsocialdemographicanalysis_request= axios.get(centerforsocialdemographicanalysis);
-            const centerfortechnologyingovernment_request= axios.get(centerfortechnologyingovernment);
-            const instituteforhealththeenvironment_request= axios.get(instituteforhealththeenvironment);
-            const instituteforinformaticslogicsandsecuritystudies_request= axios.get(instituteforinformaticslogicsandsecuritystudies);
-            const ionbeamlaboratory_request= axios.get(ionbeamlaboratory);
-            const nysmesonet_request= axios.get(nysmesonet);
-            const rnaepitranscriptomicslab_request= axios.get(rnaepitranscriptomicslab);
-            /* Administrative Units request*/
-            const communityandeconomicdevelopment_Request = axios.get(communityandeconomicdevelopment);
-            const facultyresearchdevelopment_Request = axios.get(facultyresearchdevelopment);
-            const innovationdevelopmentandcommercialization_request= axios.get(innovationdevelopmentandcommercialization);
-            const regulatoryandresearchcompliance_request= axios.get(regulatoryandresearchcompliance);
-            const researchfoundationhumanresources_request= axios.get(researchfoundationhumanresources);
-            const sponsoredprogramsadministration_request= axios.get(sponsoredprogramsadministration);
-            const strategicplanningassessmentdataanalyticsandtechnology_request= axios.get(strategicplanningassessmentdataanalyticsandtechnology);
-            /* calls*/
-            axios.all([atmosphericsciencesresearchcenter_Request, 
-            centerforfunctionalgenomics_Request,
-            centerforhumanservicesresearch_request,
-            centerforsocialdemographicanalysis_request,
-            centerfortechnologyingovernment_request,
-            instituteforhealththeenvironment_request,
-            instituteforinformaticslogicsandsecuritystudies_request,
-            ionbeamlaboratory_request,
-            nysmesonet_request,
-            rnaepitranscriptomicslab_request,
-            communityandeconomicdevelopment_Request,
-            facultyresearchdevelopment_Request,
-            innovationdevelopmentandcommercialization_request,
-            regulatoryandresearchcompliance_request,
-            researchfoundationhumanresources_request,
-            sponsoredprogramsadministration_request,
-            strategicplanningassessmentdataanalyticsandtechnology_request
-            ]).then(axios.spread((...responses) => {
-            const atmosphericsciencesresearchcenter_Reponses = responses[0];
-            const centerforfunctionalgenomics_Reponses = responses[1];
-            const centerforhumanservicesresearch_Reponses = responses[2];
-            const centerforsocialdemographicanalysis_response = responses[3];
-            const centerfortechnologyingovernment_response = responses[4];
-            const instituteforhealththeenvironment_response = responses[5];
-            const instituteforinformaticslogicsandsecuritystudies_response = responses[6];
-            const ionbeamlaboratory_response = responses[7];
-            const nysmesonet_response = responses[8];
-            const rnaepitranscriptomicslab_response = responses[9];
-
-            /* Administrative units*/
-            const  communityandeconomicdevelopment_Reponses =responses[10];
-            const facultyresearchdevelopment_Reponses = responses[11];
-            const innovationdevelopmentandcommercialization_Reponses =responses[12];
-            const regulatoryandresearchcompliance_Reponses =responses[13];
-            const researchfoundationhumanresources_Reponses =responses[14];
-            const sponsoredprogramsadministration_Reponses =responses[15];
-            const strategicplanningassessmentdataanalyticsandtechnology_Reponses =responses[16];
-
-            /* end Administrative units*/
-            localStorage.setItem("atmosphericsciencesresearchcenter",JSON.stringify(atmosphericsciencesresearchcenter_Reponses));
-            // console.log(localStorage.getItem("atmosphericsciencesresearchcenter"));
-            localStorage.setItem("centerforfunctionalgenomics",JSON.stringify(centerforfunctionalgenomics_Reponses));
-            localStorage.setItem("centerforhumanservicesresearch",JSON.stringify(centerforhumanservicesresearch_Reponses));
-
-            localStorage.setItem("centerforsocial&demographicanalysis",JSON.stringify(centerforsocialdemographicanalysis_response));
-            localStorage.setItem("centerfortechnologyingovernment",JSON.stringify(centerfortechnologyingovernment_response));
-            localStorage.setItem("instituteforhealth&theenvironment",JSON.stringify(instituteforhealththeenvironment_response));
-            localStorage.setItem("instituteforinformaticslogicsandsecuritystudies",
-            JSON.stringify(instituteforinformaticslogicsandsecuritystudies_response));
-            localStorage.setItem("ionbeamlaboratory",JSON.stringify(ionbeamlaboratory_response));
-            localStorage.setItem("nysmesonet",JSON.stringify(nysmesonet_response));
-            localStorage.setItem("rnaepitranscriptomicslab",JSON.stringify(rnaepitranscriptomicslab_response));
-
-
-            /* Administrative units*/
-            localStorage.setItem("communityandeconomicdevelopment",JSON.stringify(communityandeconomicdevelopment_Reponses));
-            localStorage.setItem("facultyresearchdevelopment",JSON.stringify(facultyresearchdevelopment_Reponses));
-            localStorage.setItem("innovationdevelopmentandcommercialization(oidc)",JSON.stringify(innovationdevelopmentandcommercialization_Reponses));
-            localStorage.setItem("regulatoryandresearchcompliance",JSON.stringify(regulatoryandresearchcompliance_Reponses));
-            localStorage.setItem("researchfoundationhumanresources",JSON.stringify(researchfoundationhumanresources_Reponses));
-            localStorage.setItem("sponsoredprogramsadministration",JSON.stringify(sponsoredprogramsadministration_Reponses));
-            localStorage.setItem("strategicplanningassessmentdataanalyticsandtechnology",JSON.stringify(strategicplanningassessmentdataanalyticsandtechnology_Reponses));          
-            /* end Administrative units*/
-            })).catch(errors => {
-            console.log(errors);
-            })
-        });
-    </script>
 </body>
 
 </html>
