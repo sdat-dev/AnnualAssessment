@@ -150,25 +150,25 @@ function printAssessmentReport(type){
     let content = '';
     if(type == 'admin')
     {
-        if(year == 'FY2019-2020')
+        if(period == 'FY2019-2020')
         {
-            content = printAdminAssessment20(data.FY1920);
+            content = printAdminAssessment(data.FY1920,'2019','2020');
         }
         else
         {
-            content = printAdminAssessment(data.FY2021)
+            content = printAdminAssessment(data.FY2021,'2020','2021')
         }
        
     }
     else
     {
-        if(year == 'FY2019-2020')
+        if(period == 'FY2019-2020')
         {
-            content = printResearchAssessment20(data.FY1920);
+            content = printResearchAssessment(data.FY1920,'2019','2020');
         }
         else
         {
-            content = printResearchUnit2021(data.FY2021)
+            content = printResearchAssessment(data.FY2021,'2020','2021')
         }
     }
     
@@ -185,22 +185,22 @@ function printPlanningReport(type){
     {
         if(period == 'FY2019-2020')
         {
-            content = printAdminPlanning20(data.FY2021);
+            content = printAdminPlanning(data.FY2021, '2020','2021');
         }
         else
         {
-            content = printAdminPlanning(data.FY2122)
+            content = printAdminPlanning(data.FY2122, '2021','2022');
         }       
     }
     else
     {
-        if(year == 'FY2019-2020')
+        if(period == 'FY2019-2020')
         {
-            content = printResearchPlanning20(data.FY2021);
+            content = printResearchPlanning(data.FY2021,'2020','2021');
         }
         else
         {
-            content = printResearchPlanning(data.FY2122)
+            content = printResearchPlanning(data.FY2122,'2021','2022');
         }
     }
     

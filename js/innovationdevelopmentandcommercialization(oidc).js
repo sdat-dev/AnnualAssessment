@@ -61,7 +61,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
     content += '<p><b>Director\'s Name: </b>' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName +
         '<br><b>Director\'s Email: </b>' + reportdata.RecipientEmail +
         '<br><b>Reporting Period: </b>July 1, ' + year1 + ' to June 30, ' + year2 +
-        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2019)">Print</button>';
+        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printAssessmentReport(\'admin\')">Print</button>';
     content += '<div id = "FY' + year1 + '">';
 
     let ids = getIds('FY' + year1);
@@ -173,7 +173,7 @@ let addPlanningReport = function (reportdata, year1, year2) {
     content += '<p><b>Director\'s Name: </b>' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName +
         '<br><b>Director\'s Email: </b>' + reportdata.RecipientEmail +
         '<br><b>Reporting Period: </b>July 1, ' + year1 + ' to June 30, ' + year2 +
-        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\', 2021)">Print</button>';
+        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'admin\')">Print</button>';
     content += '<div id = "FY' + year2 + '">';
 
     let ids = getIds('FY' + year2);
@@ -336,16 +336,4 @@ let addSmartGoalPlan = function (ids, goal, year) {
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>' + (goal.collaborations == '' ? 'N/A' : goal.collaborations) + '</p>';
     smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>' + (goal.impact == '' ? 'N/A' : goal.impact) + '</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal " + goal.no, smartgoal);
-}
-
-let getPeriod = function (year) {
-    let period = '';
-    if (year == 2019)
-        period = '19-20';
-    else if (year == 2020)
-        period = '20-21';
-    else
-        period = '21-22';
-
-    return period;
 }

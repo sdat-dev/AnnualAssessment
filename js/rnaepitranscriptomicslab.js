@@ -65,7 +65,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
     content += '<p><b>Director\'s Name: </b>' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName +
         '<br><b>Director\'s Email: </b>' + reportdata.RecipientEmail +
         '<br><b>Reporting Period: </b>July 1, ' + year1 + ' to June 30, ' + year2 +
-        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2019)">Print</button>';
+        '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printAssessmentReport(\'researchcenter\')">Print</button>';
     content += '<div id = "FY' + year1 + '">';
 
     let ids = getIds('FY' + year1);
@@ -92,7 +92,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
 
     data["total3"] = checkNull(reportdata.Q43_4_1);
     data["total33"] = checkNull(reportdata.Q43_4_2);
-    content += addResearceAnnualBudget19(ids, data);
+    content += addResearceAnnualBudget(ids, data);
 
     ids = getIds('FY' + year1);
     data = {};
@@ -211,7 +211,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
     data["nature_of_mentoring_graduate"] = checkNull(reportdata.Q71_3_2);
     data["nature_of_mentoring_graduate_phd"] = checkNull(reportdata.Q71_3_4);
     data["nature_of_mentoringl_phd"] = checkNull(reportdata.Q71_3_5);
-    content += addEducation19(ids, data);
+    content += addEducation(ids, data);
 
     for (var i = 9; i < 14; i++) {
         ids = getIds('FY' + year1);
@@ -293,7 +293,7 @@ let addPlanningReport = function (reportdata, year1, year2) {
         content += '<p><b>Director\'s Name: </b>' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName +
             '<br><b>Director\'s Email: </b>' + reportdata.RecipientEmail +
             '<br><b>Reporting Period: </b>July 1, ' + year1 + ' to June 30, ' + year2 +
-            '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\', 2021)">Print</button>';
+            '<button type="button" style="float:right; background-color: #46166b; color:white ; padding-left: 10px; padding-right: 10px; padding-top: 5px; padding-bottom: 2px; margin-right: 1px;text-align: center; margin: 0 auto;"onclick="printPlanningReport(\'researchcenter\')">Print</button>';
 
         content += '<div id = "FY' + year1 + '">';
 
@@ -519,12 +519,6 @@ let addResearchPerformancetarget = function (ids, data, year) {
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Research Performanace Target ", researchContent);
 }
 
-
-
-
-
-
-
 let addMissionAndVision = function (ids, data) {
     let misionandvision = '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
@@ -546,7 +540,7 @@ let addAnnualBudget = function (ids, data) {
 }
 
 
-let addResearceAnnualBudget19 = function (ids, data) {
+let addResearceAnnualBudget = function (ids, data) {
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -765,7 +759,7 @@ let addresearchActivity = function (ids, data, year) {
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Detailed Activity Report Research and Scholarly Activities", researchActivity);
 }
 /* research end */
-let addEducation19 = function (ids, data, year) {
+let addEducation = function (ids, data, year) {
     let period = getPeriod(year);
     let eduContent = '<h4> EDUCATION AND TRAINING </h4>' +
         '<div class="annual-budget">' +
@@ -901,16 +895,4 @@ let addSmartGoalPlan = function (ids, goal, year) {
     smartgoal += '<p><b>Most Important Collaborating Units/Offices: </b>' + (goal.collaborations == '' ? 'N/A' : goal.collaborations) + '</p>';
     smartgoal += '<p><b>Impact on Research Excellence (Campus Strategic Priorities): </b>' + (goal.impact == '' ? 'N/A' : goal.impact) + '</p>';
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "SMART Goal " + goal.no, smartgoal);
-}
-
-let getPeriod = function (year) {
-    let period = '';
-    if (year == 2019)
-        period = '19-20';
-    else if (year == 2020)
-        period = '20-21';
-    else
-        period = '21-22';
-
-    return period;
 }
