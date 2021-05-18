@@ -68,22 +68,35 @@ let goalDetailsAdmin = function (reportdata, year1, year2) {
     }
 
     data = [];
-    if (reportdata.Q131_8 != '')
-        data.push(reportdata.Q83);
-    if (reportdata.Q131_9 != '')
-        data.push(reportdata.Q93);
-    if (reportdata.Q131_13 != '')
-        data.push(reportdata.Q103);
-    if (reportdata.Q131_11 != '')
-        data.push(reportdata.Q113);
-    if (reportdata.Q131_12 != '')
-        data.push(reportdata.Q123);
-    if (reportdata.Q132_4 != '')
-        data.push(reportdata.Q132_4);
-    if (reportdata.Q132_5 != '')
-        data.push(reportdata.Q132_5);
-    if (reportdata.Q132_6 != '')
-        data.push(reportdata.Q132_6);
+    if (year1 != 2019) {
+        if (reportdata.Q131_8 != '' && reportdata.Q86 != '')
+            data.push(reportdata.Q86);
+        if (reportdata.Q131_9 != '' && reportdata.Q96 != '')
+            data.push(reportdata.Q96);
+        if (reportdata.Q131_13 != '' && reportdata.Q106 != '')
+            data.push(reportdata.Q106);
+        if (reportdata.Q131_11 != '' && reportdata.Q116 != '')
+            data.push(reportdata.Q116);
+        if (reportdata.Q131_12 != '' && reportdata.Q126 != '')
+            data.push(reportdata.Q126);
+        if (reportdata.Q132_4 != '')
+            data.push(reportdata.Q132_4);
+        if (reportdata.Q132_5 != '')
+            data.push(reportdata.Q132_5);
+        if (reportdata.Q132_6 != '')
+            data.push(reportdata.Q132_6);
+        if (reportdata.Q132_7 != '')
+            data.push(reportdata.Q132_7);
+        if (reportdata.Q132_8 != '')
+            data.push(reportdata.Q132_8);
+    } else {
+        if (reportdata.Q132_4 != '')
+            data.push(reportdata.Q132_4);
+        if (reportdata.Q132_5 != '')
+            data.push(reportdata.Q132_5);
+        if (reportdata.Q132_6 != '')
+            data.push(reportdata.Q132_6);
+    }
     content += printTopAchievements(data);
 
     data["opportunities"] = reportdata.Q141;
@@ -475,12 +488,43 @@ function printResearchAssessment(reportdata, year1, year2){
     content_research += goalDetailsResearch(reportdata);
 
     achievementdata = [];
-    if (reportdata.Q81_4 != '')
-        achievementdata.push(reportdata.Q81_4);
-    if (reportdata.Q81_5 != '')
-        achievementdata.push(reportdata.Q81_5);
-    if (reportdata.Q81_6 != '')
-        achievementdata.push(reportdata.Q81_6);
+    if (year1 == 2019) {
+        if (reportdata.Q81_4 != '')
+            achievementdata.push(reportdata.Q81_4);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_5 != '')
+            achievementdata.push(reportdata.Q81_5);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_6 != '')
+            achievementdata.push(reportdata.Q81_6);
+        else
+            achievementdata.push("N/A");
+    }
+    else {
+        if (reportdata.Q81_4 != '')
+            achievementdata.push(reportdata.Q81_4);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_5 != '')
+            achievementdata.push(reportdata.Q81_5);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_6 != '')
+            achievementdata.push(reportdata.Q81_6);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_7 != '')
+            achievementdata.push(reportdata.Q81_7);
+        else
+            achievementdata.push("N/A");
+        if (reportdata.Q81_8 != '')
+            achievementdata.push(reportdata.Q81_8);
+        else
+            achievementdata.push("N/A");
+    }
+
 
     content_research += printTopAchievements(achievementdata);
     content_research += '<br><br>';

@@ -224,7 +224,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
 
     ids = getIds('FY' + year1);
     data = [];
-    if (ids.parentId != "FY2020") {
+    if (ids.parentId == "FY2019") {
         if (reportdata.Q81_4 != '')
             data.push(reportdata.Q81_4);
         else
