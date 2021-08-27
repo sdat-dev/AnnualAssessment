@@ -1,31 +1,18 @@
-let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"ANNUAL ASSESSMENTS","link":"annualassessments.html"},{"item":"ADMINISTRATIVE UNIT REPORTS","link":"#","subItems":[{"item":"Community and Economic Development","link":"communityandeconomicdevelopment.html"},{"item":"Faculty Research Development","link":"facultyresearchdevelopment.html"},{"item":"Innovation Development and Commercialization (OIDC)","link":"innovationdevelopmentandcommercialization(oidc).html"},{"item":"Institutes, Centers, & Specialized Labs (ICL)","link":"institutescenters&specializedlabs(icl).html"},{"item":"Institutes, Centers, and Specialized Labs (ICL)","link":"institutescentersandspecializedlabs(icl).html"},{"item":"Regulatory and Research Compliance","link":"regulatoryandresearchcompliance.html"},{"item":"Research Foundation Human Resources","link":"researchfoundationhumanresources.html"},{"item":"Sponsored Programs Administration","link":"sponsoredprogramsadministration.html"},{"item":"Strategic Planning, Assessment, Data Analytics, and Technology","link":"strategicplanningassessmentdataanalyticsandtechnology.html"}]},{"item":"RESEARCH UNIT REPORTS","link":"#","subItems":[{"item":"Atmospheric Sciences Research Center","link":"atmosphericsciencesresearchcenter.html"},{"item":"Center for Functional Genomics","link":"centerforfunctionalgenomics.html"},{"item":"Center for Human Services Research","link":"centerforhumanservicesresearch.html"},{"item":"Center for Social & Demographic Analysis","link":"centerforsocial&demographicanalysis.html"},{"item":"Center for Technology in Government","link":"centerfortechnologyingovernment.html"},{"item":"Institute for Health & the Environment","link":"instituteforhealth&theenvironment.html"},{"item":"Ion Beam Laboratory","link":"ionbeamlaboratory.html"},{"item":"NYS Mesonet","link":"nysmesonet.html"},{"item":"RNA Epitranscriptomics Lab","link":"rnaepitranscriptomicslab.html"}]},{"item":"STEPS TO COMPLETION","link":"steps-to-completion.html"},{"item":"BENEFITS","link":"benifits.html"},{"item":"PRINT REPORTS","link":"print.html"},{"item":"QUESTIONS?","link":"questions.html"}]
+let sidemenuItems = [{"item":"HOME","link":"home.html"},{"item":"ANNUAL ASSESSMENTS","link":"annualassessments.html"},{"item":"ADMINISTRATIVE UNIT REPORTS","link":"#","subItems":[{"item":"FY2019-2020","link":"administrativeunitreports-FY2019-2020.html"},{"item":"FY2020-2021","link":"administrativeunitreports-FY2020-2021.html"}]},{"item":"RESEARCH CENTER REPORTS","link":"#","subItems":[{"item":"FY2019-2020","link":"researchcenterreports-FY2019-2020.html"},{"item":"FY2020-2021","link":"researchcenterreports-FY2020-2021.html"}]},{"item":"STEPS TO COMPLETION","link":"steps-to-completion.html"},{"item":"BENEFITS","link":"benifits.html"},{"item":"PRINT REPORTS","link":"print.html"},{"item":"QUESTIONS?","link":"questions.html"}]
 //SideMenu Start
 //What evet written  before '//SideMenu Start' will be relace with sidemenuItems in automation scripts
-let addsidemenu = function(page){
+let addsidemenu = function(page, subpage){
     let sidemenu = document.getElementById('navigation-bar');
 
     for(let i = 0; i < sidemenuItems.length; i++){
         let item = sidemenuItems[i];
-        var addsubmenu = false;
-        if(item.hasOwnProperty('subItems')){
-            let subitems = item.subItems;
-            subitems.forEach(element => {
-                if(element.item == page)
-                {
-                    addsubmenu = true;
-                    return;
-                }
-            });
-        }
-        if( addsubmenu == false)
-        {
+
+        if(page != item.item){
             let link = '';
-            if(item.hasOwnProperty('subItems'))
-            {
+            if(item.hasOwnProperty('subItems') && item.link == '#'){
                 link = item.subItems[0].link;
             } 
-            else
-            {
+            else{
                 link = item.link;
             }
 
@@ -34,51 +21,65 @@ let addsidemenu = function(page){
             menuItem.innerHTML = menuItemContent;
             menuItem.classList.add('navigation-items');
             menuItem.classList.add('hover-highlight');
-            if(page == item.item)
-            {
-                menuItem.setAttribute("id", "active-page");
-            }
             sidemenu.appendChild(menuItem);
         }
-        else
-        {
-            let subitems = item.subItems;
-            let submenu = '<ul id="sub-navigation-bar">';
-            for(var j = 0; j< subitems.length; j++)
-            {
-                if(j == 0)
-                {
-                    submenu +='<li class="first-sub-navigation-item hover-highlight"';
-                    if(page == subitems[j].item)
-                    {
-                        submenu += ' id = "active-page"';
-                    }
-                    submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
+        else{
+            if(subpage == ""){
+                let link = '';
+                if(item.hasOwnProperty('subItems') && item.link == '#'){
+                    link = item.subItems[0].link;
+                } 
+                else{
+                    link = item.link;
                 }
-                else if(j == subitems.length-1)
-                {
-                    submenu +='<li class="last-sub-navigation-item hover-highlight"';
-                    if(page == subitems[j].item)
-                    {
-                        submenu += ' id = "active-page"';
-                    }
-                    submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
-                }
-                else
-                {
-                    submenu +='<li class="sub-navigation-items hover-highlight"';
-                    if(page == subitems[j].item)
-                    {
-                        submenu += ' id = "active-page"';
-                    }
-                    submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
-                }
+
+                let menuItem = document.createElement("li");
+                let menuItemContent = '<a href="' + link + '">'+ item.item +'</a>'; 
+                menuItem.innerHTML = menuItemContent;
+                menuItem.classList.add('navigation-items');
+                menuItem.classList.add('hover-highlight');
+                menuItem.setAttribute("id", "active-page");
+                sidemenu.appendChild(menuItem);
             }
-            let menuItem = document.createElement("li");
-            let menuItemContent = '<a href="' + subitems[0].link + '">'+ item.item +'</a>' + submenu; 
-            menuItem.innerHTML = menuItemContent;
-            menuItem.setAttribute("id", "expanded-navigation-item");
-            sidemenu.appendChild(menuItem);
+            else{
+                let subitems = item.subItems;
+                let submenu = '<ul id="sub-navigation-bar">';
+                for(var j = 0; j< subitems.length; j++)
+                {
+                    if(j == 0)
+                    {
+                        submenu +='<li class="first-sub-navigation-item hover-highlight"';
+                        if(subpage == subitems[j].item)
+                        {
+                            submenu += ' id = "active-page"';
+                        }
+                        submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
+                    }
+                    else if(j == subitems.length-1)
+                    {
+                        submenu +='<li class="last-sub-navigation-item hover-highlight"';
+                        if(subpage == subitems[j].item)
+                        {
+                            submenu += ' id = "active-page"';
+                        }
+                        submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
+                    }
+                    else
+                    {
+                        submenu +='<li class="sub-navigation-items hover-highlight"';
+                        if(subpage == subitems[j].item)
+                        {
+                            submenu += ' id = "active-page"';
+                        }
+                        submenu += '><a href="'+ subitems[j].link +'">'+ subitems[j].item +'</a></li>';
+                    }
+                }
+                let menuItem = document.createElement("li");
+                let menuItemContent = '<a href="' + subitems[0].link + '">'+ item.item +'</a>' + submenu; 
+                menuItem.innerHTML = menuItemContent;
+                menuItem.setAttribute("id", "expanded-navigation-item");
+                sidemenu.appendChild(menuItem);
+                }  
         }
     }
 }
@@ -145,30 +146,33 @@ function getDate(serial){
 }
 
 function printAssessmentReport(type){
-    var period = document.getElementById("selectperiod").value;
-    let data = JSON.parse(localStorage.getItem(period));
+    var unit = document.getElementById("selectunit").value;
+    let reportdata = JSON.parse(localStorage.getItem("data"));
+    let unitdata = reportdata.data.filter(d => {
+        return d.ExternalReference == unit;
+    })[0];
     let content = '';
     if(type == 'admin')
     {
-        if(period == 'FY2019-2020')
+        if(reportdata.FY == 'FY2019-2020')
         {
-            content = printAdminAssessment(data.FY1920,'2019','2020');
+            content = printAdminAssessment(unitdata.FY1920,'2019','2020');
         }
         else
         {
-            content = printAdminAssessment(data.FY2021,'2020','2021')
+            content = printAdminAssessment(unitdata.FY2021,'2020','2021')
         }
        
     }
     else
     {
-        if(period == 'FY2019-2020')
+        if(reportdata.FY == 'FY2019-2020')
         {
-            content = printResearchAssessment(data.FY1920,'2019','2020');
+            content = printResearchAssessment(unitdata.FY1920,'2019','2020');
         }
         else
         {
-            content = printResearchAssessment(data.FY2021,'2020','2021')
+            content = printResearchAssessment(unitdata.FY2021,'2020','2021')
         }
     }
     
@@ -178,29 +182,32 @@ function printAssessmentReport(type){
 }
 
 function printPlanningReport(type){
-    var period = document.getElementById("selectperiod").value;
-    let data = JSON.parse(localStorage.getItem(period));
+    var unit = document.getElementById("selectunit").value;
+    let reportdata = JSON.parse(localStorage.getItem("data"));
+    let unitdata = reportdata.data.filter(d => {
+        return d.ExternalReference == unit;
+    })[0];
     let content = '';
     if(type == 'admin')
     {
-        if(period == 'FY2019-2020')
+        if(reportdata.FY == 'FY2019-2020')
         {
-            content = printAdminPlanning(data.FY2021, '2020','2021');
+            content = printAdminPlanning(unitdata.FY2021, '2020','2021');
         }
         else
         {
-            content = printAdminPlanning(data.FY2122, '2021','2022');
+            content = printAdminPlanning(unitdata.FY2122, '2021','2022');
         }       
     }
     else
     {
-        if(period == 'FY2019-2020')
+        if(reportdata.FY == 'FY2019-2020')
         {
-            content = printResearchPlanning(data.FY2021,'2020','2021');
+            content = printResearchPlanning(unitdata.FY2021,'2020','2021');
         }
         else
         {
-            content = printResearchPlanning(data.FY2122,'2021','2022');
+            content = printResearchPlanning(unitdata.FY2122,'2021','2022');
         }
     }
     
@@ -209,8 +216,24 @@ function printPlanningReport(type){
     win.document.close(); 
 }
 
-function changeReportPeriod(){
-    var period = document.getElementById("selectperiod").value;
-    let data = JSON.parse(localStorage.getItem(period));
-    buildReport(data, period);
+function changeReportUnit(){
+    var unit = document.getElementById("selectunit").value;
+    let reportdata = JSON.parse(localStorage.getItem("data"));
+    let unitdata = reportdata.data.filter(d => {
+        return d.ExternalReference == unit;
+    })[0];
+    buildReport(unitdata, reportdata.FY);
+}
+
+let getDistinctAttributes = function (objects, attribute) {
+    if(objects == null)
+        return [];
+    let mappedAttributes = objects.map(function (object) {
+        return object[attribute];
+    });
+    let distinctAttributes = mappedAttributes.filter(function (v, i, a) {
+        return a.indexOf(v) === i;
+    });
+
+    return distinctAttributes;
 }
