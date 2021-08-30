@@ -125,44 +125,23 @@ let addAssessmentReport = function (reportdata, year1, year2) {
 
     ids = getIds('FY' + year1);
     data = [];
-    if (ids.parentId != "FY2019") {
-        if (reportdata.Q131_8 != '' && reportdata.Q86 != '')
-            data.push(reportdata.Q86);
-        if (reportdata.Q131_9 != '' && reportdata.Q96 != '')
-            data.push(reportdata.Q96);
-        if (reportdata.Q131_13 != '' && reportdata.Q106 != '')
-            data.push(reportdata.Q106);
-        if (reportdata.Q131_11 != '' && reportdata.Q116 != '')
-            data.push(reportdata.Q116);
-        if (reportdata.Q131_12 != '' && reportdata.Q126 != '')
-            data.push(reportdata.Q126);
-        if (reportdata.Q132_4 != '')
-            data.push(reportdata.Q132_4);
-        if (reportdata.Q132_5 != '')
-            data.push(reportdata.Q132_5);
-        if (reportdata.Q132_6 != '')
-            data.push(reportdata.Q132_6);
-        if (reportdata.Q132_7 != '')
-            data.push(reportdata.Q132_7);
-        if (reportdata.Q132_8 != '')
-            data.push(reportdata.Q132_8);
-    }
-    else {
-        // if (reportdata.Q131_8 != '')
-        //     data.push(reportdata.Q86);
-        // if (reportdata.Q131_9 != '')
-        //     data.push(reportdata.Q96);
-        // if (reportdata.Q131_13 != '')
-        //     data.push(reportdata.Q106);
-        // if (reportdata.Q131_11 != '')
-        //     data.push(reportdata.Q116);
-        if (reportdata.Q132_4 != '')
-            data.push(reportdata.Q132_4);
-        if (reportdata.Q132_5 != '')
-            data.push(reportdata.Q132_5);
-        if (reportdata.Q132_6 != '')
-            data.push(reportdata.Q132_6);
-    }
+
+    if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
+        data.push(reportdata.Q83);
+    if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
+        data.push(reportdata.Q93);
+    if (reportdata.Q131_13 != '' && reportdata.Q103 != '')
+        data.push(reportdata.Q103);
+    if (reportdata.Q131_11 != '' && reportdata.Q113 != '')
+        data.push(reportdata.Q113);
+    if (reportdata.Q131_12 != '' && reportdata.Q123 != '')
+        data.push(reportdata.Q123);
+    if (reportdata.Q132_4 != '')
+        data.push(reportdata.Q132_4);
+    if (reportdata.Q132_5 != '')
+        data.push(reportdata.Q132_5);
+    if (reportdata.Q132_6 != '')
+        data.push(reportdata.Q132_6);
     content += addTopAchievements(ids, data);
 
     ids = getIds('FY' + year1);
