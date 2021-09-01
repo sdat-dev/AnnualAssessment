@@ -120,11 +120,11 @@ let addAssessmentReport = function (reportdata, year1, year2) {
                 reportdata["Q" + i + "3"], reportdata["Q" + i + "4"], reportdata["Q" + i + "5"], reportdata["Q" + i + "6"], reportdata["Q" + i + "7"]);
             content += addSmartGoal(ids, goal, year1);
         }
-
     }
 
     ids = getIds('FY' + year1);
     data = [];
+
     if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
         data.push(reportdata.Q83);
     if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
@@ -141,6 +141,7 @@ let addAssessmentReport = function (reportdata, year1, year2) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6 != '')
         data.push(reportdata.Q132_6);
+    
     content += addTopAchievements(ids, data);
 
     ids = getIds('FY' + year1);
