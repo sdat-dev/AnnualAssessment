@@ -6,18 +6,21 @@ window.onload = function () {
         let responsedata = responses[0].data;
         localStorage.clear();
         localStorage.setItem("data", JSON.stringify(responsedata));
-        
+
         let units = getDistinctAttributes(responsedata.data, "ExternalReference");
         let validunits = [];
-        for(i =0; i< units.length;i++){
-            if(units[i] != "")
+        for (i = 0; i < units.length; i++) {
+            if (units[i] == 'Faculty Research Development') {
+                units[i] = "Research Grants and Faculty Development";
+            }
+            if (units[i] != "")
                 validunits.push(units[i]);
         }
         let headercontent = ' <select id="selectunit" onchange="changeReportUnit()">';
-        for(i = 0; i < validunits.length; i++){
-            headercontent = headercontent + '<option value="'+ validunits[i]+'">'+ validunits[i] +'</option>';
+        for (i = 0; i < validunits.length; i++) {
+            headercontent = headercontent + '<option value="' + validunits[i] + '">' + validunits[i] + '</option>';
         }
-        headercontent = headercontent + '</select> '+ responsedata.FY;
+        headercontent = headercontent + '</select> ' + responsedata.FY;
         let contentHeadr = document.getElementsByClassName('report-header')[0];
         contentHeadr.innerHTML = headercontent;
 
@@ -141,7 +144,12 @@ let addAssessmentReport = function (reportdata, year1, year2) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6 != '')
         data.push(reportdata.Q132_6);
-    
+    if (reportdata.Q132_7 != '')
+        data.push(reportdata.Q132_7);
+    if (reportdata.Q132_8 != '')
+        data.push(reportdata.Q132_8);
+
+
     content += addTopAchievements(ids, data);
 
     ids = getIds('FY' + year1);
@@ -250,12 +258,16 @@ let achievementsData = function (reportdata) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6.trim() != '')
         data.push(reportdata.Q132_6);
-    if (data.size() == 3)
+    if (reportdata.Q132_7.trim() != '')
+        data.push(reportdata.Q132_8);
+    if (reportdata.Q132_8.trim() != '')
+        data.push(reportdata.Q132_8);
+    if (data.size() == 5)
         return data;
     let data1 = [];
     if (reportdata.Q131_8.trim() != '')
         data1.push(reportdata.Q83);
-    if (data.length + data1.length == 3) {
+    if (data.length + data1.length == 5) {
         data1.concat(data);
         return data1;
     }
@@ -295,8 +307,8 @@ let achievementsData = function (reportdata) {
 let addTopAchievements = function (ids, data) {
     let achievements = '<div class="achievements">';
     for (var i = 0; i < data.length; i++) {
-            achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
-            achievements += formatText(data[i]);
+        achievements += '<p><b>Achievement ' + (i + 1) + ': </b><p>';
+        achievements += formatText(data[i]);
     }
     achievements += "</div>";
     return generateAccordionElem(1, ids.collapseId, ids.headerId, ids.parentId, ids.childId, "Top 3-5 Achievements", achievements);

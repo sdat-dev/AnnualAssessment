@@ -1,5 +1,5 @@
 
-function printAdminAssessment(reportdata, year1, year2){
+function printAdminAssessment(reportdata, year1, year2) {
     let data = {};
     data["unit"] = reportdata["ExternalReference"];
 
@@ -18,7 +18,7 @@ function printAdminAssessment(reportdata, year1, year2){
     data["fteState"] = reportdata.Q42_2_1;
     data["fteRF"] = reportdata.Q42_2_2;
     let content = '';
-    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report ('+ year1 +'-'+ year2 +')</h1>' +
+    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report (' + year1 + '-' + year2 + ')</h1>' +
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
@@ -69,7 +69,7 @@ let goalDetailsAdmin = function (reportdata, year1, year2) {
 
     data = [];
     if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
-    data.push(reportdata.Q83);
+        data.push(reportdata.Q83);
     if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
         data.push(reportdata.Q93);
     if (reportdata.Q131_13 != '' && reportdata.Q103 != '')
@@ -84,6 +84,10 @@ let goalDetailsAdmin = function (reportdata, year1, year2) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6 != '')
         data.push(reportdata.Q132_6);
+    if (reportdata.Q132_7 != '')
+        data.push(reportdata.Q132_7);
+    if (reportdata.Q132_8 != '')
+        data.push(reportdata.Q132_8);
     content += printTopAchievements(data);
 
     data["opportunities"] = reportdata.Q141;
@@ -108,7 +112,7 @@ function printAdminPlanning(reportdata, year1, year2) {
     data["fteRF"] = reportdata.Q42_2_2;
 
 
-    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report ('+year1+'-'+year2+')</h1>' +
+    content = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (' + year1 + '-' + year2 + ')</h1>' +
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
         '<p class="mission">' + data.mission + '</p>' +
@@ -127,10 +131,10 @@ function printAdminPlanning(reportdata, year1, year2) {
     return content;
 }
 
-function printResearchAssessment(reportdata, year1, year2){
-  
+function printResearchAssessment(reportdata, year1, year2) {
+
     let data = {};
-    
+
     data["unit"] = reportdata.ExternalReference;
 
     data["mission"] = reportdata.Q31;
@@ -266,7 +270,7 @@ function printResearchAssessment(reportdata, year1, year2){
         data["partners"] = reportdata.partners;
     let content_research = '';
     let period = getPeriod(year1);
-    content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report ('+year1+'-'+year2+')</h1>';
+    content_research = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Annual Assessment Report (' + year1 + '-' + year2 + ')</h1>';
     content_research +=
 
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
@@ -308,7 +312,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4> Number of Research Proposals Submitted to Extramural Sponsors</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">Federal Applications</th><td style=" text-align: center;">' + data.federalApplicationgoals + '</td><td style=" text-align: center;">' +
         data.federalApplicationactual + '</td></tr>' +
@@ -328,7 +332,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4> Numbers of Awards Received from Extramural Sponsors  </h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">Federals Awards </th><td style=" text-align: center;">' + data.federalAwardsgoals + '</td><td style=" text-align: center;">' +
         data.federalAwardsactual + '</td></tr>' +
@@ -347,7 +351,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4> Number of Large Scale Proposals/Awards </h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">#Proposals </th><td style=" text-align: center;">' + data.proposal_goals + '</td><td style=" text-align: center;">' +
         data.proposal_actual + '</td></tr>' +
@@ -363,7 +367,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4>Numbers of STTR/SBIR Proposals/Awards</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">#Proposals </th><td style=" text-align: center;">' + data.stProposal_goals + '</td><td style=" text-align: center;">' +
         data.stProposal_actual + '</td></tr>' +
@@ -375,7 +379,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4>Number of Publications by Center/Institute/Lab in the past FY</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">Books Authored/Edited </th><td style=" text-align: center;">' + data.booksAuthoredgoals + '</td><td style=" text-align: center;">' +
         data.bookauthoredsactual + '</td></tr>' +
@@ -398,7 +402,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<div class="annual-budget">' +
         '<h4>Number of Intellectual Property/Technology Transfer/Commercialization in the Past FY </h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;"></td>' +
-        '<th class="border_bottom" width="36.5%">Your Goal in FY '+period+'</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
+        '<th class="border_bottom" width="36.5%">Your Goal in FY ' + period + '</th><th class="border_bottom" width="36.5%">Actual Number</th></tr></thead>' +
         '<tbody><tr>' +
         '<th class="border_right padding_bottom padding_top">Intellectual Property Disclosures </th><td style=" text-align: center;">' + data.intellctualgoals + '</td><td style=" text-align: center;">' +
         data.intellctualgoals + '</td></tr>' +
@@ -426,7 +430,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<h4> Numbers of all Keynote Address or Plenary Invited Presentations</h4>' +
         '<table width="100%">' +
         '<tbody><tr>' +
-        '<th class="padding_bottom padding_top">Your Goals for FY '+period+' </th><td style=" text-align: center;">' + data.yougoaloffy19020 + '</td></tr>' +
+        '<th class="padding_bottom padding_top">Your Goals for FY ' + period + ' </th><td style=" text-align: center;">' + data.yougoaloffy19020 + '</td></tr>' +
         '<tr><th class="">Actual Numbers </th><td style=" text-align: center;">' + data.actualnumbers + '</td>' +
         '</tbody></table></div>' +
         '<br/>' +
@@ -450,7 +454,7 @@ function printResearchAssessment(reportdata, year1, year2){
         '<th class="border_bottom" width=25%">Graduate - PhD </th>' +
         '<th class="border_bottom" width="25%">Postdoctoral </th>' +
         '</tr></thead>' +
-        '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY '+period+'</th><td style=" text-align: center;">' + data.students_goals_undergraduate + '</td>' +
+        '<tbody><tr><th class="border_right padding_bottom padding_top">#Students - Your Goal for FY ' + period + '</th><td style=" text-align: center;">' + data.students_goals_undergraduate + '</td>' +
         '<td style=" text-align: center;">' + data.students_goals_graduate + '</td> ' +
         '<td style=" text-align: center;">' + data.students_goals_graduate_phd + '</td> ' +
         '<td style=" text-align: center;">' + data.students_goals_phd + '</td> ' +
@@ -589,7 +593,7 @@ function printResearchPlanning(reportdata, year1, year2) {
     data["graduate_phd"] = checkNull(reportdata.Q58_3_1);
     data["post"] = checkNull(reportdata.Q58_4_1);
     let period = getPeriod(year1);
-    let content_research1 = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report ('+year1+'-'+year2+')</h1>';
+    let content_research1 = '<h1 style="text-align: center;">' + data.unit + '</h1><div style="margin-botton:30px;"></div><h1 style="text-align: center;">Planning Report (' + year1 + '-' + year2 + ')</h1>';
     content_research1 +=
         '<div style="margin-botton:30px;"></div><h3 style="text-align: center;">Director: ' + reportdata.RecipientFirstName + ' ' + reportdata.RecipientLastName + '</h3>' +
         '<h4>MISSION</h4>' +
@@ -609,7 +613,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> The target numbers are indicated below:</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Applications</th>' +
         '<td style=" text-align: center;">' + data.federalApplication + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">State Application</th><td style=" text-align: center;">' +
@@ -627,7 +631,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> The target numbers are indicated below:</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Federal Awards</th>' +
         '<td  style=" text-align: center;" >' + data.federalAwards + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">State Awards</th><td  style=" text-align: center;">' +
@@ -644,7 +648,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> Number of target for Large-Scale*, Multi-Investigator Proposals/Awards with Multi-Institutions</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>' +
         '<td  style=" text-align: center;">' + data.proposal + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">' +
@@ -660,7 +664,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> The target numbers are indicated below: </h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">#Proposals</th>' +
         '<td  style=" text-align: center;">' + data.stProposal + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">#Awards</th><td  style=" text-align: center;">' +
@@ -674,7 +678,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4>  The target numbers are indicated below:</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Books-Authored/Edited</th>' +
         '<td  style=" text-align: center;">' + data.booksAuthored + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">Books Chapters - Authored/Edited </th><td  style=" text-align: center;">' +
@@ -689,7 +693,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> The target numbers are indicated below:</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Intellectual Property Disclosures</th>' +
         '<td  style=" text-align: center;">' + data.intellectual + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">Patents Applications</th><td style=" text-align: center;" >' +
@@ -712,7 +716,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4> The target numbers are indicated below:</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Your Goal for FY 20-21</th>' +
         '<td style=" text-align: center;">' + data.goals + '</td></tr>' +
 
@@ -724,7 +728,7 @@ function printResearchPlanning(reportdata, year1, year2) {
         '<div class="annual-budget">' +
         '<h4>Number of Undergraduate/Graduate/Postdoc Trained.</h4>' +
         '<table width="100%"><thead><tr><td class="border_bottom border_right" style="width: 25%;">' +
-        '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY '+period+'</th></tr></thead>' +
+        '</td><th class="border_bottom" width="36.5%">#Students - Your Goal for FY ' + period + '</th></tr></thead>' +
         '<tbody><tr><th class="border_right padding_bottom padding_top">Undergraduate</th>' +
         '<td  style=" text-align: center;">' + data.undergraduate + '</td></tr>' +
         '<tr><th class="border_right padding_bottom padding_top">Graduate - Master</th><td  style=" text-align: center;">' +
@@ -854,9 +858,9 @@ let goalPlanningDetailsResearch = function (reportdata, year) {
     return content;
 }
 
-let printSmartGoalPlan = function (goal,year) {
+let printSmartGoalPlan = function (goal, year) {
     let period = getPeriod(year);
-    let smartgoal = '<h4>FY '+period+' SMART GOAL ' + goal.no + '</h4>';
+    let smartgoal = '<h4>FY ' + period + ' SMART GOAL ' + goal.no + '</h4>';
     smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p>';
     smartgoal += "<p><b>Action(s): </b>" + (goal.action == '' ? 'N/A' : goal.action) + '</p>';
     smartgoal += "<p><b>Metric(s): </b>" + (goal.metric == '' ? 'N/A' : goal.metric) + '</p>';
@@ -912,11 +916,11 @@ class GoalPlan {
 
 let printSmartGoal = function (goal, year) {
     let period = getPeriod(year);
-    let smartgoal = '<h4>FY '+ period +' SMART GOAL '+ goal.no +'</h4>';
-    smartgoal += '<div class="goal"><p><b>Goal: </b>'+ (goal.goal == ''?'N/A': formatText(goal.goal)) +'</p> </div>';
-    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>'+ (goal.action == ''?'N/A':formatText(goal.action)) +'</p>';
-    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>'+ (goal.metric == ''?'N/A':formatText(goal.metric)) +'</p>';
-    smartgoal += '<p><b>Changes Made/Planned: </b>'+ (goal.timeFrame == ''?'N/A':formatText(goal.timeFrame)) +'</p></div>';
+    let smartgoal = '<h4>FY ' + period + ' SMART GOAL ' + goal.no + '</h4>';
+    smartgoal += '<div class="goal"><p><b>Goal: </b>' + (goal.goal == '' ? 'N/A' : formatText(goal.goal)) + '</p> </div>';
+    smartgoal += '<div class="goalresult"><p><b>Actions Implemented: </b>' + (goal.action == '' ? 'N/A' : formatText(goal.action)) + '</p>';
+    smartgoal += '<p><b>Noteworthy Results of Assessment: </b>' + (goal.metric == '' ? 'N/A' : formatText(goal.metric)) + '</p>';
+    smartgoal += '<p><b>Changes Made/Planned: </b>' + (goal.timeFrame == '' ? 'N/A' : formatText(goal.timeFrame)) + '</p></div>';
     return smartgoal;
 }
 
