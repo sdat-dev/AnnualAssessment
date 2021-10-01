@@ -124,27 +124,46 @@ let addAssessmentReport = function (reportdata, year1, year2) {
 
     ids = getIds('FY' + year1);
     data = [];
-
-    if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
-        data.push(reportdata.Q83);
-    if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
-        data.push(reportdata.Q93);
-    if (reportdata.Q131_13 != '' && reportdata.Q103 != '')
-        data.push(reportdata.Q103);
-    if (reportdata.Q131_11 != '' && reportdata.Q113 != '')
-        data.push(reportdata.Q113);
-    if (reportdata.Q131_12 != '' && reportdata.Q123 != '')
-        data.push(reportdata.Q123);
-    if (reportdata.Q132_4 != '')
-        data.push(reportdata.Q132_4);
-    if (reportdata.Q132_5 != '')
-        data.push(reportdata.Q132_5);
-    if (reportdata.Q132_6 != '')
-        data.push(reportdata.Q132_6);
-    if (reportdata.Q132_7 != '')
-        data.push(reportdata.Q132_7);
-    if (reportdata.Q132_8 != '')
-        data.push(reportdata.Q132_8);
+    if (ids.parentId == "FY2020") {
+        if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
+            data.push(reportdata.Q83);
+        if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
+            data.push(reportdata.Q93);
+        if (reportdata.Q131_13 != '' && reportdata.Q103 != '')
+            data.push(reportdata.Q103);
+        if (reportdata.Q131_11 != '' && reportdata.Q113 != '')
+            data.push(reportdata.Q113);
+        if (reportdata.Q131_12 != '' && reportdata.Q123 != '')
+            data.push(reportdata.Q123);
+        if (reportdata.Q132_4 != '')
+            data.push(reportdata.Q132_4);
+        if (reportdata.Q132_5 != '')
+            data.push(reportdata.Q132_5);
+        if (reportdata.Q132_6 != '')
+            data.push(reportdata.Q132_6);
+        if (reportdata.Q132_7 != '')
+            data.push(reportdata.Q132_7);
+        if (reportdata.Q132_8 != '')
+            data.push(reportdata.Q132_8);
+    }
+    else {
+        if (reportdata.Q131_8 != '' && reportdata.Q83 != '')
+            data.push(reportdata.Q83);
+        if (reportdata.Q131_9 != '' && reportdata.Q93 != '')
+            data.push(reportdata.Q93);
+        if (reportdata.Q131_13 != '' && reportdata.Q103 != '')
+            data.push(reportdata.Q103);
+        if (reportdata.Q131_11 != '' && reportdata.Q113 != '')
+            data.push(reportdata.Q113);
+        if (reportdata.Q131_12 != '' && reportdata.Q123 != '')
+            data.push(reportdata.Q123);
+        if (reportdata.Q132_4 != '')
+            data.push(reportdata.Q132_4);
+        if (reportdata.Q132_5 != '')
+            data.push(reportdata.Q132_5);
+        if (reportdata.Q132_6 != '')
+            data.push(reportdata.Q132_6);
+    }
 
 
     content += addTopAchievements(ids, data);
@@ -255,15 +274,14 @@ let achievementsData = function (reportdata) {
         data.push(reportdata.Q132_5);
     if (reportdata.Q132_6.trim() != '')
         data.push(reportdata.Q132_6);
-    if (reportdata.Q132_7.trim() != '')
-        data.push(reportdata.Q132_8);
-    if (reportdata.Q132_8.trim() != '')
-        data.push(reportdata.Q132_8);
-    if (data.size() == 5)
+
+    if (data.size() == 3)
         return data;
     let data1 = [];
-    if (reportdata.Q131_8.trim() != '')
-        data1.push(reportdata.Q83);
+    if (reportdata.Q132_7.trim() != '')
+        data.push(reportdata.Q132_7);
+    if (reportdata.Q132_8.trim() != '')
+        data.push(reportdata.Q132_8);
     if (data.length + data1.length == 5) {
         data1.concat(data);
         return data1;
