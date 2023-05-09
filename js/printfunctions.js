@@ -1017,8 +1017,10 @@ let getPeriod = function (year) {
         period = '19-20';
     else if (year == 2020)
         period = '20-21';
-    else
+        else if(year== 2021)
         period = '21-22';
+    else
+        period = '22-23';
 
     return period;
 }
