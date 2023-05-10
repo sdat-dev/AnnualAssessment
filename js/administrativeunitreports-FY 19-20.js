@@ -63,7 +63,13 @@ let buildReport = function (data, period) {
     let tabheaders = [];
     let tabcontent = [];
     let content = '';
-    if (period == 'FY 21-22') {
+    if (period == 'FY 22-23') {
+        years = ['FY 2022-23', 'FY 2023-24'];
+        tabheaders = ['Assessment FY 22-23 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY 23-24 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
+        tabcontent.push(addAssessmentReport(data["FY 22-23"], '2022', '2023'));
+        tabcontent.push(addPlanningReport(data["FY 23-24"], '2023', '2024'));
+    }
+    else if (period == 'FY 21-22') {
         years = ['FY 2021-22', 'FY 2022-23'];
         tabheaders = ['Assessment FY 21-22 <br><span style="font-size:15px;"> (Year Completed)</span>', 'Planning FY 22-23 <br> <span style="font-size:15px;">(Year Ahead)<span>'];
         tabcontent.push(addAssessmentReport(data["FY 21-22"], '2021', '2022'));
