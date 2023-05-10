@@ -188,9 +188,6 @@ function printAssessmentReport(type){
         else if(reportdata.FY == 'FY 21-22')
         {
             content = printAdminAssessment(unitdata["FY 21-22"],'2021','2022');
-        }else if(reportdata.FY == 'FY 22-23')
-        {
-            content = printAdminAssessment(unitdata["FY 22-23"],'2022','2023');
         }
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
@@ -210,10 +207,6 @@ function printAssessmentReport(type){
         else if(reportdata.FY == 'FY 21-22')
         {
             content = printResearchAssessment(unitdata["FY 21-22"],'2021','2022')
-        }
-        else if(reportdata.FY == 'FY 22-23')
-        {
-            content = printResearchAssessment(unitdata["FY 22-23"],'2022','2023')
         }
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
