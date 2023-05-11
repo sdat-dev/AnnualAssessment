@@ -9,7 +9,7 @@ let addsidemenu = function(page, subpage){
         if(page != item.item){
             let link = '';
             if(item.hasOwnProperty('subItems') && item.link == '#'){
-               
+                item.subItems=sortFYYears(item.subItems);
                 link = item.subItems[0].link;
                 
             }            
@@ -80,6 +80,23 @@ let addsidemenu = function(page, subpage){
                 }  
         }
     }
+}
+const sortFYYears= (arr)=>{
+    let temp=arr;
+
+    temp.sort(function(a, b) {
+        var itemA = a.item.toUpperCase();
+        var itemB = b.item.toUpperCase();
+        if (itemA < itemB) {
+          return 1; // Descending order
+        }
+        if (itemA > itemB) {
+          return -1; // Descending order
+        }
+        return 0;
+      });
+
+    return temp;
 }
 
 let generateAccordionElem = function(level, collapseId, headerId, parentId, childId, header, accordionContent){
@@ -189,6 +206,10 @@ function printAssessmentReport(type){
         {
             content = printAdminAssessment(unitdata["FY 21-22"],'2021','2022');
         }
+        else if(reportdata.FY == 'FY 22-23')
+        {
+            content = printAdminAssessment(unitdata["FY 22-23"],'2022','2023');
+        }
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
         }
@@ -207,6 +228,9 @@ function printAssessmentReport(type){
         else if(reportdata.FY == 'FY 21-22')
         {
             content = printResearchAssessment(unitdata["FY 21-22"],'2021','2022')
+        } else if(reportdata.FY == 'FY 21-22')
+        {
+            content = printResearchAssessment(unitdata["FY 22-23"],'2022','2023')
         }
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
@@ -239,6 +263,10 @@ function printPlanningReport(type){
         {
             content = printAdminPlanning(unitdata["FY 22-23"], '2022','2023');
         } 
+        else if(reportdata.FY == 'FY 22-23')
+        {
+            content = printAdminPlanning(unitdata["FY 23-24"], '2023','2024');
+        } 
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
         }         
@@ -256,6 +284,10 @@ function printPlanningReport(type){
         else if(reportdata.FY == 'FY 21-22')
         {
             content = printResearchPlanning(unitdata["FY 22-23"],'2022','2023');
+        }
+        else if(reportdata.FY == 'FY 22-23')
+        {
+            content = printResearchPlanning(unitdata["FY 23-24"],'2023','2024');
         }
         else {
             content = "Print Not implemented for the year:" + reportdata.FY;
