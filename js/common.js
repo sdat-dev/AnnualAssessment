@@ -228,7 +228,7 @@ function printAssessmentReport(type){
         else if(reportdata.FY == 'FY 21-22')
         {
             content = printResearchAssessment(unitdata["FY 21-22"],'2021','2022')
-        } else if(reportdata.FY == 'FY 22-23')
+        } else if(reportdata.FY == 'FY 21-22')
         {
             content = printResearchAssessment(unitdata["FY 22-23"],'2022','2023')
         }
