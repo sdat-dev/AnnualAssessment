@@ -244,9 +244,11 @@ function printReport(event) {
                     content = printResearchAssessment(centerdata["FY 21-22"], '2021', '2022')
                 }
                 else if (period == 'FY 22-23') {
+                    console.log("22 year");
                     content = printResearchAssessment(centerdata["FY 22-23"], '2022', '2023')
                 }
                 else {
+                    console.log(period);
                     content = "Print Not implemented for the year:" + period;
                 }
 
@@ -311,7 +313,7 @@ function printReport(event) {
     }
     if (contenttotal == '')
         contenttotal = "Please select admin units/research units and type of the report to print";
-
+    console.log(period);
     var win = window.open("print.html", "reportprinttemplate.html");
     win.document.write(contenttotal); // where 'html' is a variable containing your HTML
     win.document.close();
